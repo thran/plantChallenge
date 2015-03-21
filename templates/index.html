@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlantChallenge</title>
+
+    <link rel="stylesheet" href="{% static "foundation/css/normalize.css" %}">
+    <link rel="stylesheet" href="{% static "foundation/css/foundation.min.css" %}">
+    <link rel="stylesheet" href="{% static "style.css" %}">
+
+    <script src="{% static "angular/angular.js" %}"></script>
+    <script src="{% static "angular/angular-cookies.min.js" %}"></script>
+    <script src="{% static "angular/angular-route.min.js" %}"></script>
+    <script src="{% static "foundation/js/vendor/modernizr.js" %}"></script>
+    <script src="{% static "main.js" %}"></script>
+
+    <base href="/">
+</head>
+<body ng-app="plantChallenge">
+
+<div class="contain-to-grid" role="navigation">
+    <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+            <li class="name"><h1><a href="home">PlantChallenge</a></h1></li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+        </ul>
+        <section class="top-bar-section"> <!-- Right Nav Section -->
+            <ul class="right">
+                <li class="has-dropdown"><a href="#">Login</a>
+                    <ul class="dropdown">
+{#                        <li><a href="#">sda</a></li>#}
+                    </ul>
+                </li>
+            </ul>
+            <ul class="left">
+{#                <li><a href="#">Left Nav Button</a></li>#}
+            </ul>
+        </section>
+    </nav>
+</div>
+
+<div id="content" class="row">
+    <div ng-view></div>
+</div>
+
+
+<script src="{% static "foundation/js/vendor/jquery.js" %}"></script>
+<script src="{% static "foundation/js/vendor/fastclick.js" %}"></script>
+<script src="{% static "foundation/js/foundation.min.js" %}"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>
