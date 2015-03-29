@@ -8,6 +8,7 @@ app.config(function ($httpProvider) {
 
 app.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
+        $locationProvider.hashPrefix('!');
         $routeProvider.
             when('/', {
                 templateUrl: 'static/ng-parts/welcome.html',
@@ -20,6 +21,9 @@ app.config(['$routeProvider', '$locationProvider',
             when('/practice', {
                 templateUrl: 'static/ng-parts/practice.html',
                 controller: 'something'
+            }).
+            when('/about', {
+                templateUrl: 'static/ng-parts/about.html'
             }).
             otherwise({
                 redirectTo: '/'

@@ -1,0 +1,20 @@
+.fancy{ font-family: 'Sorts Mill Goudy', serif; !important; }
+.strong{ font-weight: bold; }
+
+.underline{ text-decoration: underline; }
+
+#footer{
+    background-color: #fef8dd;
+    color: #909090;
+    padding: 20px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 100px;
+    text-align: center;
+}
+#footer a, #footer a:hover {color: #909090}
+
+div[role=navigation]{ border-bottom: solid lightgray 1px; }
+.button{ border-bottom: solid #236618 2px; }
+.top-bar-section ul li > a, .uppercase  {text-transform: uppercase;}
