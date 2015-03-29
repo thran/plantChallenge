@@ -25,6 +25,10 @@ app.config(['$routeProvider', '$locationProvider',
             when('/about', {
                 templateUrl: 'static/ng-parts/about.html'
             }).
+            when('/login', {
+                templateUrl: 'static/ng-parts/auth.html',
+                controller: "auth"
+            }).
             otherwise({
                 redirectTo: '/'
             });
@@ -37,5 +41,9 @@ app.factory("Data", function ($cookies) {
 });
 
 app.controller("something", function ($scope, $cookies, Data) {
+
+});
+
+app.controller("auth", function ($scope, $cookies, Data) {
 
 });

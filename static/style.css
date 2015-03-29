@@ -63,6 +63,49 @@ a:hover { color: #000000; }
     font-weight: bold;
 }
 
+#google, #facebook{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    font-size: 0.8rem;
+    padding: 6px 18px 5px 40px;
+    position: relative;
+    display: inline-block;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+#google i, #facebook i{
+    position: absolute;
+    font-size: 1.5rem;
+    left: 8px;
+    top: -0.1rem;
+}
+#google{ background-color: #dd4b35; border-bottom: solid 2px #8e3326; }
+#google:hover{ background-color: #c33c2f; }
+#facebook{ background-color: #445eaa; border-bottom: solid 2px #1c3068; float: right;}
+#facebook:hover{ background-color: #294694; }
+
+.separator{
+    border-top: solid #c6c6c6 1px;
+    color: #909090;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    position: relative;
+    font-size: 0.8rem;
+}
+.separator > span{
+    position: absolute;
+    left: 50%;
+    top: -0.7rem;
+}
+.separator > span > span{
+    position: relative;
+    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: -50%;
+}
+
 
 /* Foundation customization */
 
@@ -70,3 +113,4 @@ div[role=navigation]{ border-bottom: solid lightgray 1px; }
 div[role=navigation] a {text-decoration: none; }
 .button{ border-bottom: solid #236618 2px; }
 .top-bar-section ul li > a, .uppercase  {text-transform: uppercase;}
+label {text-transform: uppercase;}

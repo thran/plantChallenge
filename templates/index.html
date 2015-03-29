@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="{% static "foundation/css/normalize.css" %}">
     <link rel="stylesheet" href="{% static "foundation/css/myfoundation.css" %}">
+    <link rel="stylesheet" href="{% static "foundation/icons/foundation-icons.css" %}">
     <link rel="stylesheet" href="{% static "style.css" %}">
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy:400,400italic' rel='stylesheet' type='text/css'>
@@ -26,16 +27,13 @@
 <div class="contain-to-grid" role="navigation">
     <nav class="top-bar" data-topbar role="navigation">
         <ul class="title-area">
-            <li class="name uppercase"><h1><a href="home">Plant Challenge</a></h1></li>
+            <li class="name uppercase"><h1><a href="/">Plant Challenge</a></h1></li>
             <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
         </ul>
         <section class="top-bar-section"> <!-- Right Nav Section -->
             <ul class="right">
-                <li><a href="/about">About</a></li>
-                <li class="has-dropdown"><a href="#">Login</a>
-                    <ul class="dropdown">
-{#                        <li><a href="#">sda</a></li>#}
-                    </ul>
+                <li><a href="about">About</a></li>
+                <li class=""><a href="login">Login</a>
                 </li>
             </ul>
             <ul class="left">
