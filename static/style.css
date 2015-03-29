@@ -1,9 +1,9 @@
-.fancy{ font-family: 'Sorts Mill Goudy', serif; !important; }
-.strong{ font-weight: bold; }
-
+.fancy {font-family: 'Sorts Mill Goudy', serif; !important; }
+.strong {font-weight: bold; }
+.shadow,.shadow a {color: #909090; }
 .underline{ text-decoration: underline; }
 
-#footer{
+#footer {
     background-color: #fef8dd;
     color: #909090;
     padding: 20px;
@@ -13,15 +13,60 @@
     height: 100px;
     text-align: center;
 }
-a.shadow-link, a.shadow-link:hover {color: #909090; text-decoration: underline; }
+a {text-decoration: underline; color: #000000; transition: color 0.3s; }
+a:hover { color: #000000; }
 
 #tulips {position: relative;}
 #tulips img {margin-right: 150px;}
 #tulips span {position: absolute; left: 610px; top: 20px; font-size: 1.3rem;}
 
 
+.plant-type-box{
+    width: 180px;
+    height: 260px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    padding: 190px 10px 10px;
+    transition: all 0.5s;
+}
+.plant-type-box:hover { box-shadow: 0 0 5px black; }
+
+.plant-type-box:before{
+    content: "";
+    height: 180px;
+    width: 180px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fef8dd;
+}
+.plant-type-box img{
+    max-width: 160px;
+    max-height: 160px;
+    margin-top: -170px;
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+}
+.plant-type-box .button{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 5px 15px;
+    margin: 0;
+}
+.plant-type-box span{
+    font-weight: bold;
+}
+
+
 /* Foundation customization */
 
 div[role=navigation]{ border-bottom: solid lightgray 1px; }
+div[role=navigation] a {text-decoration: none; }
 .button{ border-bottom: solid #236618 2px; }
 .top-bar-section ul li > a, .uppercase  {text-transform: uppercase;}

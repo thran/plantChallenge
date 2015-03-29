@@ -11,16 +11,16 @@ app.config(['$routeProvider', '$locationProvider',
         $locationProvider.hashPrefix('!');
         $routeProvider.
             when('/', {
-                templateUrl: 'static/ng-parts/welcome.html',
-                controller: 'something'
+                templateUrl: 'static/ng-parts/intro-1.html'
+            }).
+            when('/intro', {
+                templateUrl: 'static/ng-parts/intro-2.html'
             }).
             when('/home', {
-                templateUrl: 'static/ng-parts/home.html',
-                controller: 'something'
+                templateUrl: 'static/ng-parts/home.html'
             }).
             when('/practice', {
-                templateUrl: 'static/ng-parts/practice.html',
-                controller: 'something'
+                templateUrl: 'static/ng-parts/practice.html'
             }).
             when('/about', {
                 templateUrl: 'static/ng-parts/about.html'
