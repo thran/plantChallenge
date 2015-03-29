@@ -13,7 +13,14 @@
     height: 100px;
     text-align: center;
 }
-#footer a, #footer a:hover {color: #909090}
+a.shadow-link, a.shadow-link:hover {color: #909090; text-decoration: underline; }
+
+#tulips {position: relative;}
+#tulips img {margin-right: 150px;}
+#tulips span {position: absolute; left: 610px; top: 20px; font-size: 1.3rem;}
+
+
+/* Foundation customization */
 
 div[role=navigation]{ border-bottom: solid lightgray 1px; }
 .button{ border-bottom: solid #236618 2px; }
