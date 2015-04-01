@@ -13,15 +13,17 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import dj_database_url
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-DEBUG = True
+ON_SERVER = os.getenv('ON_PRODUCTION', "False") == "True"
+DEBUG = os.getenv('DJANGO_DEBUG', "False") == "True"
+if not ON_SERVER:
+    DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'really secret key'
+SECRET_KEY = os.getenv('SECRET_KEY', "really secret key")
 
 # Application definition
 
@@ -76,12 +78,10 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
-
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
+MEDIA_URL = '/media/'
 
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 
