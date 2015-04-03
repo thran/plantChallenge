@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     # 'proso_feedback',
     'proso_flashcards',
     'social_auth',
+    'practice',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -17,6 +17,6 @@ urlpatterns = patterns('',
     url(r'^flashcards/', include('proso_flashcards.urls')),
     url(r'', include('social_auth.urls')),
 
-    url(r'^typehead', "plantchallenge.views.typehead"),
+    url(r'^typehead', "practice.views.typehead"),
     url(r'^.*$', TemplateView.as_view(template_name="index.html"), name='home'),
 )
