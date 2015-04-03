@@ -7,11 +7,10 @@
     background-color: #fef8dd;
     color: #909090;
     padding: 20px;
-    position: absolute;
     width: 100%;
-    bottom: 0;
     height: 100px;
     text-align: center;
+    margin-top: 100px;
 }
 a {text-decoration: underline; color: #000000; transition: color 0.3s; }
 a:hover { color: #000000; }
