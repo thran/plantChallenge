@@ -1,4 +1,4 @@
-.fancy {font-family: 'Sorts Mill Goudy', serif; !important; }
+.fancy {font-family: 'Sorts Mill Goudy', serif !important; }
 .strong {font-weight: bold; }
 .shadow,.shadow a {color: #909090; }
 .underline{ text-decoration: underline; }
@@ -114,3 +114,123 @@ div[role=navigation] a {text-decoration: none; }
 .button{ border-bottom: solid #236618 2px; }
 .top-bar-section ul li > a, .uppercase  {text-transform: uppercase;}
 label {text-transform: uppercase;}
+
+
+/* Practice */
+
+#image-strip {
+    background-color: #2a2a2a;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    height: 460px;
+    z-index: -1;
+}
+#image-strip #img{
+    display: inline-block;
+    margin: auto;
+    height: 100%;
+
+}
+#select-left{
+    display: inline-block;
+    width: 130px;
+    padding: 10px;
+    height: 460px;
+}
+#select-left > div{
+    border: solid white 1px;
+    height: 102px;
+    width: 102px;
+    margin-bottom: 10px;
+    transition: all 0.5s;
+    opacity: 0.5;
+}
+#select-left > div.selected{ border-color: #236618; margin-left: 5px;}
+#select-left > div:hover{
+    margin-left: 5px;
+    opacity: 1;
+}
+#select-left > div > img {
+    object-fit: cover;
+    object-position: center;
+    height: 100px;
+    width: 100px;
+}
+#answer{
+    margin-top: 20px;
+}
+
+#answer ul.f-dropdown{
+    width: auto;
+    max-width: none;
+    margin-top: 0;
+    right: 15px;
+    left: 0;
+    font-family: 'Sorts Mill Goudy', serif !important;
+}
+#answer .f-dropdown::before, #answer .f-dropdown::after { content: none; }
+#answer .f-dropdown li a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1.1rem !important;
+    height: 40px;
+    line-height: 28px;
+}
+#answer .f-dropdown li a:hover{background-color: #fef8dd;}
+div.google_icon, div.web_icon {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    float: right;
+    text-align: center;
+    border: solid gray 1px;
+    border-radius: 3px;
+    margin-left: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+div.google_icon:hover, div.web_icon:hover {
+    background-color: #cad5fe;
+}
+#answer input{
+    color: #000000;
+    font-size: 1.1em;
+}
+#answer input.selected{ background-color: #fef8dd; }
+#answer > #input {
+    position: relative;
+}
+#answer > #input > span{
+    position: absolute;
+    right: 15px;
+    top: 7px;
+    color: gray;
+    border-left: solid lightgray 1px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+#answer > #input > div.loader {
+    font-size: 0.2rem;
+    position: absolute;
+    right: 23px;
+    top: 7px;
+    margin: 0;
+}
+#answer > #input > #links {
+    position: absolute;
+    right: 48px;
+    top: 7px;
+}
+#answer > #input > span:hover{ color: #000000 }
+
+
+/* spinner */
+.loader:before, .loader:after, .loader { border-radius: 50%; width: 2.5em; height: 2.5em; -webkit-animation-fill-mode: both; animation-fill-mode: both; -webkit-animation: load7 1.8s infinite ease-in-out; animation: load7 1.8s infinite ease-in-out; }
+.loader { margin: 8em auto; font-size: 10px; position: relative; text-indent: -9999em; -webkit-animation-delay: 0.16s; animation-delay: 0.16s; }
+.loader:before { left: -3.5em; }
+.loader:after { left: 3.5em; -webkit-animation-delay: 0.32s; animation-delay: 0.32s; }
+.loader:before, .loader:after { content: ''; position: absolute; top: 0; }
+@-webkit-keyframes load7 { 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em #aaaaaa; } 40% { box-shadow: 0 2.5em 0 0 #FFF; } }
+@keyframes load7 { 0%, 80%, 100% { box-shadow: 0 2.5em 0 -1.3em #aaaaaa; } 40% { box-shadow: 0 2.5em 0 0 #aaaaaa; } }
