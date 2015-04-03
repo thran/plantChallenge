@@ -1,0 +1,9 @@
+{
+  "categories": [
+    {
+      "id": "intro-set",
+      "name-en": "Intro ser",
+      "not-in-model": true
+    }
+  ]
+}
