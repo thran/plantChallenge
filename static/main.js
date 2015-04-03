@@ -47,11 +47,30 @@ app.controller("auth", function ($scope, $cookies) {
 
 app.controller("practice", function ($scope, $http) {
     $scope.flashcard = {
+        id: 1,
+        term: {
+            "lang":"en",
+            "name":"Passiflora caerulea",
+            "url":"http://en.wikipedia.org/wiki/Passiflora_caerulea",
+            "object_type":"fc_term",
+            "item_id":2134,
+            "type":null,
+            "id":2134
+        },
         images: ["static/plants/plant1.jpg", "static/plants/plant2.jpg"],
         selected_image: "static/plants/plant1.jpg"
     };
-    $scope.answer = {
+    $scope.answer = {guesses: 0};
 
+    $scope.submit = function(){
+        if (!$scope.answer.term)
+            return;
+        $scope.answer.answered = true;
+        $scope.answer.guesses++;
+        $scope.answer.correct = $scope.answer.term.id == $scope.flashcard.term.id;
+        if ($scope.answer.correct){
+            $scope.answer.closed = true;
+        }
     };
 
     $scope.getPlantNames = function(val) {

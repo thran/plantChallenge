@@ -12,31 +12,36 @@
 </div>
 <br/>
 
-<div id="answer" class="columns large-8 large-offset-2">
+<div ng-hide="answer.answered" id="answer" class="columns large-8 large-offset-2">
     <h3>What is this plant?</h3>
     <div id="input">
         <input
+                type="text"
+                class="fancy"
+                ng-class="{'selected': answer.meta}"
+                ng-model="answer.term"
                 typeahead="plant as plant.name for plant in getPlantNames($viewValue)"
                 typeahead-loading="loadingPlants"
-                type="text" ng-model="answer.meta"
                 typeahead-editable="false"
                 typeahead-min-length="2"
                 typeahead-template-url="static/ng-parts/dropdown.html"
-                class="fancy"
-                ng-class="{'selected': answer.meta}"
                 />
-        <div id="links" ng-show="answer.meta" >
-            <div class="google_icon" ng-click="search_google(answer.meta)" stop-event><i class="fi-magnifying-glass"></i></div>
-            <div class="web_icon" ng-click="open_web(answer.meta)" stop-event><i class="fi-web"></i></div>
+        <div id="links" ng-show="answer.term" >
+            <div class="google_icon" ng-click="search_google(answer.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+            <div class="web_icon" ng-click="open_web(answer.term)" stop-event><i class="fi-web"></i></div>
         </div>
-        <span ng-show="answer.meta" ng-click="answer.meta = null" class="fi-x"></span>
+        <span ng-show="answer.term" ng-click="answer.term = null" class="fi-x"></span>
         <div ng-show="loadingPlants" class="loader"></div>
     </div>
-    <div class="button uppercase">Answer</div>
-    <span class="shadow uppercase">&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a href="" class="shadow-link">show correct answer</a></span>
+    <div class="button uppercase" ng-disabled="!answer.term" ng-click="submit()">Answer</div>
+    <span class="shadow uppercase">&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
+        <a href="" class="shadow-link" ng-click="answer.closed = true; answer.answered = true; answer.correct = false;">show correct answer</a></span>
+</div>
 
-    <br/>
-    {{ flashcard }}
-    <br/>
-    {{ answer }}
+<div ng-cloak ng-show="answer.closed && answer.correct && answer.answered">
+    Correct
+</div>
+
+<div ng-cloak ng-show="answer.answered && !answer.correct">
+    Incorrect {{ answer.closed }}
 </div>

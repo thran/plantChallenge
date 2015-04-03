@@ -3,6 +3,12 @@
 .shadow,.shadow a {color: #909090; }
 .underline{ text-decoration: underline; }
 
+#content{
+    padding-left: 5px;
+    padding-right: 5px;
+    min-height: 400px;
+}
+
 #footer {
     background-color: #fef8dd;
     color: #909090;
