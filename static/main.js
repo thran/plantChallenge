@@ -76,7 +76,7 @@ app.controller("practice", function ($scope, $http) {
     $scope.getPlantNames = function(val) {
     return $http.get('typehead', {
         params: {
-            input: val
+            search: val
         }
         }).then(function(response){
             return response.data.plants;

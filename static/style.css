@@ -158,6 +158,7 @@ label {text-transform: uppercase;}
     opacity: 1;
 }
 #select-left > div > img {
+    /* TODO for FF */
     object-fit: cover;
     object-position: center;
     height: 100px;
