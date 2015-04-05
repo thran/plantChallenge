@@ -1,5 +1,7 @@
 var app = angular.module('plantChallenge', ["ngCookies", "ngRoute", "mm.foundation"]);
 
+var MAX_GUESSES = 2;
+
 app.config(function ($httpProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -15,6 +17,9 @@ app.config(['$routeProvider', '$locationProvider',
             }).
             when('/intro', {
                 templateUrl: 'static/ng-parts/intro-2.html'
+            }).
+            when('/post-practice', {
+                templateUrl: 'static/ng-parts/post-practice.html'
             }).
             when('/home', {
                 templateUrl: 'static/ng-parts/home.html'
@@ -40,12 +45,22 @@ app.config(['$routeProvider', '$locationProvider',
         $locationProvider.html5Mode(true);
     }]);
 
+app.factory("PlantSet", function ($cookies) {
+    return {
+        length: 5,
+        corrects: 0,
+        current: 0,
+        progress: [null, null, null, null, null],
+        name: "Indoor plants"
+    }
+});
+
 
 app.controller("auth", function ($scope, $cookies) {
 
 });
 
-app.controller("practice", function ($scope, $http) {
+app.controller("practice", function ($scope, $http, PlantSet, $location) {
     $scope.load_flashcards = function(){
         $http.get('flashcards/flashcards', {params: {db_orderby: "id"}})
             .success(function(response){
@@ -55,12 +70,20 @@ app.controller("practice", function ($scope, $http) {
     };
 
     $scope.save_answer = function(answer){
+        PlantSet.progress[PlantSet.current] = {
+            correct: answer.correct,
+            name: $scope.flashcard.term.name
+        };
+        PlantSet.current++;
+        if (answer.correct)
+            PlantSet.corrects.current++;
         console.log(answer);
     };
 
     $scope.next_plant = function(){
-        if ($scope.answer){
-            $scope.save_answer($scope.answer);
+        if (PlantSet.current == PlantSet.length){
+            $location.path("/post-practice");
+            return;
         }
         $scope.answer = {guesses: 0};
         $scope.flashcard = $scope.flashcards.pop();
@@ -73,14 +96,22 @@ app.controller("practice", function ($scope, $http) {
         $scope.answer.answered = false;
     };
 
+    $scope.skip = function(){
+        $scope.answer.closed = true;
+        $scope.answer.answered = true;
+        $scope.answer.correct = false;
+        $scope.save_answer($scope.answer);
+    };
+
     $scope.submit = function(){
         if (!$scope.answer.term)
             return;
         $scope.answer.answered = true;
         $scope.answer.guesses++;
         $scope.answer.correct = $scope.answer.term.id == $scope.flashcard.term.id;
-        if ($scope.answer.correct){
+        if ($scope.answer.correct || $scope.answer.guesses >= MAX_GUESSES){
             $scope.answer.closed = true;
+            $scope.save_answer($scope.answer);
         }
     };
 
@@ -101,6 +132,12 @@ app.controller("practice", function ($scope, $http) {
     };
 
     $scope.load_flashcards();
+});
+
+
+app.controller("post-practice", function ($scope, PlantSet) {
+    $scope.set = PlantSet;
+    $scope.set = JSON.parse('{"length":5,"current":5,"progress":[{"correct":true,"name":"Tagetes patula"},{"correct":false,"name":"Hyacinthus orientalis"},{"correct":false,"name":"Platanus occidentalis"},{"correct":false,"name":"Solanum dulcamara"},{"correct":false,"name":"Bryophyllum daigremontianum"}]} ');
 });
 
 app.directive('stopEvent', function () {

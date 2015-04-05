@@ -40,7 +40,7 @@
     </div>
     <div class="button uppercase" ng-disabled="!answer.term" ng-click="submit()">Answer</div>
     <span class="shadow uppercase">&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
-        <a href="" class="shadow-link" ng-click="answer.closed = true; answer.answered = true; answer.correct = false;">show correct answer</a></span>
+        <a href="" class="shadow-link" ng-click="skip()">show correct answer</a></span>
 </div>
 
 <div ng-cloak ng-show="answer.closed && answer.correct && answer.answered">
@@ -55,7 +55,7 @@
     <p>This is not <strong>{{ answer.term.name }}</strong></p>
     <div class="button uppercase" ng-click="try_again()">Try again</div>
     <span class="shadow uppercase">&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
-        <a href="" class="shadow-link" ng-click="answer.closed = true;">show correct answer</a></span>
+        <a href="" class="shadow-link" ng-click="skip()">show correct answer</a></span>
 </div>
 
 <div ng-cloak ng-show="answer.closed && !answer.correct">

@@ -87,7 +87,7 @@ a:hover { color: #000000; }
 }
 #google{ background-color: #dd4b35; border-bottom: solid 2px #8e3326; }
 #google:hover{ background-color: #c33c2f; }
-#facebook{ background-color: #445eaa; border-bottom: solid 2px #1c3068; float: right;}
+#facebook{ background-color: #445eaa; border-bottom: solid 2px #1c3068; float: right;   }
 #facebook:hover{ background-color: #294694; }
 
 .separator{
@@ -228,18 +228,21 @@ div.google_icon:hover, div.web_icon:hover {
     top: 7px;
 }
 #answer > #input > span:hover{ color: #000000 }
-h4 > div.fi-check, h4 > div.fi-x{
-    height: 1.2em;
-    width: 1.2em;
+div.fi-check, div.fi-x{
+    height: 1.3em;
+    width: 1.3em;
     float: left;
     text-align: center;
     color: #ffffff;
     font-size: 1.3em;
-    margin-right: 10px;
+    margin-right: 0.5em;
     margin-top: -0.1em;
 }
-h4 > div.fi-check{ background-color: green; }
-h4 > div.fi-x{background-color: red; }
+div.fi-check{ background-color: green; }
+div.fi-x{background-color: red; }
+
+.set-result-list{ margin-bottom: 10px; }
+.set-result-list div.fi-x, .set-result-list div.fi-check{ float: right; }
 
 /* spinner */
 .loader:before, .loader:after, .loader { border-radius: 50%; width: 2.5em; height: 2.5em; -webkit-animation-fill-mode: both; animation-fill-mode: both; -webkit-animation: load7 1.8s infinite ease-in-out; animation: load7 1.8s infinite ease-in-out; }

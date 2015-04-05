@@ -1,0 +1,36 @@
+<div class="large-10 large-offset-1 column">
+    <div class="medium-5 column" ng-controller="post-practice">
+        <br/>
+        <h3>Set finished</h3>
+        <p class="fancy">Good job! You identified {{ set.corrects }} from {{ set.length }} plants from {{ set.name }}.</p>
+        <hr/>
+            <div ng-repeat="plant in set.progress" class="fancy set-result-list">
+            <div ng-show="!plant.correct" class="fi-x"></div>
+            <div ng-show="plant.correct" class="fi-check"></div>
+            {{ plant.name }}
+        </div>
+        <hr/>
+    </div>
+
+    <div class="medium-6 column" ng-controller="auth">
+        <br/>
+        <h3>Sign up for more</h3>
+        <p class="fancy">Sign up to Plant Challenge to continue with more plants and sets prepared for you. All for free.</p>
+        <div style="height: 1rem"></div>
+
+        <div class="row">
+            <div class="small-6 column">
+                <span id="google"><i class="fi-social-google-plus"></i>sign with Google</span>
+            </div>
+            <div class="small-6 column">
+                <span id="facebook"><i class="fi-social-facebook"></i>sign with Facebook</span>
+            </div>
+        </div>
+        <div class="separator uppercase"><span><span>OR</span></span></div>
+
+        <label> Email <input ng-model="user.email" type="text"/></label>
+        <label> Password <input ng-model="user.password" type="text"/></label>
+
+        <div class="button medium uppercase">sign up</div>
+    </div>
+</div>
