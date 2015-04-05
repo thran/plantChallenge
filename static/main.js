@@ -49,9 +49,10 @@ app.factory("PlantSet", function ($cookies) {
     return {
         length: 5,
         corrects: 0,
-        current: 0,
+        current: -1,
         progress: [null, null, null, null, null],
-        name: "Indoor plants"
+        name: "Indoor plants",
+        active: false
     }
 });
 
@@ -65,7 +66,8 @@ app.controller("practice", function ($scope, $http, PlantSet, $location) {
         $http.get('flashcards/flashcards', {params: {db_orderby: "id"}})
             .success(function(response){
                 $scope.flashcards = response.data.reverse();
-                $scope.next_plant()
+                $scope.next_plant();
+                PlantSet.active = true;
             });
     };
 
@@ -74,15 +76,16 @@ app.controller("practice", function ($scope, $http, PlantSet, $location) {
             correct: answer.correct,
             name: $scope.flashcard.term.name
         };
-        PlantSet.current++;
         if (answer.correct)
             PlantSet.corrects.current++;
         console.log(answer);
     };
 
     $scope.next_plant = function(){
-        if (PlantSet.current == PlantSet.length){
+        PlantSet.current++;
+        if (PlantSet.current >= PlantSet.length){
             $location.path("/post-practice");
+            PlantSet.active = false;
             return;
         }
         $scope.answer = {guesses: 0};
@@ -137,7 +140,6 @@ app.controller("practice", function ($scope, $http, PlantSet, $location) {
 
 app.controller("post-practice", function ($scope, PlantSet) {
     $scope.set = PlantSet;
-    $scope.set = JSON.parse('{"length":5,"current":5,"progress":[{"correct":true,"name":"Tagetes patula"},{"correct":false,"name":"Hyacinthus orientalis"},{"correct":false,"name":"Platanus occidentalis"},{"correct":false,"name":"Solanum dulcamara"},{"correct":false,"name":"Bryophyllum daigremontianum"}]} ');
 });
 
 app.directive('stopEvent', function () {

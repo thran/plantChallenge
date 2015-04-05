@@ -1,0 +1,6 @@
+<div id="practice-progress" ng-cloak ng-show="set.active">
+    <span
+            ng-repeat="plant in set.progress track by $index"
+            ng-class="{'fi-lightbulb': !plant, 'fi-x': plant && !plant.correct, 'fi-check': plant.correct, 'current': set.current==$index}">
+    </span>
+</div>
