@@ -20,6 +20,8 @@ class ExtendedTerm(Term):
 
 
 class ExtendedContext(Context):
+    lat = models.FloatField(null=True, blank=True)
+    long = models.FloatField(null=True, blank=True)
 
     def to_json(self, nested=False):
         json = Context.to_json(self, nested)
@@ -28,8 +30,9 @@ class ExtendedContext(Context):
     @staticmethod
     def load_data(data, context):
         pass
-        # if 'extra-info' in data:
-        #     context.extra_info = data["extra-info"]
+        if 'lat' in data and 'long' in data:
+            context.lat = data["lat"]
+            context.long = data["long"]
 
 
 settings.PROSO_FLASHCARDS["term_extension"] = ExtendedTerm

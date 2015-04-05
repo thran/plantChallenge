@@ -143,6 +143,7 @@ label {text-transform: uppercase;}
     width: 130px;
     padding: 10px;
     height: 460px;
+    margin-bottom: 20px;
 }
 #select-left > div{
     border: solid white 1px;
@@ -164,10 +165,7 @@ label {text-transform: uppercase;}
     height: 100px;
     width: 100px;
 }
-#answer{
-    margin-top: 20px;
-}
-
+#answer{ }
 #answer ul.f-dropdown{
     width: auto;
     max-width: none;
@@ -230,7 +228,18 @@ div.google_icon:hover, div.web_icon:hover {
     top: 7px;
 }
 #answer > #input > span:hover{ color: #000000 }
-
+h4 > div.fi-check, h4 > div.fi-x{
+    height: 1.2em;
+    width: 1.2em;
+    float: left;
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.3em;
+    margin-right: 10px;
+    margin-top: -0.1em;
+}
+h4 > div.fi-check{ background-color: green; }
+h4 > div.fi-x{background-color: red; }
 
 /* spinner */
 .loader:before, .loader:after, .loader { border-radius: 50%; width: 2.5em; height: 2.5em; -webkit-animation-fill-mode: both; animation-fill-mode: both; -webkit-animation: load7 1.8s infinite ease-in-out; animation: load7 1.8s infinite ease-in-out; }

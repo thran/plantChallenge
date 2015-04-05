@@ -1,0 +1,66 @@
+{
+  "contexts": [
+    {
+      "id": "intro-0",
+      "name-en": "",
+      "content-en": "['01.jpg']",
+      "lat": null,
+      "long": null
+    },
+    {
+      "id": "intro-1",
+      "name-en": "",
+      "content-en": "['11.jpg', '12.jpg']",
+      "lat": null,
+      "long": null
+    },
+    {
+      "id": "intro-2",
+      "name-en": "",
+      "content-en": "['21.jpg', '22.jpg']",
+      "lat": null,
+      "long": null
+    },
+    {
+      "id": "intro-3",
+      "name-en": "",
+      "content-en": "['31.jpg', '32.jpg', '33.jpg']",
+      "lat": null,
+      "long": null
+    },
+    {
+      "id": "intro-4",
+      "name-en": "",
+      "content-en": "['41.jpg', '42.jpg']",
+      "lat": null,
+      "long": null
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "intro-0",
+      "term": "926",
+      "context": "intro-0"
+    },
+    {
+      "id": "intro-1",
+      "term": "647",
+      "context": "intro-1"
+    },
+    {
+      "id": "intro-2",
+      "term": "1403",
+      "context": "intro-2"
+    },
+    {
+      "id": "intro-3",
+      "term": "2946",
+      "context": "intro-3"
+    },
+    {
+      "id": "intro-4",
+      "term": "1341",
+      "context": "intro-4"
+    }
+  ]
+}

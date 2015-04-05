@@ -46,21 +46,32 @@ app.controller("auth", function ($scope, $cookies) {
 });
 
 app.controller("practice", function ($scope, $http) {
-    $scope.flashcard = {
-        id: 1,
-        term: {
-            "lang":"en",
-            "name":"Passiflora caerulea",
-            "url":"http://en.wikipedia.org/wiki/Passiflora_caerulea",
-            "object_type":"fc_term",
-            "item_id":2134,
-            "type":null,
-            "id":2134
-        },
-        images: ["static/plants/plant1.jpg", "static/plants/plant2.jpg"],
-        selected_image: "static/plants/plant1.jpg"
+    $scope.load_flashcards = function(){
+        $http.get('flashcards/flashcards', {params: {db_orderby: "id"}})
+            .success(function(response){
+                $scope.flashcards = response.data.reverse();
+                $scope.next_plant()
+            });
     };
-    $scope.answer = {guesses: 0};
+
+    $scope.save_answer = function(answer){
+        console.log(answer);
+    };
+
+    $scope.next_plant = function(){
+        if ($scope.answer){
+            $scope.save_answer($scope.answer);
+        }
+        $scope.answer = {guesses: 0};
+        $scope.flashcard = $scope.flashcards.pop();
+        $scope.flashcard.context.content = JSON.parse($scope.flashcard.context.content.split("'").join('"'));
+        $scope.flashcard.selected_image = $scope.flashcard.context.content[0];
+    };
+
+    $scope.try_again = function(){
+        $scope.answer.term = null;
+        $scope.answer.answered = false;
+    };
 
     $scope.submit = function(){
         if (!$scope.answer.term)
@@ -88,6 +99,8 @@ app.controller("practice", function ($scope, $http) {
     $scope.open_web = function(plant){
         window.open(plant.url);
     };
+
+    $scope.load_flashcards();
 });
 
 app.directive('stopEvent', function () {
