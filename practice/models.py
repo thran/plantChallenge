@@ -7,16 +7,21 @@ from proso_flashcards.models import Term, Context
 
 class ExtendedTerm(Term):
     url = models.TextField()
+    interesting = models.TextField(null=True, blank=True)
 
     def to_json(self, nested=False):
         json = Term.to_json(self, nested)
         json["url"] = self.url
+        json["interesting"] = self.interesting
+        print json
         return json
 
     @staticmethod
     def load_data(data, term):
         if 'url' in data:
             term.url = data["url"]
+        if 'interesting' in data:
+            term.interesting = data["interesting"]
 
 
 class ExtendedContext(Context):
