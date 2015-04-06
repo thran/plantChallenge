@@ -94,8 +94,18 @@ app.controller("practice", function ($scope, $http, PlantSet, $location) {
             name: $scope.flashcard.term.name
         };
         if (answer.correct)
-            PlantSet.corrects.current++;
-        console.log(answer);
+            PlantSet.corrects++;
+
+        $http.post("flashcards/answer", {
+                "answer": {
+                    "flashcard_id": $scope.flashcard.id,
+                    "flashcard_answered_id": answer.correct ? $scope.flashcard.id : null,
+                    "response_time": (new Date).getTime() - answer.start_time,
+                    "direction": "d2t",
+                    "meta": "guesses: " + answer.guesses
+
+                }
+            })
     };
 
     $scope.next_plant = function(){
@@ -105,7 +115,7 @@ app.controller("practice", function ($scope, $http, PlantSet, $location) {
             PlantSet.active = false;
             return;
         }
-        $scope.answer = {guesses: 0};
+        $scope.answer = {guesses: 0, start_time: (new Date).getTime()};
         $scope.flashcard = $scope.flashcards.pop();
         $scope.flashcard.context.content = JSON.parse($scope.flashcard.context.content.split("'").join('"'));
         $scope.flashcard.selected_image = $scope.flashcard.context.content[0];
