@@ -227,7 +227,8 @@
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Oxalis_triangularis", 
-            "name-en": "Oxalis triangularis, Love plant, Purple shamrock", 
+            "name-en": "Oxalis triangularis",
+            "interesting": "The leaves move in response to light levels, opening in high ambient light (in the day) and closing at low light levels (at night).",
             "id": "53"
         }, 
         {
