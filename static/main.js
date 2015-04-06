@@ -10,6 +10,15 @@ app.config(function ($httpProvider) {
 app.service("authService", AuthService);
 
 
+
+app.run(function ($rootScope, $location) {
+    $rootScope.$on('$routeChangeSuccess', function(){
+        ga('send', 'pageview', $location.path());
+    });
+});
+
+
+
 app.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
         $locationProvider.hashPrefix('!');

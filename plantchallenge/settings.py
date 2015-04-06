@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import dj_database_url
+from django.conf import global_settings
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -87,6 +88,9 @@ MEDIA_URL = '/media/'
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'), )
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+   "practice.context_processors.important",
+)
 
 
 STATICFILES_FINDERS = (
