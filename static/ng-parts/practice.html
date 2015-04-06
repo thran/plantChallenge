@@ -47,7 +47,8 @@
     <h4><div class="fi-check"></div>Yes, correct!</h4>
     <p>It is <strong>{{ flashcard.term.name }}</strong></p>
     <p><i>{{ flashcard.term.interesting }}</i></p>
-    <div class="button uppercase medium" ng-click="next_plant()">Next plant</div>
+    <div class="button uppercase medium" ng-click="next_plant()" ng-hide="set.current + 1 == set.length">Next plant</div>
+    <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
 </div>
 
 <div ng-cloak ng-show="answer.answered && !answer.closed && !answer.correct">
@@ -62,6 +63,7 @@
     <h4><div class="fi-x"></div>No worries, here is the answer.</h4>
     <p>It is <strong>{{ flashcard.term.name }}</strong></p>
     <p><i>{{ flashcard.term.interesting }}</i></p>
-    <div class="button uppercase medium" ng-click="next_plant()">Next plant</div>
+    <div class="button uppercase medium" ng-click="next_plant()" ng-hide="set.current + 1 == set.length">Next plant</div>
+    <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
 </div>
 </div>

@@ -71,6 +71,7 @@ app.controller("auth", function ($scope, authService, $location) {
 });
 
 app.controller("practice", function ($scope, $http, PlantSet, $location) {
+    $scope.set = PlantSet;
     $scope.load_flashcards = function(){
         PlantSet.length = 5;
         PlantSet.corrects = 0;
