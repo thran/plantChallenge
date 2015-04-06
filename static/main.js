@@ -7,6 +7,8 @@ app.config(function ($httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
+app.service("auth", AuthService);
+
 
 app.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
@@ -17,6 +19,9 @@ app.config(['$routeProvider', '$locationProvider',
             }).
             when('/intro', {
                 templateUrl: 'static/ng-parts/intro-2.html'
+            }).
+            when('/intro-final', {
+                templateUrl: 'static/ng-parts/intro-final.html'
             }).
             when('/post-practice', {
                 templateUrl: 'static/ng-parts/post-practice.html'
@@ -42,13 +47,23 @@ app.config(['$routeProvider', '$locationProvider',
         $locationProvider.html5Mode(true);
     }]);
 
-app.factory("PlantSet", function ($cookies) {
+app.factory("PlantSet", function () {
     return {}
 });
 
 
-app.controller("auth", function ($scope, $cookies) {
+app.controller("auth", function ($scope, auth, $location) {
+    $scope.auth = auth;
 
+    $scope.sign_up = function(){
+        auth.signup($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
+    };
+
+    $scope.$watch("auth.user.logged", function(n, o){
+        if (n){
+            $location.path("/intro-final")
+        }
+    });
 });
 
 app.controller("practice", function ($scope, $http, PlantSet, $location) {

@@ -20,6 +20,7 @@
 }
 a {text-decoration: underline; color: #000000; transition: color 0.3s; }
 a:hover { color: #000000; }
+.alert-box a {text-decoration: none}
 
 #tulips {position: relative;}
 #tulips img {margin-right: 150px;}
@@ -119,7 +120,7 @@ div[role=navigation] a {text-decoration: none; }
 .button{ border-bottom: solid #236618 2px; }
 .top-bar-section ul li > a, .uppercase  {text-transform: uppercase;}
 label {text-transform: uppercase;}
-
+.normal-case{text-transform: none !important;}
 
 /* Practice */
 
@@ -159,7 +160,6 @@ label {text-transform: uppercase;}
     opacity: 1;
 }
 #select-left > div > img {
-    /* TODO for FF */
     object-fit: cover;
     object-position: center;
     height: 100px;

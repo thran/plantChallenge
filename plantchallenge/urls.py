@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
-from django.conf import settings
 from django.contrib import admin
 from django.views.generic import TemplateView
+from lazysignup.decorators import allow_lazy_user
 
 
 admin.autodiscover()
@@ -18,5 +18,5 @@ urlpatterns = patterns('',
     url(r'', include('social_auth.urls')),
 
     url(r'^typehead', "practice.views.typehead"),
-    url(r'^.*$', TemplateView.as_view(template_name="index.html"), name='home'),
+    url(r'^.*$', allow_lazy_user(TemplateView.as_view(template_name="index.html")), name='home'),
 )

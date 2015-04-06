@@ -12,10 +12,15 @@
         </div>
     </div>
     <div class="separator uppercase"><span><span>OR</span></span></div>
+    <div data-alert class="alert-box alert" ng-cloak ng-show="auth.user.error_msg">
+        {{ auth.user.error_msg }}
+        <a href="#" class="close">&times;</a>
+    </div>
+    <form ng-submit="sign_up()">
+        <label> Email <input ng-model="login.email" type="email" required="true"/></label>
+        <label> Password <input ng-model="login.password" required type="password"/></label>
 
-    <label> Email <input ng-model="user.email" type="text"/></label>
-    <label> Password <input ng-model="user.password" type="text"/></label>
-
-    <div class="button medium uppercase">login</div>
-
+        <input type="submit" class="button medium uppercase" value="sign up">
+    </form>
 </div>
+
