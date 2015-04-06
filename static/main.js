@@ -43,14 +43,7 @@ app.config(['$routeProvider', '$locationProvider',
     }]);
 
 app.factory("PlantSet", function ($cookies) {
-    return {
-        length: 5,
-        corrects: 0,
-        current: -1,
-        progress: [null, null, null, null, null],
-        name: "Indoor plants",
-        active: false
-    }
+    return {}
 });
 
 
@@ -60,6 +53,13 @@ app.controller("auth", function ($scope, $cookies) {
 
 app.controller("practice", function ($scope, $http, PlantSet, $location) {
     $scope.load_flashcards = function(){
+        PlantSet.length = 5;
+        PlantSet.corrects = 0;
+        PlantSet.current = -1;
+        PlantSet.progress = [null, null, null, null, null];
+        PlantSet.name = "Indoor plants";
+        PlantSet.active = false;
+
         $http.get('flashcards/flashcards', {params: {db_orderby: "id"}})
             .success(function(response){
                 $scope.flashcards = response.data.reverse();
