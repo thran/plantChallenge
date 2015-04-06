@@ -3,6 +3,11 @@ AuthService = function($http){
         "logged": false
     };
 
+    this.update_profile = function (scope) {
+        console.log(scope);
+        scope.$apply(_update_profile)
+    };
+
     var _update_profile = function(){
         $http.get("user/profile/").success(function(data){
             user.logged = true;
