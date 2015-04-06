@@ -17,7 +17,7 @@
     {
       "id": "intro-2",
       "name-en": "",
-      "content-en": "['21.jpg', '22.jpg']",
+      "content-en": "['21.jpg', '22.jpg', '23.jpg']",
       "lat": null,
       "long": null
     },
@@ -31,7 +31,7 @@
     {
       "id": "intro-4",
       "name-en": "",
-      "content-en": "['41.jpg', '42.jpg']",
+      "content-en": "['41.jpg']",
       "lat": null,
       "long": null
     }
