@@ -21,9 +21,6 @@ app.config(['$routeProvider', '$locationProvider',
             when('/post-practice', {
                 templateUrl: 'static/ng-parts/post-practice.html'
             }).
-            when('/home', {
-                templateUrl: 'static/ng-parts/home.html'
-            }).
             when('/practice', {
                 templateUrl: 'static/ng-parts/practice.html'
             }).
