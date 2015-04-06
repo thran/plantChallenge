@@ -56,7 +56,7 @@ app.controller("auth", function ($scope, authService, $location) {
     $scope.auth = authService;
 
     $scope.sign_up = function(){
-        auth.signup($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
+        authService.signup($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
     };
 
     $scope.$watch("auth.user.logged", function(n, o){
@@ -76,7 +76,7 @@ app.controller("practice", function ($scope, $http, PlantSet, $location) {
         PlantSet.corrects = 0;
         PlantSet.current = -1;
         PlantSet.progress = [null, null, null, null, null];
-        PlantSet.name = "Indoor plants";
+        PlantSet.name = "Plants";
         PlantSet.active = false;
 
         $http.get('flashcards/flashcards', {params: {db_orderby: "id"}})
