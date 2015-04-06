@@ -115,8 +115,8 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/close_login_popup/'
 
 GOOGLE_OAUTH2_CLIENT_ID = os.getenv("GOOGLE_OAUTH2_CLIENT_ID", "866680388789-jcn765bcsljfgmlh6iceb441lpq4i11k.apps.googleusercontent.com")
 GOOGLE_OAUTH2_CLIENT_SECRET = os.getenv("GOOGLE_OAUTH2_CLIENT_SECRET", "lQtMKN0oCWCjwiPdzVqKvDME")
-FACEBOOK_APP_ID = os.getenv('FACEBOOK_APP_ID', '1613509665547322')
-FACEBOOK_API_SECRET = os.getenv('FACEBOOK_API_SECRET', '97b1e7d64df94242c7dce475c04d8f05')
+FACEBOOK_APP_ID = os.getenv('FACEBOOK_APP_ID', '1431784213788747')
+FACEBOOK_API_SECRET = os.getenv('FACEBOOK_API_SECRET', 'c60a36636fc686047784d3790e0e65f1')
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
 # http://stackoverflow.com/questions/22005841/is-not-json-serializable-django-social-auth-facebook-login
