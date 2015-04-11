@@ -8,6 +8,7 @@ app.config(function ($httpProvider) {
 });
 
 app.service("userService", UserService);
+app.service("practiceService", PracticeService);
 
 
 
@@ -70,22 +71,18 @@ app.controller("auth", function ($scope, userService, $location) {
     };
 });
 
-app.controller("practice", function ($scope, $http, PlantSet, $location) {
+app.controller("practice", function ($scope, $http, PlantSet, $location, practiceService) {
     $scope.set = PlantSet;
     $scope.load_flashcards = function(){
-        PlantSet.length = 5;
+        practiceService.fc_in_queue = practiceService.fc_in_set = PlantSet.length = 5;
         PlantSet.corrects = 0;
         PlantSet.current = -1;
         PlantSet.progress = [null, null, null, null, null];
         PlantSet.name = "Plants";
         PlantSet.active = false;
 
-        $http.get('flashcards/flashcards', {params: {db_orderby: "id"}})
-            .success(function(response){
-                $scope.flashcards = response.data.reverse();
-                $scope.next_plant();
-                PlantSet.active = true;
-            });
+        $scope.next_plant();
+        PlantSet.active = true;
     };
 
     $scope.save_answer = function(answer){
@@ -96,29 +93,26 @@ app.controller("practice", function ($scope, $http, PlantSet, $location) {
         if (answer.correct)
             PlantSet.corrects++;
 
-        $http.post("flashcards/answer", {
-                "answer": {
-                    "flashcard_id": $scope.flashcard.id,
-                    "flashcard_answered_id": answer.correct ? $scope.flashcard.id : null,
-                    "response_time": (new Date).getTime() - answer.start_time,
-                    "direction": "d2t",
-                    "meta": "guesses: " + answer.guesses
-
-                }
-            })
+        practiceService.save_answer_to_current_fc(
+            answer.correct ? $scope.flashcard.id : null,
+            (new Date).getTime() - answer.start_time,
+            "guesses: " + answer.guesses
+        );
     };
 
     $scope.next_plant = function(){
-        PlantSet.current++;
-        if (PlantSet.current >= PlantSet.length){
-            $location.path("/post-practice");
-            PlantSet.active = false;
-            return;
-        }
-        $scope.answer = {guesses: 0, start_time: (new Date).getTime()};
-        $scope.flashcard = $scope.flashcards.pop();
-        $scope.flashcard.context.content = JSON.parse($scope.flashcard.context.content.split("'").join('"'));
-        $scope.flashcard.selected_image = $scope.flashcard.context.content[0];
+        practiceService.get_flashcard()
+            .then(
+            function(flashcard){
+                PlantSet.current++;
+                $scope.answer = {guesses: 0, start_time: (new Date).getTime()};
+                $scope.flashcard = flashcard;
+                $scope.flashcard.context.content = JSON.parse($scope.flashcard.context.content.split("'").join('"'));
+                $scope.flashcard.selected_image = $scope.flashcard.context.content[0];
+            }, function(msg){
+                $location.path("/post-practice");
+                PlantSet.active = false;
+            });
     };
 
     $scope.try_again = function(){

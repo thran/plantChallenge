@@ -139,7 +139,7 @@ SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 125
 
 PROSO_FLASHCARDS = {}
 PROSO_CONFIG = {
-    'path': os.path.join(BASE_DIR, 'proso_config.yaml'),
+    'path': os.path.join(BASE_DIR, 'plantchallenge/proso_config.yaml'),
     'default': 'default'
 }
 
