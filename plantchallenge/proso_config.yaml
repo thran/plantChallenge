@@ -1,0 +1,14 @@
+default:
+    proso_models:
+        predictive_model:
+            class: proso.models.prediction.PriorCurrentPredictiveModel
+        item_selector:
+            class: proso.models.item_selection.ScoreItemSelection
+        option_selector:
+            class: proso.models.option_selection.NonOptionSelection
+    proso_flashcards:
+        option_set:
+            class: proso_flashcards.flashcard_construction.EmptyOptionSet
+        direction:
+            class: proso_flashcards.flashcard_construction.OnlyFromDescriptionDirection
+

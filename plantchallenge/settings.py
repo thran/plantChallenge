@@ -55,9 +55,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'proso_common.models.RequestMiddleware',
+    'proso.django.request.RequestMiddleware',
     'proso_ab.models.ABMiddleware',
-    'proso_models.cache.RequestCacheMiddleware',
+    'proso.django.cache.RequestCacheMiddleware',
     'proso.django.log.RequestLogMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'proso_questions_client.middleware.AuthAlreadyAssociatedMiddleware',
@@ -137,13 +137,11 @@ SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 135
 SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 125
 
 
-PROSO_PREDICTIVE_MODEL = 'proso.models.prediction.PriorCurrentPredictiveModel'
-PROSO_ENVIRONMENT = 'proso_models.models.DatabaseEnvironment'
-PROSO_ITEM_SELECTION = 'proso.models.item_selection.ScoreItemSelection'
-PROSO_OPTION_SELECTION = 'proso.models.option_selection.NonOptionSelection'
-PROSO_FLASHCARDS_OPTION_SET = 'proso_flashcards.flashcard_construction.ContextOptionSet'
-PROSO_FLASHCARDS_DIRECTION = 'proso_flashcards.flashcard_construction.RandomDirection'
 PROSO_FLASHCARDS = {}
+PROSO_CONFIG = {
+    'path': os.path.join(BASE_DIR, 'proso_config.yaml'),
+    'default': 'default'
+}
 
 
 EMAIL_HOST = 'localhost'
