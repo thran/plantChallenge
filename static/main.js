@@ -7,7 +7,7 @@ app.config(function ($httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
-app.service("authService", AuthService);
+app.service("userService", UserService);
 
 
 
@@ -61,21 +61,12 @@ app.factory("PlantSet", function () {
 });
 
 
-app.controller("auth", function ($scope, authService, $location) {
-    $scope.auth = authService;
+app.controller("auth", function ($scope, userService, $location) {
+    $scope.service = userService;
+    userService.process_user(user);
 
     $scope.sign_up = function(){
-        authService.signup($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
-    };
-
-    $scope.$watch("auth.user.logged", function(n, o){
-        if (n){
-            $location.path("/intro-final")
-        }
-    });
-
-    var update_profile = function() {
-        $scope.$apply(authService.update_profile)
+        userService.signup_params($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
     };
 });
 
@@ -191,5 +182,5 @@ app.directive('stopEvent', function () {
 
 var social_auth_callback = function(){
     var element = angular.element($("body"));
-    element.injector().get("authService").update_profile(element.scope());
+    element.injector().get("userService").load_user_fromJS(element.scope());
 };

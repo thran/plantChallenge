@@ -1,5 +1,8 @@
+import json
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponseBadRequest
+from django.shortcuts import render
+from lazysignup.decorators import allow_lazy_user
 from practice.models import ExtendedTerm
 
 
@@ -17,3 +20,11 @@ def typehead(request):
                           ExtendedTerm.objects.filter(q)
                           .order_by("name")[:LIMIT])}
     return JsonResponse(data)
+
+@allow_lazy_user
+def home(request):
+    if not hasattr(request.user, "userprofile"):
+        user = ""
+    else:
+        user = json.dumps(request.user.userprofile.to_json())
+    return render(request, "index.html", {"user": user})

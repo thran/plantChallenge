@@ -19,16 +19,16 @@
         <div style="height: 1rem"></div>
 
         <div class="row">
-            <div class="small-6 column"  onclick="openPopup('login/google-oauth2/', '/close_login_popup/')">
+            <div class="small-6 column"  ng-click="service.login_google()">
                 <span id="google"><i class="fi-social-google-plus"></i>sign with Google</span>
             </div>
-            <div class="small-6 column" onclick="openPopup('login/facebook/', '/close_login_popup/')">
+            <div class="small-6 column" ng-click="service.login_facebook()">
                 <span id="facebook"><i class="fi-social-facebook"></i>sign with Facebook</span>
             </div>
         </div>
         <div class="separator uppercase"><span><span>OR</span></span></div>
-        <div data-alert class="alert-box alert" ng-cloak ng-show="auth.user.error_msg">
-            {{ auth.user.error_msg }}
+        <div data-alert class="alert-box alert" ng-cloak ng-show="service.user.error    ">
+            {{ service.user.error }}
             <a href="#" class="close">&times;</a>
         </div>
         <form ng-submit="sign_up()">
