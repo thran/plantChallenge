@@ -13,7 +13,6 @@ class ExtendedTerm(Term):
         json = Term.to_json(self, nested)
         json["url"] = self.url
         json["interesting"] = self.interesting
-        print json
         return json
 
     @staticmethod

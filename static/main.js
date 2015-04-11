@@ -69,6 +69,12 @@ app.controller("auth", function ($scope, userService, $location) {
     $scope.sign_up = function(){
         userService.signup_params($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
     };
+
+    $scope.$watch("service.user.logged", function(n, o){
+        if (n){
+            $location.path("/intro-final")
+        }
+    });
 });
 
 app.controller("practice", function ($scope, $http, PlantSet, $location, practiceService) {
