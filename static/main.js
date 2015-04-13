@@ -70,7 +70,7 @@ app.controller("auth", function ($scope, userService, $location) {
         userService.signup_params($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
     };
 
-    $scope.$watch("service.user.logged", function(n, o){
+    $scope.$watch("service.status.logged", function(n, o){
         if (n){
             $location.path("/intro-final")
         }
@@ -80,7 +80,7 @@ app.controller("auth", function ($scope, userService, $location) {
 app.controller("practice", function ($scope, $http, PlantSet, $location, practiceService) {
     $scope.set = PlantSet;
     $scope.load_flashcards = function(){
-        practiceService.fc_in_queue = practiceService.fc_in_set = PlantSet.length = 5;
+        practiceService.fc_queue_size_max = practiceService.set_lenght = PlantSet.length = 5;
         PlantSet.corrects = 0;
         PlantSet.current = -1;
         PlantSet.progress = [null, null, null, null, null];
