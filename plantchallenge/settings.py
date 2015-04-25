@@ -46,6 +46,8 @@ INSTALLED_APPS = (
     'proso_flashcards',
     'social_auth',
     'practice',
+    'set_creator',
+    'flowerchecker',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,7 +68,12 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'plantchallenge.urls'
 
 
-DATABASES = {"default": dj_database_url.config(default='postgresql://proso_apps:proso_apps@localhost/plantchallenge')}
+DATABASES = {
+    "default": dj_database_url.config(default='postgresql://proso_apps:proso_apps@localhost/plantchallenge'),
+    "flowerChecker": dj_database_url.config("FC_DB", default='mysql://plantch:try_me@flowerchecker.com/flowerchecker'),
+}
+
+DATABASE_ROUTERS = ['plantchallenge.db_router.DBRouter']
 
 # Internationalization
 

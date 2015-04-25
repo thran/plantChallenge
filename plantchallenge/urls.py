@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     # url(r'^feedback/', include('proso_feedback.urls')),
     url(r'^flashcards/', include('proso_flashcards.urls')),
     url(r'', include('social_auth.urls')),
+    url(r'^sets/', include('set_creator.urls')),
 
     url(r'^typehead', "practice.views.typehead"),
     url(r'^.*$', "practice.views.home", name='home'),
