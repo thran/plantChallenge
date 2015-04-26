@@ -123,6 +123,9 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
     };
 
     $scope.image_url = function(image, size){
+        if (typeof image === "undefined"){
+            return null;
+        }
         return "http://images.flowerchecker.com/images/" + image + "-" + size;
     };
 
