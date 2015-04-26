@@ -1,0 +1,14 @@
+{% extends "sets/base.html" %}
+
+{% block content %}
+    <h4>{{ term }}</h4>
+    {% for flashcard in flashcards %}
+        Request #{{ flashcard.context.identifier }}<br/>
+        <a href="http://images.flowerchecker.com/images/{{ flashcard.images.0 }}-original" target="_blank"><img src="http://images.flowerchecker.com/images/{{ flashcard.images.0 }}-small" alt=""/></a>
+        <a href="http://images.flowerchecker.com/images/{{ flashcard.images.1 }}-original" target="_blank"><img src="http://images.flowerchecker.com/images/{{ flashcard.images.1 }}-small" alt=""/></a>
+        <a href="http://images.flowerchecker.com/images/{{ flashcard.images.2 }}-original" target="_blank"><img src="http://images.flowerchecker.com/images/{{ flashcard.images.2 }}-small" alt=""/></a>
+        <hr/>
+    {% endfor %}
+
+
+{% endblock %}

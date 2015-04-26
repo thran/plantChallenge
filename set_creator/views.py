@@ -1,5 +1,7 @@
+import json
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404, redirect
+from proso_flashcards.models import Flashcard
 from practice.models import ExtendedTerm
 from set_creator.models import Set
 
@@ -41,3 +43,13 @@ def remove_term(request, set_pk, term_pk):
     s.terms.filter(pk=term_pk).delete()
     s.save()
     return redirect("set", set_pk)
+
+@staff_member_required
+def term_detail(request, pk):
+    flashcards = Flashcard.objects.filter(term_id=pk)
+    for flashcard in flashcards:
+        flashcard.images = json.loads(flashcard.context.content)
+    return render(request, 'sets/term.html', {
+        "flashcards": flashcards,
+        "term": get_object_or_404(ExtendedTerm, pk=pk)
+    })
