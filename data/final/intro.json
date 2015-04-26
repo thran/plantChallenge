@@ -1,0 +1,79 @@
+{
+  "contexts": [
+    {
+      "id": "intro-0",
+      "name-en": "",
+      "content-en": "['euCszNDNIB-1']",
+      "lat": null,
+      "long": null
+    },
+    {
+      "id": "intro-1",
+      "name-en": "",
+      "content-en": "['VUWAqitQwd-2', 'VUWAqitQwd-3']",
+      "lat": null,
+      "long": null
+    },
+    {
+      "id": "intro-2",
+      "name-en": "",
+      "content-en": "['umfrHGOaXF-1', 'fpUytyJOmP-1', 'UIJGYeYpRJ-2']",
+      "lat": null,
+      "long": null
+    },
+    {
+      "id": "intro-3",
+      "name-en": "",
+      "content-en": "['nSclwnEeKL-1', 'ZxdrXgoDqU-1', 'NrcpCZGaKJ-1']",
+      "lat": null,
+      "long": null
+    },
+    {
+      "id": "intro-4",
+      "name-en": "",
+      "content-en": "['kAhlanTvVw-1']",
+      "lat": null,
+      "long": null
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "intro-0",
+      "term": "Tagetes patula",
+      "context": "intro-0",
+      "categories": ["intro_set"]
+    },
+    {
+      "id": "intro-1",
+      "term": "Hyacinthus orientalis",
+      "context": "intro-1",
+      "categories": ["intro_set"]
+    },
+    {
+      "id": "intro-2",
+      "term": "Platanus occidentalis",
+      "context": "intro-2",
+      "categories": ["intro_set"]
+    },
+    {
+      "id": "intro-3",
+      "term": "Solanum dulcamara",
+      "context": "intro-3",
+      "categories": ["intro_set"]
+    },
+    {
+      "id": "intro-4",
+      "term": "Oxalis triangularis",
+      "context": "intro-4",
+      "categories": ["intro_set"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "intro_set",
+      "name-en": "Intro Plants",
+      "not-in-model": true,
+      "type": "intro_set"
+    }
+  ]
+}
