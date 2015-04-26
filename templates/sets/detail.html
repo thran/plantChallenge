@@ -1,0 +1,55 @@
+{% extends "sets/base.html" %}
+{% load staticfiles %}
+{% block head %}
+
+    <script src="{% static "angular/angular.js" %}"></script>
+    <script src="{% static "foundation/js/ng-foundation.min.js" %}"></script>
+
+
+    <script>
+        var app = angular.module('pc', ['mm.foundation']);
+        app.controller("sets", function($scope, $http){
+        $scope.getPlantNames = function(val) {
+            return $http.get('/typehead', {
+                params: {
+                    search: val
+                }
+                }).then(function(response){
+                    return response.data.plants;
+                });
+            };
+        })
+    </script>
+{% endblock %}
+
+{% block content %}
+    <span class="right"><a href="{% url "set_list" %}">back</a></span>
+    <h4>{{ set }}</h4>
+    {% for term in set.terms.all %}
+        <b><a href="{{ term.url }}" target="_blank">{{ term.name }}</a></b>
+        - {{ term.flashcards.count }} requsts
+        <a onclick="return confirm('Really?')" href="{% url "set_remove_term" set.pk term.pk %}"><i class="fi-x"></i></a>
+        <br/>
+    {% endfor %}
+
+
+    <hr/>
+    <form action="{% url "set_add_term" set.pk %}" method="post" ng-app="pc" ng-controller="sets">
+        {% verbatim %}{% endverbatim %}
+        {% csrf_token %}
+        <input
+                type="text"
+                class="fancy"
+                ng-model="term"
+                typeahead="plant as plant.name for plant in getPlantNames($viewValue)"
+                typeahead-loading="loadingPlants"
+                typeahead-editable="false"
+                typeahead-min-length="2"
+                typeahead-wait-ms="300"
+                />
+        <input type="hidden" name="term" ng-value="term.id"/>
+
+        <input class="button" ng-disabled="!term" type="submit" value="Add Plant" />
+    </form>
+
+{% endblock %}

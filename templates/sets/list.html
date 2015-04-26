@@ -1,0 +1,21 @@
+{% extends "sets/base.html" %}
+
+{% block content %}
+    <h4>Sets</h4>
+    {% for set in sets %}
+        <a href="{% url "set" set.pk %}">{{ set }}</a> - {{ set.terms.all.count }} plants
+        <br/>
+    {% endfor %}
+
+    <hr/>
+    <h4>New set</h4>
+    <form action="{% url "set_new" %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Name" name="name"/>
+        <input class="button" type="submit" value="Create" />
+    </form>
+
+    <hr/>
+    <a href="{% url "admin:set_creator_set_changelist" %}">advanced</a>
+
+{% endblock %}

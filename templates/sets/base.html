@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Sets</title>
+    <link rel="stylesheet" href="{% static "foundation/css/normalize.css" %}">
+    <link rel="stylesheet" href="{% static "foundation/css/myfoundation.css" %}">
+    <link rel="stylesheet" href="{% static "foundation/icons/foundation-icons.css" %}">
+    <link rel="stylesheet" href="{% static "style.css" %}">
+
+    <style>
+        body{
+            margin-top: 20px;
+        }
+    </style>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<div id="content" class="row">
+{% block content %}
+{% endblock %}
+</div>
+</body>
+</html>
