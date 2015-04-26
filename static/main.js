@@ -66,7 +66,7 @@ app.controller("auth", function ($scope, userService, $location) {
     userService.processUser(user);
 
     $scope.sign_up = function(){
-        userService.signup_params($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
+        userService.signupParams($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
     };
 
     $scope.$watch("service.status.logged", function(n, o){
@@ -190,5 +190,5 @@ app.directive('stopEvent', function () {
 
 var social_auth_callback = function(){
     var element = angular.element($("body"));
-    element.injector().get("userService").load_user_fromJS(element.scope());
+    element.injector().get("userService").loadUserFromJS(element.scope());
 };
