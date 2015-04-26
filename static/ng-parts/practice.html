@@ -1,7 +1,7 @@
 <div class="loader" ng-hide="flashcard"></div>
 
 <div id="image-strip" ng-cloak ng-show="flashcard">
-    <img id="img" ng-src="static/plants/{{ flashcard.selected_image }}"/>
+    <img id="img" ng-src='{{image_url(flashcard.selected_image, "big")}}'/>
 </div>
 <div id="select-left" ng-cloak ng-show="flashcard">
     <div
@@ -10,7 +10,7 @@
             ng-click="flashcard.selected_image = image"
             ng-class="{'selected': flashcard.selected_image == image}"
             >
-        <img ng-src="static/plants/{{ image }}" />
+        <img ng-src='{{image_url(image, "small")}}' />
     </div>
 </div>
 <br/>

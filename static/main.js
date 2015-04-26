@@ -80,6 +80,7 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
     $scope.set = PlantSet;
     $scope.load_flashcards = function(){
         practiceService.initSet("intro");
+        practiceService.setFilter({categories: ["intro_set"]});
         PlantSet.length = 5;
         PlantSet.corrects = 0;
         PlantSet.current = -1;
@@ -119,6 +120,10 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
                 $location.path("/post-practice");
                 PlantSet.active = false;
             });
+    };
+
+    $scope.image_url = function(image, size){
+        return "http://images.flowerchecker.com/images/" + image + "-" + size;
     };
 
     $scope.try_again = function(){
