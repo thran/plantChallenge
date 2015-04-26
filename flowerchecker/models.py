@@ -43,14 +43,14 @@ class Flowers(models.Model):
 
 
 class Imagefile(models.Model):
-    request = models.ForeignKey('Request', db_column='request')
+    request = models.ForeignKey('Request', db_column='request', related_name="images")
     imgorder = models.IntegerField()
     type = models.CharField(max_length=9)
     filename = models.CharField(max_length=100)
     addedas = models.CharField(max_length=20, blank=True)
     accesshash = models.CharField(max_length=20, blank=True)
     clouded = models.CharField(max_length=3)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(primary_key=True)
 
     class Meta:
         managed = False
@@ -96,7 +96,7 @@ class Request(models.Model):
     access_hash = models.CharField(max_length=12, blank=True)
     country = models.CharField(max_length=5, blank=True)
     unresolvedreason = models.TextField(blank=True)
-    plant_type = models.IntegerField(blank=True, null=True)
+    plant_type = models.ForeignKey(PlantType, db_column="plant_type", blank=True, null=True)
     ip = models.CharField(max_length=40, blank=True)
     alchemyapi = models.CharField(max_length=50, blank=True)
     deviceid = models.CharField(max_length=300, blank=True)
