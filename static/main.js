@@ -100,7 +100,7 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
         if (answer.correct)
             PlantSet.corrects++;
 
-        practiceService.saveAnswerToCurrentFc(
+        practiceService.saveAnswerToCurrentFC(
             answer.correct ? $scope.flashcard.id : null,
             (new Date).getTime() - answer.start_time,
             "guesses: " + answer.guesses
