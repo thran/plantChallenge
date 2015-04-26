@@ -1,1 +1,3 @@
 *.py[cod]
+data/final/categories.json
+data/final/terms.json

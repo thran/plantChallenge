@@ -13,9 +13,5 @@ pip install -r $DIR/requirements.txt
 python $DIR/manage.py syncdb
 python $DIR/manage.py migrate
 
-python $DIR/manage.py load_flashcards $DIR/data/categories.json
-python $DIR/manage.py load_flashcards $DIR/data/terms.json
-python $DIR/manage.py load_flashcards $DIR/data/intro.json
-
 # static files
 python $DIR/manage.py collectstatic --noinput

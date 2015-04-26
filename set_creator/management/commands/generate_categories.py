@@ -7,7 +7,7 @@ from set_creator.models import Set
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        data = json.load(open("data/final/terms.json"))
+        data = json.load(open("data/final/terms-clean.json"))
         categories = []
         terms = data["terms"]
         relationships = defaultdict(lambda: [])
