@@ -97,6 +97,7 @@ DATA_DIR = os.path.join(BASE_DIR, 'data')
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'), )
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
    "practice.context_processors.important",
+   "proso_common.context_processors.config_processor",
 )
 
 

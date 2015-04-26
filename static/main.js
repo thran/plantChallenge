@@ -1,4 +1,4 @@
-var app = angular.module('plantChallenge', ["ngCookies", "ngRoute", "mm.foundation"]);
+var app = angular.module('plantChallenge', ["ngCookies", "ngRoute", "mm.foundation", "proso_apps.services"]);
 
 var MAX_GUESSES = 2;
 
@@ -7,10 +7,6 @@ app.config(function ($httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
-app.service("userService", UserService);
-app.service("practiceService", PracticeService);
-
-
 
 app.run(function ($rootScope, $location) {
     $rootScope.$on('$routeChangeSuccess', function(){
@@ -18,6 +14,9 @@ app.run(function ($rootScope, $location) {
     });
 });
 
+app.run(function(configService){
+    configService.processConfig(config);
+});
 
 
 app.config(['$routeProvider', '$locationProvider',
@@ -64,7 +63,7 @@ app.factory("PlantSet", function () {
 
 app.controller("auth", function ($scope, userService, $location) {
     $scope.service = userService;
-    userService.process_user(user);
+    userService.processUser(user);
 
     $scope.sign_up = function(){
         userService.signup_params($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
@@ -80,7 +79,8 @@ app.controller("auth", function ($scope, userService, $location) {
 app.controller("practice", function ($scope, $http, PlantSet, $location, practiceService) {
     $scope.set = PlantSet;
     $scope.load_flashcards = function(){
-        practiceService.fc_queue_size_max = practiceService.set_lenght = PlantSet.length = 5;
+        practiceService.initSet("intro");
+        PlantSet.length = 5;
         PlantSet.corrects = 0;
         PlantSet.current = -1;
         PlantSet.progress = [null, null, null, null, null];
@@ -99,7 +99,7 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
         if (answer.correct)
             PlantSet.corrects++;
 
-        practiceService.save_answer_to_current_fc(
+        practiceService.saveAnswerToCurrentFc(
             answer.correct ? $scope.flashcard.id : null,
             (new Date).getTime() - answer.start_time,
             "guesses: " + answer.guesses
@@ -107,7 +107,7 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
     };
 
     $scope.next_plant = function(){
-        practiceService.get_flashcard()
+        practiceService.getFlashcard()
             .then(
             function(flashcard){
                 PlantSet.current++;
