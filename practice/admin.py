@@ -12,7 +12,7 @@ class TermAdmin(admin.ModelAdmin):
 
 class RequestInline(admin.StackedInline):
     model = Request
-    fields = ('term', 'description', 'active')
+    fields = ('term', 'active')
 
     def has_add_permission(self, request):
         return False
