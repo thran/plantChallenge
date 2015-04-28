@@ -26,8 +26,10 @@
     <span class="right"><a href="{% url "set_list" %}">back</a></span>
     <h4>{{ set }}</h4>
     {% for term in set.terms.all %}
-        <a href="{% url "set_term" term.pk %}">{{ term.name }}</a>
+        <a href="{% url "set_term" term.pk %}"><i class="fi-list-thumbnails"></i></a>
         <a href="{{ term.url }}" target="_blank"><i class="fi-web"></i></a>
+        <a target="_blank" href="{% url "admin:practice_extendedterm_change" term.pk %}"><i class="fi-pencil"></i></a>
+        <b>{{ term.name }}</b>
         - {{ term.flashcards.count }} requsts
         <a onclick="return confirm('Really?')" href="{% url "set_remove_term" set.pk term.pk %}"><i class="fi-x"></i></a>
         <br/>

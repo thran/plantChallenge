@@ -2,10 +2,13 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from proso_flashcards.models import Term, Context
+from proso_flashcards.models import Term, Context, Flashcard
 
 
 class ExtendedTerm(Term):
+    class Meta:
+        verbose_name = "Plant"
+
     url = models.TextField()
     interesting = models.TextField(null=True, blank=True)
 
@@ -24,6 +27,9 @@ class ExtendedTerm(Term):
 
 
 class ExtendedContext(Context):
+    class Meta:
+        verbose_name = "Request"
+
     lat = models.FloatField(null=True, blank=True)
     long = models.FloatField(null=True, blank=True)
     fullname = models.CharField(max_length=255, null=True, blank=True)
@@ -39,6 +45,11 @@ class ExtendedContext(Context):
             context.long = data["long"]
         if 'fullname' in data:
             context.fullname = data["fullname"]
+
+
+class Request(Flashcard):
+    class Meta:
+        proxy = True
 
 
 settings.PROSO_FLASHCARDS["term_extension"] = ExtendedTerm
