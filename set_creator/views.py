@@ -46,7 +46,7 @@ def remove_term(request, set_pk, term_pk):
 
 @staff_member_required
 def term_detail(request, pk):
-    flashcards = Flashcard.objects.filter(term_id=pk)
+    flashcards = Flashcard.objects.filter(term_id=pk).order_by("identifier")
     for flashcard in flashcards:
         flashcard.images = json.loads(flashcard.context.content)
     return render(request, 'sets/term.html', {

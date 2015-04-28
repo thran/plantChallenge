@@ -10,9 +10,9 @@ class TermAdmin(admin.ModelAdmin):
         return False
 
 
-class RequestInline(admin.TabularInline):
+class RequestInline(admin.StackedInline):
     model = Request
-    fields = ('term', 'description',)
+    fields = ('term', 'description', 'active')
 
     def has_add_permission(self, request):
         return False
