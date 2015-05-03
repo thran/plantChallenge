@@ -17,7 +17,7 @@ class Command(BaseCommand):
     )
 
     def handle(self, *args, **options):
-        SURNESS = 95
+        SURNESS = 90
 
         terms = [t["id"] for t in json.load(open("data/final/terms.json"))["terms"]]
         flashcards = []
