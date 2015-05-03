@@ -40,7 +40,7 @@ def add_term(request, pk):
 @staff_member_required
 def add_terms(request, pk):
     set = get_object_or_404(Set, pk=pk)
-    if request.method == "POST" and "pattern" in request.POST:
+    if request.method == "POST" and "pattern" in request.POST and len(request.POST["pattern"]) > 2:
         pattern = request.POST["pattern"]
         pattern = pattern[0].upper() + pattern[1:].lower()
         for term in ExtendedTerm.objects.filter(name__startswith=pattern):
