@@ -21,7 +21,6 @@ def typehead(request):
                           .order_by("name")[:LIMIT])}
     return JsonResponse(data)
 
-@allow_lazy_user
 def home(request):
     if not hasattr(request.user, "userprofile"):
         user = ""
