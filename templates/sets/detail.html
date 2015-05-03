@@ -38,7 +38,6 @@
 
     <hr/>
     <form action="{% url "set_add_term" set.pk %}" method="post" ng-app="pc" ng-controller="sets">
-        {% verbatim %}{% endverbatim %}
         {% csrf_token %}
         <input
                 type="text"
@@ -53,6 +52,13 @@
         <input type="hidden" name="term" ng-value="term.id"/>
 
         <input class="button" ng-disabled="!term" type="submit" value="Add Plant" />
+    </form>
+
+    <form action="{% url "set_add_terms" set.pk %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="starting with..." name="pattern" ng-value="term.id"/>
+
+        <input class="button" type="submit" value="Add Plants" />
     </form>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 import json
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, get_object_or_404, redirect
-from proso_flashcards.models import Flashcard
+from proso_flashcards.models import Flashcard, Term
 from practice.models import ExtendedTerm
 from set_creator.models import Set
 
@@ -34,6 +34,18 @@ def add_term(request, pk):
         t = get_object_or_404(ExtendedTerm, pk=int(request.POST["term"]))
         s.terms.add(t)
         s.save()
+    return redirect("set", pk)
+
+
+@staff_member_required
+def add_terms(request, pk):
+    set = get_object_or_404(Set, pk=pk)
+    if request.method == "POST" and "pattern" in request.POST:
+        pattern = request.POST["pattern"]
+        pattern = pattern[0].upper() + pattern[1:].lower()
+        for term in ExtendedTerm.objects.filter(name__startswith=pattern):
+            set.terms.add(term)
+            set.save()
     return redirect("set", pk)
 
 
