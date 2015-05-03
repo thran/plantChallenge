@@ -60,7 +60,10 @@ def remove_term(request, set_pk, term_pk):
 def term_detail(request, pk):
     flashcards = Flashcard.objects.filter(term_id=pk).order_by("identifier")
     for flashcard in flashcards:
-        flashcard.images = json.loads(flashcard.context.content)
+        try:
+            flashcard.images = json.loads(flashcard.context.content)
+        except ValueError:
+            flashcard.json_error = "Invalid form of images json."
     return render(request, 'sets/term.html', {
         "flashcards": flashcards,
         "term": get_object_or_404(ExtendedTerm, pk=pk)
