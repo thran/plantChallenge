@@ -14,16 +14,22 @@ class Command(BaseCommand):
             action='store_true',
             default=False,
             help='do it'),
+        make_option(
+            '--short',
+            dest='short',
+            action='store_true',
+            default=False,
+            help='short terms only'),
     )
 
     def handle(self, *args, **options):
         SURNESS = 90
 
-        terms = [t["id"] for t in json.load(open("data/final/terms.json"))["terms"]]
+        terms = [t["id"] for t in json.load(open("data/final/terms{}.json".format("-short" if options["short"] else "")))["terms"]]
         flashcards = []
         contexts = []
 
-        answers = Answer.objects.filter(sureness__gte=SURNESS).select_related("request")\
+        answers = Answer.objects.filter(sureness__gte=SURNESS, request__source="mobile").select_related("request")\
                       .prefetch_related("request__images").order_by("-request")
         for answer in progress.bar(answers, every=max(1, answers.count() / 100)):
             if answer.request.images.all().count() == 0:
@@ -56,4 +62,4 @@ class Command(BaseCommand):
                 "long": float(gps[1])
             })
 
-        json.dump({"contexts": contexts, "flashcards": flashcards}, open("data/final/flashcards.json", "w"), indent=4)
+        json.dump({"contexts": contexts, "flashcards": flashcards}, open("data/final/flashcards{}.json".format("-short" if options["short"] else ""), "w"), indent=4)
