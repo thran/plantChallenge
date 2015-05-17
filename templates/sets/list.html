@@ -1,8 +1,17 @@
 {% extends "sets/base.html" %}
 
 {% block content %}
-    <h4>Sets</h4>
+    <h4>Sets - PlantChallenge</h4>
     {% for set in sets %}
+        <a href="{% url "set_switch_for_daniel" set.pk %}"><i class="fi-arrow-down"></i></a>
+        <a href="{% url "set" set.pk %}">{{ set }}</a> - {{ set.terms.all.count }} plants
+        {% if not set.active %} (not active) {% endif %}
+        <br/>
+    {% endfor %}
+
+    <h4>Sets - Daniel</h4>
+    {% for set in sets_for_daniel %}
+        <a href="{% url "set_switch_for_daniel" set.pk %}"><i class="fi-arrow-up"></i></a>
         <a href="{% url "set" set.pk %}">{{ set }}</a> - {{ set.terms.all.count }} plants
         <br/>
     {% endfor %}

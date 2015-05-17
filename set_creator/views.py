@@ -9,7 +9,8 @@ from set_creator.models import Set
 @staff_member_required
 def set_list(request, *args):
     return render(request, 'sets/list.html', {
-        "sets": Set.objects.all()
+        "sets": Set.objects.filter(for_daniel=False),
+        "sets_for_daniel": Set.objects.filter(for_daniel=True),
     })
 
 
@@ -68,3 +69,10 @@ def term_detail(request, pk):
         "flashcards": flashcards,
         "term": get_object_or_404(ExtendedTerm, pk=pk)
     })
+
+@staff_member_required
+def switch_for_daniel(request, pk):
+    set = get_object_or_404(Set, pk=pk)
+    set.for_daniel = not set.for_daniel
+    set.save()
+    return redirect("set_list")
