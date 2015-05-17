@@ -25,6 +25,9 @@ class RequestInline(admin.StackedInline):
 class FlashcardAdmin(admin.ModelAdmin):
     fields = ('fullname', 'content',)
     inlines = (RequestInline, )
+    list_display = ('identifier', 'fullname')
+    search_fields = ['identifier']
+
     def has_delete_permission(self, request, *args):
         return False
 
