@@ -13,7 +13,7 @@ def parse_flower(flowerName):
     complexName = parseNomenklature(flowerName)
 
     if len(simpleName) > 0:
-        simpleName.lower()
+        simpleName = simpleName.lower()
         simpleName = simpleName[0].upper() + simpleName[1:]
 
     return simpleName, complexName

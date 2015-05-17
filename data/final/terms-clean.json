@@ -1657,8 +1657,8 @@
         }, 
         {
             "url": "http://www.rhs.org.uk/plants/details?plantid=149", 
-            "name-en": "Aponogeton Distachyos", 
-            "id": "Aponogeton Distachyos"
+            "name-en": "Aponogeton distachyos", 
+            "id": "Aponogeton distachyos"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Aponogeton_longiplumulosus", 
@@ -2336,14 +2336,14 @@
             "id": "Atropa belladonna"
         }, 
         {
-            "url": "http://en.wikipedia.org/wiki/Aubrieta", 
-            "name-en": "Aubrieta Hybrida", 
-            "id": "Aubrieta Hybrida"
-        }, 
-        {
             "url": "http://botany.cz/cs/aubrieta-deltoidea/", 
             "name-en": "Aubrieta deltoides", 
             "id": "Aubrieta deltoides"
+        }, 
+        {
+            "url": "http://en.wikipedia.org/wiki/Aubrieta", 
+            "name-en": "Aubrieta hybrida", 
+            "id": "Aubrieta hybrida"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Aucuba_japonica", 
@@ -2591,11 +2591,6 @@
             "id": "Beaumontia grandiflora"
         }, 
         {
-            "url": "http://www.vitegreenhouses.com/PlantDetail.asp?PlantID=A2013111", 
-            "name-en": "Begonia Rex", 
-            "id": "Begonia Rex"
-        }, 
-        {
             "url": "http://en.wikipedia.org/wiki/Begonia_boliviensis", 
             "name-en": "Begonia boliviensis", 
             "id": "Begonia boliviensis"
@@ -2654,6 +2649,11 @@
             "url": "http://www.biolib.cz/cz/taxon/id813072/", 
             "name-en": "Begonia partita", 
             "id": "Begonia partita"
+        }, 
+        {
+            "url": "http://www.vitegreenhouses.com/PlantDetail.asp?PlantID=A2013111", 
+            "name-en": "Begonia rex", 
+            "id": "Begonia rex"
         }, 
         {
             "url": "http://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b543", 
@@ -3158,8 +3158,7 @@
         {
             "url": "http://en.wikipedia.org/wiki/Bryophyllum_daigremontianum", 
             "name-en": "Bryophyllum daigremontianum", 
-            "id": "Bryophyllum daigremontianum",
-            "interesting": "Its name 'Mother of Thousands' reffers to its ability to propagate vegetatively from plantlets that develop on phylloclade margins."
+            "id": "Bryophyllum daigremontianum"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Bryophyllum_fedtschenkoi", 
@@ -6518,8 +6517,8 @@
         }, 
         {
             "url": "http://www.lsuagcenter.com/news_archive/2013/october/get_it_growing/Diamonds-Blue-delphiniums-sparkle-in-the-coolseason-garden-.htm", 
-            "name-en": "DelphiniumDelphinium chinensis", 
-            "id": "DelphiniumDelphinium chinensis"
+            "name-en": "Delphiniumdelphinium chinensis", 
+            "id": "Delphiniumdelphinium chinensis"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Dendrobium_kingianum", 
@@ -7255,11 +7254,6 @@
             "url": "http://en.wikipedia.org/wiki/Echinopsis_spachiana", 
             "name-en": "Echinopsis spachiana", 
             "id": "Echinopsis spachiana"
-        }, 
-        {
-            "url": "http://www.cooltropicalplants.com/Echium-pininana.html", 
-            "name-en": "Echium Pininana", 
-            "id": "Echium Pininana"
         }, 
         {
             "url": "http://botany.cz/cs/echium-angustifolium/", 
@@ -8578,8 +8572,8 @@
         }, 
         {
             "url": "http://www.emblibrary.com/el/new.aspx?date=071107", 
-            "name-en": "Folk Flowers", 
-            "id": "Folk Flowers"
+            "name-en": "Folk flowers", 
+            "id": "Folk flowers"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Fomes_fomentarius", 
@@ -10154,13 +10148,7 @@
         {
             "url": "http://en.wikipedia.org/wiki/Hyacinthus_orientalis", 
             "name-en": "Hyacinthus orientalis", 
-            "id": "Hyacinthus orientalis",
-            "interesting": "It has a long history of cultivation as an ornamental plant, grown across the Mediterranean region, and later France (where it is used in perfumery), the Netherlands (a major centre of cultivation) and elsewhere."
-        }, 
-        {
-            "url": "http://es.wikipedia.org/wiki/Hydrangea_aspera", 
-            "name-en": "Hydrangea Aspera", 
-            "id": "Hydrangea Aspera"
+            "id": "Hyacinthus orientalis"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Hydrangea_anomala", 
@@ -10171,6 +10159,11 @@
             "url": "http://en.wikipedia.org/wiki/Hydrangea_arborescens", 
             "name-en": "Hydrangea arborescens", 
             "id": "Hydrangea arborescens"
+        }, 
+        {
+            "url": "http://es.wikipedia.org/wiki/Hydrangea_aspera", 
+            "name-en": "Hydrangea aspera", 
+            "id": "Hydrangea aspera"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Hydrangea_macrophylla", 
@@ -11184,8 +11177,8 @@
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Lace_Bug", 
-            "name-en": "Lace Bug", 
-            "id": "Lace Bug"
+            "name-en": "Lace bug", 
+            "id": "Lace bug"
         }, 
         {
             "url": "http://www.mushroomexpert.com/lacrymaria_velutina.html", 
@@ -11998,11 +11991,6 @@
             "id": "Lomandra longifolia"
         }, 
         {
-            "url": "http://botany.cz/cs/lonicera-ledebourii/", 
-            "name-en": "Lonicera Ledebourii", 
-            "id": "Lonicera Ledebourii"
-        }, 
-        {
             "url": "http://en.hortipedia.com/wiki/Lonicera_acuminata", 
             "name-en": "Lonicera acuminata", 
             "id": "Lonicera acuminata"
@@ -12036,6 +12024,11 @@
             "url": "http://en.wikipedia.org/wiki/Lonicera_japonica", 
             "name-en": "Lonicera japonica", 
             "id": "Lonicera japonica"
+        }, 
+        {
+            "url": "http://botany.cz/cs/lonicera-ledebourii/", 
+            "name-en": "Lonicera ledebourii", 
+            "id": "Lonicera ledebourii"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Lonicera_maackii", 
@@ -12763,11 +12756,6 @@
             "id": "Marah oreganus"
         }, 
         {
-            "url": "http://gflora.com/index.php?cmd=genus_body&genus_id=166", 
-            "name-en": "Maranta Leuconeura", 
-            "id": "Maranta Leuconeura"
-        }, 
-        {
             "url": "http://en.wikipedia.org/wiki/Maranta_arundinacea", 
             "name-en": "Maranta arundinacea", 
             "id": "Maranta arundinacea"
@@ -12778,7 +12766,7 @@
             "id": "Maranta depressa"
         }, 
         {
-            "url": "http://en.wikipedia.org/wiki/Maranta_leuconeura", 
+            "url": "http://gflora.com/index.php?cmd=genus_body&genus_id=166", 
             "name-en": "Maranta leuconeura", 
             "id": "Maranta leuconeura"
         }, 
@@ -13358,14 +13346,14 @@
             "id": "Murraya paniculata"
         }, 
         {
-            "url": "http://en.wikipedia.org/wiki/Musa_basjoo", 
-            "name-en": "Musa Basjoo", 
-            "id": "Musa Basjoo"
-        }, 
-        {
             "url": "http://en.wikipedia.org/wiki/Musa_acuminata", 
             "name-en": "Musa acuminata", 
             "id": "Musa acuminata"
+        }, 
+        {
+            "url": "http://en.wikipedia.org/wiki/Musa_basjoo", 
+            "name-en": "Musa basjoo", 
+            "id": "Musa basjoo"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Musa_ornata", 
@@ -13778,11 +13766,6 @@
             "id": "Ochna thomasiana"
         }, 
         {
-            "url": "https://gobotany.newenglandwild.org/species/ocimum/basilicum/", 
-            "name-en": "Ocimum Basilicum", 
-            "id": "Ocimum Basilicum"
-        }, 
-        {
             "url": "http://en.wikipedia.org/wiki/Ocimum_basilicum", 
             "name-en": "Ocimum basilicum", 
             "id": "Ocimum basilicum"
@@ -14028,14 +14011,14 @@
             "id": "Orbea variegata"
         }, 
         {
-            "url": "http://en.wikipedia.org/wiki/Orchis_italica", 
-            "name-en": "Orchis Italica", 
-            "id": "Orchis Italica"
-        }, 
-        {
             "url": "http://en.wikipedia.org/wiki/Orchis_coriophora", 
             "name-en": "Orchis coriophora", 
             "id": "Orchis coriophora"
+        }, 
+        {
+            "url": "http://en.wikipedia.org/wiki/Orchis_italica", 
+            "name-en": "Orchis italica", 
+            "id": "Orchis italica"
         }, 
         {
             "url": "http://oregonexpat.wordpress.com/2012/04/20/naked-man-orchid/", 
@@ -14230,8 +14213,7 @@
         {
             "url": "http://en.wikipedia.org/wiki/Oxalis_triangularis", 
             "name-en": "Oxalis triangularis", 
-            "id": "Oxalis triangularis",
-            "interesting": "The leaves move in response to light levels, opening in high ambient light (in the day) and closing at low light levels (at night)."
+            "id": "Oxalis triangularis"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Oxalis_violacea", 
@@ -14762,11 +14744,6 @@
             "url": "http://en.wikipedia.org/wiki/Pentas_lanceolata", 
             "name-en": "Pentas lanceolata", 
             "id": "Pentas lanceolata"
-        }, 
-        {
-            "url": "http://www.greenculturesg.com/articles/may06/may06_peperomia.htm", 
-            "name-en": "Peperomia Caperata", 
-            "id": "Peperomia Caperata"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Peperomia_argyreia", 
@@ -15706,8 +15683,7 @@
         {
             "url": "http://en.wikipedia.org/wiki/Platanus_occidentalis", 
             "name-en": "Platanus occidentalis", 
-            "id": "Platanus occidentalis",
-            "interesting": "The American sycamore is able to endure a big city environment and was formerly extensively planted as a shade tree."
+            "id": "Platanus occidentalis"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Platanus_racemosa", 
@@ -17386,8 +17362,8 @@
         }, 
         {
             "url": "http://web.aces.uiuc.edu/vista/pdf_pubs/632.pdf", 
-            "name-en": "Rose Rosette", 
-            "id": "Rose Rosette"
+            "name-en": "Rose rosette", 
+            "id": "Rose rosette"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Rosmarinus_officinalis", 
@@ -18770,11 +18746,6 @@
             "id": "Sideroxylon reclinatum"
         }, 
         {
-            "url": "http://www.gardeningknowhow.com/ornamental/flowers/catchfly-plants/how-to-grow-catchfly-plants.htm", 
-            "name-en": "Silene Armeria", 
-            "id": "Silene Armeria"
-        }, 
-        {
             "url": "http://en.wikipedia.org/wiki/Silene_armeria", 
             "name-en": "Silene armeria", 
             "id": "Silene armeria"
@@ -19027,8 +18998,7 @@
         {
             "url": "http://en.wikipedia.org/wiki/Solanum_dulcamara", 
             "name-en": "Solanum dulcamara", 
-            "id": "Solanum dulcamara",
-            "interesting": "The berry is attractive and familiar look make it dangerous for children, because it is toxic."
+            "id": "Solanum dulcamara"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Solanum_elaeagnifolium", 
@@ -19883,8 +19853,7 @@
         {
             "url": "http://en.wikipedia.org/wiki/Tagetes_patula", 
             "name-en": "Tagetes patula", 
-            "id": "Tagetes patula",
-            "interesting": "They are commonly planted in butterfly gardens as a nectar source. It is harvested for oil, which is used in perfumery; it is blended with sandalwood oil to produce 'attar genda' perfume."
+            "id": "Tagetes patula"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Tagetes_tenuifolia", 
@@ -19913,8 +19882,8 @@
         }, 
         {
             "url": "http://www.stormthecastle.com/bonsai/tamarind-tamarindus-indica-as-bonsai.htm", 
-            "name-en": "Tamarindus Indica", 
-            "id": "Tamarindus Indica"
+            "name-en": "Tamarindus indica", 
+            "id": "Tamarindus indica"
         }, 
         {
             "url": "http://en.wikipedia.org/wiki/Tamarix_aphylla", 

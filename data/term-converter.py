@@ -90,8 +90,8 @@ def generate_terms():
     flowers, _ = parse_flowers()
     urls = json.load(open("urls.json"))
     for f in sorted(list(flowers)):
-        if len(urls[f]) != 1:
-            print f, urls[f]
+        if f not in urls or len(urls[f]) != 1:
+            print f
         else:
             terms.append({
                 "id": f,
@@ -116,8 +116,8 @@ def generate_terms_short():
     json.dump({"terms": terms}, open("terms_short.json", "w"), indent=4)
 
 
-# generate_terms()
-generate_terms_short()
+generate_terms()
+# generate_terms_short()
 
 
 
