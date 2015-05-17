@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'', include('social_auth.urls')),
     url(r'^sets/', include('set_creator.urls')),
 
-    url(r'^typehead', "practice.views.typehead"),
+    url(r'^typehead$', "practice.views.typehead"),
+    url(r'^typehead-all$', "practice.views.typehead", {"exclude_short": False}),
     url(r'^.*$', "practice.views.home", name='home'),
 )

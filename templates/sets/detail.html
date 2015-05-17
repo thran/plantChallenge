@@ -10,7 +10,7 @@
         var app = angular.module('pc', ['mm.foundation']);
         app.controller("sets", function($scope, $http){
         $scope.getPlantNames = function(val) {
-            return $http.get('/typehead', {
+            return $http.get('/typehead-all', {
                 params: {
                     search: val
                 }

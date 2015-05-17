@@ -2,23 +2,25 @@ import json
 from django.db.models import Q
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render
-from lazysignup.decorators import allow_lazy_user
 from practice.models import ExtendedTerm
 
 
-def typehead(request):
+def typehead(request, exclude_short=True, complex=False):
     LIMIT = 5
     MIN_LENGHT = 2
     search = request.GET.get("search", None)
     if search is None or len(search) < MIN_LENGHT:
         return HttpResponseBadRequest()
 
-    q = Q()
-    for s in search.split(" "):
-        q &= Q(name__icontains=s)
-    data = {"plants": map(lambda t: t.to_json(nested=True),
-                          ExtendedTerm.objects.filter(q)
-                          .order_by("name")[:LIMIT])}
+    if complex:
+        q = Q()
+        for s in search.split(" "):
+            q &= Q(name__icontains=s)
+    else:
+        q = Q(name__startswith=search)
+    if exclude_short:
+        q &= Q(name__contains=" ")
+    data = {"plants": map(lambda t: t.to_json(nested=True), ExtendedTerm.objects.filter(q).order_by("name")[:LIMIT])}
     return JsonResponse(data)
 
 def home(request):
