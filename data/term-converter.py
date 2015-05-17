@@ -44,6 +44,23 @@ def parse_flowers():
 
     return set(names), urls
 
+def parse_flowers_short():
+    urls = defaultdict(lambda: [])
+    names = []
+    flowers = json.load(open("source/flowers.json"))
+    for flower in flowers:
+        flower = flower["fields"]
+        parsed = parse_flower(flower["name"])
+        if parsed[0] != "" and not parsed[1]["species"]:
+            if len(parsed[1]["genus"].split(" ")) > 1:
+                continue
+            names.append(parsed[0])
+            urls[parsed[0]].append(flower["wikilink"])
+
+    print len(flowers), len(names), len(set(names))
+
+    return set(names), urls
+
 
 def parse_plants():
     names = []
@@ -83,5 +100,27 @@ def generate_terms():
             })
     json.dump({"terms": terms}, open("terms.json", "w"), indent=4)
 
+def generate_terms_short():
+    terms = []
+    flowers, _ = parse_flowers_short()
+    urls = json.load(open("urls-short.json"))
+    for f in sorted(list(flowers)):
+        if len(urls[f]) != 1:
+            print f, urls[f]
+        else:
+            terms.append({
+                "id": f,
+                "name-en": f,
+                "url": urls[f][0]
+            })
+    json.dump({"terms": terms}, open("terms_short.json", "w"), indent=4)
+
 
 # generate_terms()
+generate_terms_short()
+
+
+
+# flowers, urls = parse_flowers_short()
+# find_urls(flowers, urls)
+# json.dump(urls, open("urls-short.json", "w"))
