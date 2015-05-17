@@ -25,7 +25,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         SURNESS = 90
 
-        terms = [t["id"] for t in json.load(open("data/final/terms{}.json".format("-short" if options["short"] else "")))["terms"]]
+        terms = [t["id"] for t in json.load(open("data/final/terms{}.json".format("-short" if options["short"] else "-clean")))["terms"]]
         flashcards = []
         contexts = []
 
