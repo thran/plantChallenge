@@ -53,7 +53,8 @@ def add_terms(request, pk):
 @staff_member_required
 def remove_term(request, set_pk, term_pk):
     s = get_object_or_404(Set, pk=set_pk)
-    s.terms.filter(pk=term_pk).delete()
+    term = get_object_or_404(Term, pk=term_pk)
+    s.terms.remove(term)
     s.save()
     return redirect("set", set_pk)
 
