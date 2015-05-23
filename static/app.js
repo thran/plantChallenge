@@ -19,12 +19,16 @@ app.run(function ($rootScope, $location, userService, global) {
 
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
         var path = next.originalPath;
-        var intro = ["/", "/intro", "/intro-final", "/login"];
+        var intro = ["/", "/intro", "/intro-final", "/login", "/practice"];
         var training = ["/training"];
         var contest = ["/contest"];
 
         if (userService.status.logged && intro.indexOf(path) !== -1 ){
             $location.path("/training");
+            return;
+        }
+        if (!userService.status.logged && intro.indexOf(path) === -1 && path !== "/post-practice"){
+            $location.path("/login");
             return;
         }
         if (training.indexOf(path) !== -1){
@@ -58,9 +62,6 @@ app.config(['$routeProvider', '$locationProvider',
             when('/post-practice', {
                 templateUrl: 'static/ng-parts/post-practice.html'
             }).
-            when('/practice', {
-                templateUrl: 'static/ng-parts/practice.html'
-            }).
             when('/about', {
                 templateUrl: 'static/ng-parts/about.html'
             }).
@@ -69,6 +70,10 @@ app.config(['$routeProvider', '$locationProvider',
                 controller: "auth"
             }).
             when('/practice', {
+                templateUrl: 'static/ng-parts/practice.html',
+                controller: "practice"
+            }).
+            when('/practice/:id/:areaName', {
                 templateUrl: 'static/ng-parts/practice.html',
                 controller: "practice"
             }).
@@ -86,59 +91,47 @@ app.config(['$routeProvider', '$locationProvider',
         $locationProvider.html5Mode(true);
     }]);
 
-app.factory("PlantSet", function () {
-    return {}
-});
-
 app.controller("panelMenu", function ($scope, global, userService) {
     $scope.global = global;
     $scope.user = userService;
 });
 
-app.controller("panelAuth", function ($scope, userService) {
+app.controller("panelAuth", function ($scope, userService, $location) {
     $scope.user = userService;
+    $scope.$watch("user.status.logged", function(logged, o){
+        if (logged && !o){
+            $location.path("/training");
+        }
+        if(!logged && o){
+            $location.path("/login");
+        }
+    });
 });
 
-app.controller("auth", function ($scope, userService, $location) {
+app.controller("auth", function ($scope, userService) {
     $scope.service = userService;
 
     $scope.sign_up = function(){
         userService.signupParams($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
     };
-
-    $scope.$watch("service.status.logged", function(logged, o){
-        if (logged){
-            $location.path("/training")
-        }else if(o){
-            $location.path("/")
-        }
-    });
 });
 
-app.controller("practice", function ($scope, $http, PlantSet, $location, practiceService, global) {
-    $scope.set = PlantSet;
+app.controller("practice", function ($scope, $http, $location, practiceService, global, $routeParams) {
+    var area = parseInt($routeParams.id);
+    var areaName = $routeParams.areaName;
     $scope.load_flashcards = function(){
-        practiceService.initSet("intro");
-        practiceService.setFilter({categories: ["intro_set"]});
-        PlantSet.length = 5;
-        PlantSet.corrects = 0;
-        PlantSet.current = -1;
-        PlantSet.progress = [null, null, null, null, null];
-        PlantSet.name = "Plants";
-        PlantSet.active = false;
+        if (area){
+            practiceService.initSet("common");
+            practiceService.setFilter({categories: [area]});
+        }else {
+            practiceService.initSet("intro");
+            practiceService.setFilter({categories: ["intro_set"]});
+        }
 
         $scope.next_plant();
-        PlantSet.active = true;
     };
 
     $scope.save_answer = function(answer){
-        PlantSet.progress[PlantSet.current] = {
-            correct: answer.correct,
-            name: $scope.flashcard.term.name
-        };
-        if (answer.correct)
-            PlantSet.corrects++;
-
         practiceService.saveAnswerToCurrentFC(
             answer.correct ? $scope.flashcard.id : null,
             (new Date).getTime() - answer.start_time,
@@ -150,15 +143,17 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
         practiceService.getFlashcard()
             .then(
             function(flashcard){
-                PlantSet.current++;
                 $scope.answer = {guesses: 0, start_time: (new Date).getTime()};
                 $scope.flashcard = flashcard;
                 $scope.flashcard.context.content = JSON.parse($scope.flashcard.context.content.split("'").join('"'));
                 $scope.flashcard.selected_image = $scope.flashcard.context.content[0];
             }, function(msg){
+                if (!area) {
+                    global.introFinished = true;
+                }
+                global.summary = practiceService.getSummary();
+                global.summary.area = areaName;
                 $location.path("/post-practice");
-                global.introFinished = True;
-                PlantSet.active = false;
             });
     };
 
@@ -212,15 +207,32 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
     $scope.load_flashcards();
 });
 
-app.controller("post-practice", function ($scope, PlantSet) {
-    $scope.set = PlantSet;
+app.controller("post-practice", function ($scope, global, $location) {
+    if (!global.summary){
+        $location.path("/training")
+    }
+    $scope.summary = global.summary;
 });
 
-app.controller("training", function ($scope, global) {
+app.controller("training", function ($scope, $http, $location, global) {
     if (global.introFinished){
         $scope.showInfo = true;
         global.introFinished = false;
     }
+
+    var loadAreas = function(){
+        $http.get('/flashcards/categorys', {params:{ filter_column: "type", filter_value: "set"}})
+            .success(function(response){
+                $scope.areas = response.data;
+            }
+        );
+    };
+
+    $scope.openArea = function (area) {
+        $location.path("/practice/" + area.id + "/" + area.name);
+    };
+
+    loadAreas();
 
 });
 

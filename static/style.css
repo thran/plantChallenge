@@ -35,7 +35,7 @@ a:hover { color: #000000; }
 #tulips span {position: absolute; left: 610px; top: 20px; font-size: 1.3rem;}
 
 
-.plant-type-box{
+.area-box {
     width: 180px;
     height: 260px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -44,10 +44,11 @@ a:hover { color: #000000; }
     text-align: left;
     padding: 190px 10px 10px;
     transition: all 0.5s;
+    margin: 5px;
 }
-.plant-type-box:hover { box-shadow: 0 0 5px black; }
+.area-box:hover { box-shadow: 0 0 5px black; }
 
-.plant-type-box:before{
+.area-box:before{
     content: "";
     height: 180px;
     width: 180px;
@@ -56,24 +57,22 @@ a:hover { color: #000000; }
     left: 0;
     background-color: #fef8dd;
 }
-.plant-type-box img{
-    max-width: 160px;
-    max-height: 160px;
-    margin-top: -170px;
+.area-box img{
+    width: 180px;
+    height: 180px;
     position: absolute;
-    left:0;
-    right:0;
-    margin-left:auto;
-    margin-right:auto;
+    top: 0;
+    left: 0;
+    object-fit: cover;
 }
-.plant-type-box .button{
+.area-box .button{
     position: absolute;
     bottom: 10px;
     left: 10px;
     padding: 5px 15px;
     margin: 0;
 }
-.plant-type-box span{
+.area-box span{
     font-weight: bold;
 }
 

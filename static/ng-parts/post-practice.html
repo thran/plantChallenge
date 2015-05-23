@@ -2,12 +2,12 @@
     <div class="medium-5 column" ng-controller="post-practice">
         <br/>
         <h3>Set finished</h3>
-        <p class="fancy">Good job! You identified {{ set.corrects }} from {{ set.length }} plants from {{ set.name }}.</p>
+        <p class="fancy"><span ng-hide="summary.correct == 0">Good job!</span> You identified {{ summary.correct }} from {{ summary.count }} plants from {{ summary.area }}.</p>
         <hr/>
-            <div ng-repeat="plant in set.progress" class="fancy set-result-list">
-            <div ng-show="!plant.correct" class="fi-x"></div>
-            <div ng-show="plant.correct" class="fi-check"></div>
-            {{ plant.name }}
+            <div ng-repeat="flashcard in summary.flashcards" class="fancy set-result-list">
+            <div ng-show="!flashcard.answer.correct" class="fi-x"></div>
+            <div ng-show="flashcard.answer.correct" class="fi-check"></div>
+            {{ flashcard.term.name }}
         </div>
         <hr/>
     </div>
@@ -19,10 +19,10 @@
         <div style="height: 1rem"></div>
 
         <div class="row">
-            <div class="small-6 column"  ng-click="service.login_google()">
+            <div class="small-6 column"  ng-click="service.loginGoogle()">
                 <span id="google"><i class="fi-social-google-plus"></i>sign with Google</span>
             </div>
-            <div class="small-6 column" ng-click="service.login_facebook()">
+            <div class="small-6 column" ng-click="service.loginFacebook()">
                 <span id="facebook"><i class="fi-social-facebook"></i>sign with Facebook</span>
             </div>
         </div>

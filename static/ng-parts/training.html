@@ -7,6 +7,14 @@
     </p>
 </div>
 
+<div class="columns large-10 large-offset-1">
+    <div style="height: 2rem"></div>
+    <p>Choose area you want practice</p>
+    <div class="areas"></div>
 
-<p>Choose area you want practice</p>
-
+    <div class="area-box" ng-repeat="area in areas" ng-click="openArea(area)">
+        <img src="/media/areas/{{ area.identifier }}.jpg" alt=""/>
+        <span>{{ area.name }}</span>
+        <br/>
+    </div>
+</div>
