@@ -13,5 +13,8 @@ pip install -r $DIR/requirements.txt
 python $DIR/manage.py syncdb
 python $DIR/manage.py migrate
 
+#js
+bower install
+
 # static files
 python $DIR/manage.py collectstatic --noinput
