@@ -17,7 +17,7 @@ def typehead(request, exclude_short=True, complex=False):
         for s in search.split(" "):
             q &= Q(name__icontains=s)
     else:
-        q = Q(name__startswith=search)
+        q = Q(name__istartswith=search)
     if exclude_short:
         q &= Q(name__contains=" ")
     data = {"plants": map(lambda t: t.to_json(nested=True), ExtendedTerm.objects.filter(q).order_by("name")[:LIMIT])}
