@@ -96,8 +96,9 @@ app.controller("panelMenu", function ($scope, global, userService) {
     $scope.user = userService;
 });
 
-app.controller("panelAuth", function ($scope, userService, $location) {
+app.controller("panelAuth", function ($scope, userService, $location, global) {
     $scope.user = userService;
+    global.user = userService;
     $scope.$watch("user.status.logged", function(logged, o){
         if (logged && !o){
             $location.path("/training");
@@ -109,7 +110,7 @@ app.controller("panelAuth", function ($scope, userService, $location) {
 });
 
 app.controller("auth", function ($scope, userService) {
-    $scope.service = userService;
+    $scope.user = userService;
 
     $scope.sign_up = function(){
         userService.signupParams($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
@@ -152,7 +153,8 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
                     global.introFinished = true;
                 }
                 global.summary = practiceService.getSummary();
-                global.summary.area = areaName;
+                global.summary.area = area;
+                global.summary.areaName = areaName;
                 $location.path("/post-practice");
             });
     };
@@ -207,10 +209,11 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
     $scope.load_flashcards();
 });
 
-app.controller("post-practice", function ($scope, global, $location) {
+app.controller("postPractice", function ($scope, global, $location) {
     if (!global.summary){
-        $location.path("/training")
+        //$location.path("/training");
     }
+    $scope.global = global;
     $scope.summary = global.summary;
 });
 

@@ -4,15 +4,15 @@
     <div style="height: 1rem"></div>
 
     <div class="row">
-        <div class="small-6 column"  ng-click="service.loginGoogle()">
+        <div class="small-6 column"  ng-click="user.loginGoogle()">
             <span id="google"><i class="fi-social-google-plus"></i>with Google</span>
         </div>
-        <div class="small-6 column" ng-click="service.loginFacebook()">
+        <div class="small-6 column" ng-click="user.loginFacebook()">
             <span id="facebook"><i class="fi-social-facebook"></i>with Facebook</span>
         </div>
     </div>
     <div class="separator uppercase"><span><span>OR</span></span></div>
-    <div data-alert class="alert-box alert" ng-cloak ng-show="service.error.error">
+    <div data-alert class="alert-box alert" ng-cloak ng-show="user.error.error">
         {{ service.error.error }}
         <a href="#" class="close">&times;</a>
     </div>

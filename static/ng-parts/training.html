@@ -13,7 +13,7 @@
     <div class="areas"></div>
 
     <div class="area-box" ng-repeat="area in areas" ng-click="openArea(area)">
-        <img src="/media/areas/{{ area.identifier }}.jpg" alt=""/>
+        <img ng-src="/media/areas/{{ area.identifier }}.jpg" alt=""/>
         <span>{{ area.name }}</span>
         <br/>
     </div>
