@@ -8,17 +8,39 @@ app.config(function ($httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 });
 
+app.factory("global", function(){
+    return {};
+});
 
-app.run(function ($rootScope, $location) {
+app.run(function ($rootScope, $location, userService, global) {
     $rootScope.$on('$routeChangeSuccess', function(){
         ga('send', 'pageview', $location.path());
     });
+
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+        var path = next.originalPath;
+        var intro = ["/", "/intro", "/intro-final", "/login"];
+        var training = ["/training"];
+        var contest = ["/contest"];
+
+        if (userService.status.logged && intro.indexOf(path) !== -1 ){
+            $location.path("/training");
+            return;
+        }
+        if (training.indexOf(path) !== -1){
+            global.section = "training";
+        }else if (contest.indexOf(path) !== -1){
+            global.section = "contest";
+        }else if (intro.indexOf(path) !== -1){
+             delete global.section;
+        }
+    });
 });
 
-app.run(function(configService){
+app.run(function(configService, userService){
     configService.processConfig(config);
+    userService.processUser(user);
 });
-
 
 app.config(['$routeProvider', '$locationProvider',
     function ($routeProvider, $locationProvider) {
@@ -50,6 +72,13 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'static/ng-parts/practice.html',
                 controller: "practice"
             }).
+            when('/training', {
+                templateUrl: 'static/ng-parts/training.html',
+                controller: "training"
+            }).
+            when('/contest', {
+                templateUrl: 'static/ng-parts/contest.html'
+            }).
             otherwise({
                 redirectTo: '/'
             });
@@ -61,23 +90,32 @@ app.factory("PlantSet", function () {
     return {}
 });
 
+app.controller("panelMenu", function ($scope, global, userService) {
+    $scope.global = global;
+    $scope.user = userService;
+});
+
+app.controller("panelAuth", function ($scope, userService) {
+    $scope.user = userService;
+});
 
 app.controller("auth", function ($scope, userService, $location) {
     $scope.service = userService;
-    userService.processUser(user);
 
     $scope.sign_up = function(){
         userService.signupParams($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
     };
 
-    $scope.$watch("service.status.logged", function(n, o){
-        if (n){
-            $location.path("/intro-final")
+    $scope.$watch("service.status.logged", function(logged, o){
+        if (logged){
+            $location.path("/training")
+        }else if(o){
+            $location.path("/")
         }
     });
 });
 
-app.controller("practice", function ($scope, $http, PlantSet, $location, practiceService) {
+app.controller("practice", function ($scope, $http, PlantSet, $location, practiceService, global) {
     $scope.set = PlantSet;
     $scope.load_flashcards = function(){
         practiceService.initSet("intro");
@@ -119,6 +157,7 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
                 $scope.flashcard.selected_image = $scope.flashcard.context.content[0];
             }, function(msg){
                 $location.path("/post-practice");
+                global.introFinished = True;
                 PlantSet.active = false;
             });
     };
@@ -173,21 +212,17 @@ app.controller("practice", function ($scope, $http, PlantSet, $location, practic
     $scope.load_flashcards();
 });
 
-
 app.controller("post-practice", function ($scope, PlantSet) {
     $scope.set = PlantSet;
 });
 
-app.directive('stopEvent', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attr) {
-            element.bind('click', function (e) {
-                e.stopPropagation();
-            });
-        }
-    };
- });
+app.controller("training", function ($scope, global) {
+    if (global.introFinished){
+        $scope.showInfo = true;
+        global.introFinished = false;
+    }
+
+});
 
 var social_auth_callback = function(){
     var element = angular.element($("body"));

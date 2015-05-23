@@ -1,7 +1,10 @@
 .fancy {font-family: 'Sorts Mill Goudy', serif !important; }
 .strong {font-weight: bold; }
-.shadow,.shadow a {color: #909090; }
+.shadow,.shadow a {color: #909090;}
 .underline{ text-decoration: underline; }
+.top-bar-section ul li > a {
+    color: inherit;
+}
 
 #container{
     min-height:100%;

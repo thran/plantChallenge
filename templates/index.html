@@ -7,14 +7,14 @@
 
     <title>PlantChallenge</title>
 
-    <link rel="stylesheet" href="{% static "foundation/css/normalize.css" %}">
-    <link rel="stylesheet" href="{% static "foundation/css/myfoundation.css" %}">
-    <link rel="stylesheet" href="{% static "foundation/icons/foundation-icons.css" %}">
-    <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "foundation/css/normalize.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "foundation/css/myfoundation.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "foundation/icons/foundation-icons.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy:400,400italic' rel='stylesheet' type='text/css'>
 
-    <script src="{% static "bower/angular/angular.min.js" %}"></script>
+    <script src="{% static "bower/angular/angular.js" %}"></script>
     <script src="{% static "bower/angular-cookies/angular-cookies.min.js" %}"></script>
     <script src="{% static "bower/angular-route/angular-route.min.js" %}"></script>
     <script src="{% static "bower/jsTimezoneDetect/jstz.min.js" %}"></script>
@@ -39,10 +39,16 @@
             <li class="name uppercase"><h1><a href="/">Plant Challenge</a></h1></li>
             <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
         </ul>
+        <section class="top-bar-section"> <!-- Left Nav Section -->
+            <ul class="left">
+                <li class="" ng-controller="panelMenu" ng-include="'static/ng-parts/panel-menu.html'">
+                </li>
+            </ul>
+            <div class="text-center small-6 columns" ng-controller="post-practice" ng-include="'static/ng-parts/set-progress.html'"></div>
+        </section>
         <section class="top-bar-section"> <!-- Right Nav Section -->
             <ul class="right">
-                <li><a href="about">About</a></li>
-                <li class="" ng-controller="auth" ng-include="'static/ng-parts/user.html'">
+                <li class="" ng-controller="panelAuth" ng-include="'static/ng-parts/panel-user.html'">
                 </li>
             </ul>
             <div class="text-center small-6 columns" ng-controller="post-practice" ng-include="'static/ng-parts/set-progress.html'"></div>

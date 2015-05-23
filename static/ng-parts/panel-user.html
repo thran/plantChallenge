@@ -1,0 +1,4 @@
+<li ng-hide="user.status.logged"><a href="about">About</a></li>
+<li ng-hide="user.status.logged"><a href="login">Sign up</a></li>
+<li ng-cloak ng-show="user.status.logged"><a ng-click="" class="normal-case">{{ user.user.email }}</a></li>
+<li ng-cloak ng-show="user.status.logged" class="shadow"><a ng-click="user.logout()">Log out</a></li>
