@@ -57,6 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'proso.django.request.RequestMiddleware',
     'proso_ab.models.ABMiddleware',
     'proso.django.cache.RequestCacheMiddleware',
@@ -77,11 +78,15 @@ DATABASE_ROUTERS = ['plantchallenge.db_router.DBRouter']
 
 # Internationalization
 
-USE_I18N = False
+USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = False
+
+LANGUAGES = (
+    ('en', 'English'),
+)
 
 
 # Static files (CSS, JavaScript, Images)
