@@ -120,6 +120,8 @@ app.controller("auth", function ($scope, userService) {
 app.controller("practice", function ($scope, $http, $location, practiceService, global, $routeParams) {
     var area = parseInt($routeParams.id);
     var areaName = $routeParams.areaName;
+    var progress = {};
+    global.progress = progress;
     $scope.load_flashcards = function(){
         if (area){
             practiceService.initSet("common");
@@ -128,11 +130,17 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
             practiceService.initSet("intro");
             practiceService.setFilter({categories: ["intro_set"]});
         }
+        progress.active = true;
+        progress.length = practiceService.getConfig().set_length;
+        progress.current = -1;
+        progress.tries = Array.apply(null, new Array(progress.length)).map(function(){return null})
 
         $scope.next_plant();
     };
 
     $scope.save_answer = function(answer){
+        progress.tries[progress.current] = {correct: answer.correct};
+
         practiceService.saveAnswerToCurrentFC(
             answer.correct ? $scope.flashcard.id : null,
             (new Date).getTime() - answer.start_time,
@@ -144,6 +152,7 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
         practiceService.getFlashcard()
             .then(
             function(flashcard){
+                progress.current++;
                 $scope.answer = {guesses: 0, start_time: (new Date).getTime()};
                 $scope.flashcard = flashcard;
                 $scope.flashcard.context.content = JSON.parse($scope.flashcard.context.content.split("'").join('"'));
@@ -155,6 +164,7 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
                 global.summary = practiceService.getSummary();
                 global.summary.area = area;
                 global.summary.areaName = areaName;
+                progress.active = false;
                 $location.path("/post-practice");
             });
     };

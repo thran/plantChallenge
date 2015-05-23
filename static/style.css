@@ -245,6 +245,7 @@ div.fi-check, div.fi-x{
     margin-right: 0.5em;
     margin-top: -0.1em;
 }
+#practice-progress {margin-left: 3rem;}
 div.fi-check, #practice-progress > span.fi-check{ background-color: green; color: #ffffff;}
 div.fi-x, #practice-progress > span.fi-x{background-color: red; color: #ffffff;}
 #practice-progress > span.current{border-bottom-color: green; }

@@ -1,2 +1,13 @@
-<li ng-cloak ng-show="user.status.logged"><a href="/training" ng-style="global.section ==='training' ? {'text-decoration': 'underline', 'font-weight': 'bold'} : ''">Training</a></li>
-<li ng-cloak ng-show="user.status.logged"><a href="/contest" ng-style="global.section ==='contest' ? {'text-decoration': 'underline', 'font-weight': 'bold'} : ''">Contest</a></li>
+<ul class="left">
+    <li ng-cloak ng-show="user.status.logged"><a href="/training" ng-style="global.section ==='training' ? {'text-decoration': 'underline', 'font-weight': 'bold'} : ''">Training</a></li>
+    <li ng-cloak ng-show="user.status.logged"><a href="/contest" ng-style="global.section ==='contest' ? {'text-decoration': 'underline', 'font-weight': 'bold'} : ''">Contest</a></li>
+</ul>
+
+<ul class="left">
+    <div id="practice-progress" ng-cloak ng-show="global.progress.active">
+        <span
+                ng-repeat="t in global.progress.tries track by $index"
+                ng-class="{'fi-lightbulb': !t, 'fi-x': t && !t.correct, 'fi-check': t.correct, 'current': global.progress.current==$index}">
+        </span>
+    </div>
+</ul>
