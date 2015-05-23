@@ -1,4 +1,4 @@
-angular.module("proso.apps", ["proso.apps.common-config","proso.apps.common-logging","proso.apps.flashcards-practice","proso.apps.user-user"]);
+angular.module("proso.apps", ["proso.apps.common-config","proso.apps.common-logging","proso.apps.flashcards-practice","proso.apps.flashcards-userStats","proso.apps.user-user"]);
 var app = angular.module('plantChallenge', ["ngCookies", "ngRoute", "mm.foundation", "proso.apps"]);
 
 var MAX_GUESSES = 2;
@@ -227,7 +227,7 @@ app.controller("postPractice", function ($scope, global, $location) {
     $scope.summary = global.summary;
 });
 
-app.controller("training", function ($scope, $http, $location, global) {
+app.controller("training", function ($scope, $http, $location, global, userStatsService) {
     if (global.introFinished){
         $scope.showInfo = true;
         global.introFinished = false;
@@ -237,8 +237,18 @@ app.controller("training", function ($scope, $http, $location, global) {
         $http.get('/flashcards/categorys', {params:{ filter_column: "type", filter_value: "set"}})
             .success(function(response){
                 $scope.areas = response.data;
+                loadStats()
             }
         );
+    };
+
+    var loadStats = function(){
+        $scope.areas.forEach(function(area){
+            userStatsService.addGroup(area.id, {categories: [area.id]})
+        });
+        userStatsService.getStats().success(function(result){
+            $scope.stats = result.data;
+        })
     };
 
     $scope.openArea = function (area) {

@@ -267,6 +267,8 @@ div.fi-x, #practice-progress > span.fi-x{background-color: red; color: #ffffff;}
 }
 
 /* spinner */
+.loader.small{font-size: 0.5em; margin: auto;}
+
 .loader:before, .loader:after, .loader { border-radius: 50%; width: 2.5em; height: 2.5em; -webkit-animation-fill-mode: both; animation-fill-mode: both; -webkit-animation: load7 1.8s infinite ease-in-out; animation: load7 1.8s infinite ease-in-out; }
 .loader { margin: 8em auto; font-size: 10px; position: relative; text-indent: -9999em; -webkit-animation-delay: 0.16s; animation-delay: 0.16s; }
 .loader:before { left: -3.5em; }
