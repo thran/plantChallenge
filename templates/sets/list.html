@@ -4,6 +4,7 @@
     <h4>Sets - PlantChallenge</h4>
     {% for set in sets %}
         <a href="{% url "set_switch_for_daniel" set.pk %}"><i class="fi-arrow-down"></i></a>
+        <a href="{% url "admin:set_creator_set_change" set.pk %}"><i class="fi-pencil"></i></a>
         <a href="{% url "set" set.pk %}">{{ set }}</a> - {{ set.terms.all.count }} plants
         {% if not set.active %} (not active) {% endif %}
         <br/>
@@ -12,6 +13,7 @@
     <h4>Sets - Daniel</h4>
     {% for set in sets_for_daniel %}
         <a href="{% url "set_switch_for_daniel" set.pk %}"><i class="fi-arrow-up"></i></a>
+        <a href="{% url "admin:set_creator_set_change" set.pk %}"><i class="fi-pencil"></i></a>
         <a href="{% url "set" set.pk %}">{{ set }}</a> - {{ set.terms.all.count }} plants
         <br/>
     {% endfor %}
