@@ -203,11 +203,20 @@ div.google_icon, div.web_icon {
     cursor: pointer;
 }
 div.google_icon:hover, div.web_icon:hover {
-    background-color: #cad5fe;
+    background-color: rgba(88, 128, 50, 0.51);
+}
+i.wikipedia{
+    background-image: url('imgs/wikipedia.svg');
+    background-size: contain;
+    min-width: 1.2rem;
+    min-height: 1.2rem;
+    margin-top: 0.2rem;
+    display: inline-block;
 }
 #answer input{
     color: #000000;
     font-size: 1.1em;
+    padding: 0 0 0 10px;
 }
 #answer input.selected{ background-color: #fef8dd; }
 #answer > #input {

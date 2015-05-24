@@ -209,11 +209,18 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
             return response.data.plants;
         });
     };
-    $scope.search_google = function(plant){
+    $scope.searchGoogle = function(plant){
         window.open('https://www.google.cz/search?&tbm=isch&q=' + plant.name);
     };
-    $scope.open_web = function(plant){
+    $scope.openWeb = function(plant){
         window.open(plant.url);
+    };
+
+    $scope.webIcon = function(plant){
+        if (plant.url.match(/wikipedia/)) {
+            return "wikipedia";
+        }
+        return "fi-web";
     };
 
     $scope.load_flashcards();

@@ -1,5 +1,5 @@
 <a>
     <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>
-    <div class="google_icon" ng-click="$parent.$parent.$parent.search_google(match.model)" stop-event><i class="fi-magnifying-glass"></i></div>
-    <div class="web_icon" ng-click="$parent.$parent.$parent.open_web(match.model)" stop-event><i class="fi-web"></i></div>
+    <div class="google_icon" ng-click="$parent.$parent.$parent.searchGoogle(match.model)" stop-event><i class="fi-magnifying-glass"></i></div>
+    <div class="web_icon" ng-click="$parent.$parent.$parent.openWeb(match.model)" stop-event><i ng-class="$parent.$parent.$parent.webIcon(match.model)"></i></div>
 </a>

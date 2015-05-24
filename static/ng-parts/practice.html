@@ -32,8 +32,8 @@
                 typeahead-template-url="static/ng-parts/dropdown.html"
                 />
         <div id="links" ng-show="answer.term" >
-            <div class="google_icon" ng-click="search_google(answer.term)" stop-event><i class="fi-magnifying-glass"></i></div>
-            <div class="web_icon" ng-click="open_web(answer.term)" stop-event><i class="fi-web"></i></div>
+            <div class="google_icon" ng-click="searchGoogle(answer.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+            <div class="web_icon" ng-click="openWeb(answer.term)" stop-event><i ng-class="webIcon(answer.term)"></i></div>
         </div>
         <span ng-show="answer.term" ng-click="answer.term = null" class="fi-x"></span>
         <div ng-show="loadingPlants" class="loader"></div>
