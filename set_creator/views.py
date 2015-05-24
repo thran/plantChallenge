@@ -1,5 +1,6 @@
 import json
 from django.contrib.admin.views.decorators import staff_member_required
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from proso_flashcards.models import Flashcard, Term
 from practice.models import ExtendedTerm
@@ -77,3 +78,20 @@ def switch_for_daniel(request, pk):
     set.for_daniel = not set.for_daniel
     set.save()
     return redirect("set_list")
+
+@staff_member_required
+def export_for_daniel(request):
+    sets = {}
+    for set in Set.objects.filter(for_daniel=True, active=True):
+        images = []
+        terms = []
+        for term in set.terms.all():
+            terms.append(term.name)
+            for fc in term.flashcards.all().select_related("context"):
+                images += json.loads(fc.context.content)
+        sets[set.name] = {
+            "images": images,
+            "plants": terms,
+        }
+
+    return JsonResponse(sets)

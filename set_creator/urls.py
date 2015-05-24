@@ -10,4 +10,5 @@ urlpatterns = patterns('set_creator.views',
     url(r'^add_terms/(?P<pk>\d+)$', "add_terms", name='set_add_terms'),
     url(r'^switch_for_daniel/(?P<pk>\d+)$', "switch_for_daniel", name='set_switch_for_daniel'),
     url(r'^remove_term/(?P<set_pk>\d+)/(?P<term_pk>\d+)$', "remove_term", name='set_remove_term'),
+    url(r'^export_for_daniel$', "export_for_daniel", name='export_for_daniel'),
 )
