@@ -4,10 +4,19 @@
 </ul>
 
 <ul class="left">
-    <div id="practice-progress" ng-cloak ng-show="global.progress.active">
+    <div id="practice-progress" ng-mouseenter="levelShow =true" ng-mouseleave="levelShow = false" ng-cloak ng-show="global.progress.active">
         <span
                 ng-repeat="t in global.progress.tries track by $index"
                 ng-class="{'fi-lightbulb': !t, 'fi-x': t && !t.correct, 'fi-check': t.correct, 'current': global.progress.current==$index}">
         </span>
+        <div class="level-bar" ng-show="areas.active">
+            <div class="level-bar">
+            <progressbar value="areas.active.inThisLevel / areas.active.levelLength * 100"></progressbar>
+                <div class="hidden" ng-cloak ng-show="levelShow">
+                    {{ areas.active.level }} <span class="small uppercase">level</span>
+                    <span class="right small shadow">{{ areas.active.nextLevelIn }} plants to level {{ areas.active.level + 1 }}</span>
+                </div>
+            </div>
+        </div>
     </div>
 </ul>

@@ -1,5 +1,6 @@
 .fancy {font-family: 'Sorts Mill Goudy', serif !important; }
 .strong {font-weight: bold; }
+.small {font-size: 0.6em; }
 .shadow,.shadow a {color: #909090;}
 .underline{ text-decoration: underline; }
 .top-bar-section ul li > a {
@@ -34,10 +35,10 @@ a:hover { color: #000000; }
 #tulips img {margin-right: 150px;}
 #tulips span {position: absolute; left: 610px; top: 20px; font-size: 1.3rem;}
 
-
 .area-box {
+    cursor: pointer;
     width: 180px;
-    height: 260px;
+    min-height: 260px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     display: inline-block;
     position: relative;
@@ -125,7 +126,7 @@ a:hover { color: #000000; }
 div[role=navigation]{ border-bottom: solid lightgray 1px; }
 div[role=navigation] a {text-decoration: none; }
 .button{ border-bottom: solid #236618 2px; }
-.top-bar-section ul li > a, .uppercase  {text-transform: uppercase;}
+.top-bar-section ul li > a, .uppercase  {text-transform: uppercase; outline: 0;}
 label {text-transform: uppercase;}
 .normal-case{text-transform: none !important;}
 
@@ -259,10 +260,10 @@ div.fi-check, div.fi-x{
     margin-right: 0.5em;
     margin-top: -0.1em;
 }
-#practice-progress {margin-left: 3rem;}
+#practice-progress {margin-left: 3rem; position: relative}
 div.fi-check, #practice-progress > span.fi-check{ background-color: green; color: #ffffff;}
 div.fi-x, #practice-progress > span.fi-x{background-color: red; color: #ffffff;}
-#practice-progress > span.current{border-bottom-color: green; }
+#practice-progress > span.current{border-top-color: green; }
 
 .set-result-list{ margin-bottom: 10px; }
 .set-result-list div.fi-x, .set-result-list div.fi-check{ float: right; }
@@ -273,15 +274,32 @@ div.fi-x, #practice-progress > span.fi-x{background-color: red; color: #ffffff;}
     background-color: lightgray;
     width: 1.3em;
     line-height: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
     padding-top: 0.2rem;
     text-align: center;
     margin-right: 3px;
-    border-bottom: solid 0.3em white;
+    border-top: solid 0.3em white;
+}
+
+.level-bar .progress{
+    height: 0.7rem;
+    padding: 0;
+    margin-bottom: 0;
+}
+.level-bar .progress > .meter{ background-color: green; transition: width 1s ease-out;}
+.level-bar span.small{margin-top: 0.6em;}
+.level-bar > div.hidden {
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 2rem;
+    padding-top: 0.7rem;
 }
 
 /* spinner */
-.loader.small{font-size: 0.5em; margin: auto;}
+.loader.small{font-size: 0.2em; margin: auto;}
 
 .loader:before, .loader:after, .loader { border-radius: 50%; width: 2.5em; height: 2.5em; -webkit-animation-fill-mode: both; animation-fill-mode: both; -webkit-animation: load7 1.8s infinite ease-in-out; animation: load7 1.8s infinite ease-in-out; }
 .loader { margin: 8em auto; font-size: 10px; position: relative; text-indent: -9999em; -webkit-animation-delay: 0.16s; animation-delay: 0.16s; }
