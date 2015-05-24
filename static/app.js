@@ -206,6 +206,7 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
             search: val
         }
         }).then(function(response){
+            $scope.typeheadHiddenCount = response.data.count;
             return response.data.plants;
         });
     };
@@ -217,6 +218,7 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
     };
 
     $scope.webIcon = function(plant){
+        if (!plant){ return }
         if (plant.url.match(/wikipedia/)) {
             return "wikipedia";
         }

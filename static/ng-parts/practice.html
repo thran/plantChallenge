@@ -25,6 +25,7 @@
                 ng-class="{'selected': answer.meta}"
                 ng-model="answer.term"
                 typeahead="plant as plant.name for plant in getPlantNames($viewValue)"
+                ng-change="typeheadHiddenCount = null"
                 typeahead-loading="loadingPlants"
                 typeahead-editable="false"
                 typeahead-min-length="2"
@@ -37,6 +38,7 @@
         </div>
         <span ng-show="answer.term" ng-click="answer.term = null" class="fi-x"></span>
         <div ng-show="loadingPlants" class="loader"></div>
+        <div class="in-text" ng-show="typeheadHiddenCount > 0 && !loadingPlants && !answer.term">+{{ typeheadHiddenCount }} more plants, make your search more specific</div>
     </div>
     <div class="button uppercase" ng-disabled="!answer.term" ng-click="submit()">Answer</div>
     <span class="shadow uppercase">&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;

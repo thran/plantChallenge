@@ -174,7 +174,6 @@ label {text-transform: uppercase;}
 }
 #answer{ }
 #answer ul.f-dropdown{
-    width: auto;
     max-width: none;
     margin-top: 0;
     right: 15px;
@@ -230,6 +229,12 @@ i.wikipedia{
     border-left: solid lightgray 1px;
     padding-left: 10px;
     cursor: pointer;
+}
+#answer > #input > div.in-text{
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    color: grey;
 }
 #answer > #input > div.loader {
     font-size: 0.2rem;
