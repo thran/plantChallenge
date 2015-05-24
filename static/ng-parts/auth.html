@@ -1,6 +1,6 @@
 <div style="height: 2rem"></div>
 <div class="columns large-5 medium-7 large-offset-4 medium-offset-2">
-    <h3>Login</h3>
+    <h3>Log in</h3>
     <div style="height: 1rem"></div>
 
     <div class="row">
@@ -13,14 +13,18 @@
     </div>
     <div class="separator uppercase"><span><span>OR</span></span></div>
     <div data-alert class="alert-box alert" ng-cloak ng-show="user.error.error">
-        {{ service.error.error }}
+        {{ user.error.error }}
         <a href="#" class="close">&times;</a>
     </div>
-    <form ng-submit="sign_up()">
-        <label> Email <input ng-model="login.email" type="email" required="true"/></label>
+    <form ng-submit="signUpForm ? signUp() : logIn() " ng-init="signUpForm = false;">
+        <label> Email <input ng-model="login.email" type="email" required/></label>
         <label> Password <input ng-model="login.password" required type="password"/></label>
+        <label ng-cloak ng-show="signUpForm"> Password Again <input ng-model="login.password2" type="password"/></label>
 
-        <input type="submit" class="button medium uppercase" value="sign up">
+        <input ng-hide="signUpForm" type="submit" class="button medium uppercase" value="Log in">
+        <input ng-cloak ng-show="signUpForm" type="submit" class="button medium uppercase" value="sign up">
+        &nbsp;&nbsp;&nbsp;
+        <span class="shadow uppercase">or <a ng-click="signUpForm = !signUpForm" class="shadow-link">{{ signUpForm ? 'log in' : 'sign up' }}</a></span>
     </form>
 </div>
 

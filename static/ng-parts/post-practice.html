@@ -39,14 +39,17 @@
         </div>
         <div class="separator uppercase"><span><span>OR</span></span></div>
         <div data-alert class="alert-box alert" ng-cloak ng-show="user.error.error">
-            {{ service.error.error }}
+            {{ user.error.error }}
             <a href="#" class="close">&times;</a>
         </div>
-        <form ng-submit="sign_up()">
+        <form ng-submit="signUp()">
             <label> Email <input ng-model="login.email" type="email" required="true"/></label>
             <label> Password <input ng-model="login.password" required type="password"/></label>
+            <label> Password Again <input ng-model="login.password2" required type="password"/></label>
 
             <input type="submit" class="button medium uppercase" value="sign up">
+            &nbsp;&nbsp;&nbsp;
+            <span class="shadow uppercase">or <a href="/login" class="shadow-link">log in</a></span>
         </form>
     </div>
 

@@ -115,9 +115,13 @@ app.controller("panelAuth", function ($scope, userService, $location, global) {
 app.controller("auth", function ($scope, userService) {
     $scope.user = userService;
 
-    $scope.sign_up = function(){
-        userService.signupParams($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password);
+    $scope.signUp = function(){
+        userService.signupParams($scope.login.email, $scope.login.email, $scope.login.password, $scope.login.password2);
     };
+
+    $scope.logIn = function(){
+        userService.login($scope.login.email, $scope.login.password);
+    }
 });
 
 app.controller("practice", function ($scope, $http, $location, practiceService, global, $routeParams, areas) {
