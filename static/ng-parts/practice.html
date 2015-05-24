@@ -18,8 +18,11 @@
 <div class="columns large-8 large-offset-2">
 <div ng-hide="answer.answered || !flashcard" id="answer">
     <h3>What is this plant?</h3>
+
     <div id="input">
+        <form ng-submit="submit()">
         <input
+                focus
                 type="text"
                 class="fancy"
                 ng-class="{'selected': answer.meta}"
@@ -32,11 +35,12 @@
                 typeahead-wait-ms="300"
                 typeahead-template-url="static/ng-parts/dropdown.html"
                 />
+        </form>
         <div id="links" ng-show="answer.term" >
             <div class="google_icon" ng-click="searchGoogle(answer.term)" stop-event><i class="fi-magnifying-glass"></i></div>
             <div class="web_icon" ng-click="openWeb(answer.term)" stop-event><i ng-class="webIcon(answer.term)"></i></div>
         </div>
-        <span ng-show="answer.term" ng-click="answer.term = null" class="fi-x"></span>
+        <span ng-show="answer.term" ng-click="answer.term = null; typeheadHiddenCount =null;" class="fi-x"></span>
         <div ng-show="loadingPlants" class="loader"></div>
         <div class="in-text" ng-show="typeheadHiddenCount > 0 && !loadingPlants && !answer.term">+{{ typeheadHiddenCount }} more plants, make your search more specific</div>
     </div>
@@ -49,7 +53,7 @@
     <h4><div class="fi-check"></div>Yes, correct!</h4>
     <p>It is <strong>{{ flashcard.term.name }}</strong></p>
     <p><i>{{ flashcard.term.interesting }}</i></p>
-    <div class="button uppercase medium" ng-click="next_plant()" ng-hide="set.current + 1 == set.length">Next plant</div>
+    <div class="button uppercase medium" ng-click="next_plant()" ng-hide="set.current + 1 == set.length" onkeydown="if (event.keyCode == 13) this.click()">Next plant</div>
     <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
 </div>
 

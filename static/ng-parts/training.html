@@ -12,11 +12,11 @@
     <p>Choose area you want practice</p>
     <div class="areas"></div>
 
-    <div class="area-box" ng-repeat="area in areas" ng-click="openArea(area)">
+    <div class="area-box" ng-repeat="area in areas.areas" ng-click="openArea(area)">
         <img ng-src="/media/areas/{{ area.identifier }}.jpg" alt=""/>
         <span>{{ area.name }}</span>
         <br/>
-        <div class="loader small" ng-hide="stats"></div>
-        {{ stats[area.id].number_of_correct_answers }}
+        <div class="loader small" ng-hide="area.stats"></div>
+        {{ area.stats.number_of_correct_answers }}
     </div>
 </div>

@@ -14,6 +14,7 @@ app.factory("global", function(){
 
 app.run(function ($rootScope, $location, userService, global) {
     $rootScope.$on('$routeChangeSuccess', function(){
+        global.progress.active = false;
         ga('send', 'pageview', $location.path());
     });
 
@@ -177,11 +178,13 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
     };
 
     $scope.try_again = function(){
+        $scope.typeheadHiddenCount = null;
         $scope.answer.term = null;
         $scope.answer.answered = false;
     };
 
     $scope.skip = function(){
+        $scope.typeheadHiddenCount = null;
         $scope.answer.closed = true;
         $scope.answer.answered = true;
         $scope.answer.correct = false;
@@ -191,6 +194,7 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
     $scope.submit = function(){
         if (!$scope.answer.term)
             return;
+        $scope.typeheadHiddenCount = null;
         $scope.answer.answered = true;
         $scope.answer.guesses++;
         $scope.answer.correct = $scope.answer.term.id == $scope.flashcard.term.id;
@@ -230,45 +234,63 @@ app.controller("practice", function ($scope, $http, $location, practiceService, 
 
 app.controller("postPractice", function ($scope, global, $location) {
     if (!global.summary){
-        //$location.path("/training");
+        $location.path("/training");
     }
     $scope.global = global;
     $scope.summary = global.summary;
 });
 
-app.controller("training", function ($scope, $http, $location, global, userStatsService) {
+app.controller("training", function ($scope, $location, global, areas) {
+    $scope.areas = areas;
     if (global.introFinished){
         $scope.showInfo = true;
         global.introFinished = false;
     }
 
-    var loadAreas = function(){
-        $http.get('/flashcards/categorys', {params:{ filter_column: "type", filter_value: "set"}})
-            .success(function(response){
-                $scope.areas = response.data;
-                loadStats()
-            }
-        );
-    };
-
-    var loadStats = function(){
-        $scope.areas.forEach(function(area){
-            userStatsService.addGroup(area.id, {categories: [area.id]})
-        });
-        userStatsService.getStats().success(function(result){
-            $scope.stats = result.data;
-        })
-    };
-
     $scope.openArea = function (area) {
         $location.path("/practice/" + area.id + "/" + area.name);
     };
 
-    loadAreas();
+    areas.loadAreas();
 
+});
+
+
+app.factory("areas", function($http, userStatsService){
+    var self = this;
+    self.stats = {};
+
+    self.loadAreas = function(){
+        $http.get('/flashcards/categorys', {params:{ filter_column: "type", filter_value: "set"}})
+            .success(function(response){
+                self.areas = response.data;
+                self.loadStats()
+            }
+        );
+    };
+
+    self.loadStats = function(){
+        console.log("sa");
+        self.areas.forEach(function(area){
+            userStatsService.addGroup(area.id, {categories: [area.id]})
+        });
+        userStatsService.getStats().success(function(result){
+            self.areas.forEach(function(area){
+                area.stats = result.data[area.id];
+            });
+        })
+    };
+
+    return self;
 });
 
 var social_auth_callback = function(){
     var element = angular.element($("body"));
     element.injector().get("userService").loadUserFromJS(element.scope());
 };
+
+app.directive('focus', function(){
+    return function(scope, element){
+            element[0].focus();
+    };
+});

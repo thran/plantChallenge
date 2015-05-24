@@ -188,7 +188,7 @@ label {text-transform: uppercase;}
     height: 40px;
     line-height: 28px;
 }
-#answer .f-dropdown li a:hover{background-color: #fef8dd;}
+#answer .f-dropdown li a:hover, #answer .f-dropdown li.active{background-color: #fef8dd;}
 div.google_icon, div.web_icon {
     display: inline-block;
     height: 24px;
