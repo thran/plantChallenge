@@ -45,8 +45,7 @@ grunt.initConfig({
                 'static/dist/plant-challenge.min.css': [
                     'static/*.css',
                     "static/foundation/css/normalize.css",
-                    "static/foundation/css/myfoundation.css",
-                    "static/foundation/icons/foundation-icons.css"
+                    "static/foundation/css/myfoundation.css"
                 ]
             }
         }
