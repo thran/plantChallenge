@@ -15,6 +15,8 @@ python $DIR/manage.py migrate
 
 #js
 bower install
+npm install
+grunt
 
 # static files
 python $DIR/manage.py collectstatic --noinput
