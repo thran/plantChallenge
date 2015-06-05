@@ -15,7 +15,6 @@ python $DIR/manage.py migrate
 
 #js
 bower install
-npm install
 grunt
 
 # static files

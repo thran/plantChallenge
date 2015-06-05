@@ -30,6 +30,10 @@ grunt.initConfig({
         build: {
             src: 'static/dist/plant-challenge.js',
             dest: 'static/dist/plant-challenge.min.js'
+        },
+        foundation: {
+            src: 'static/foundation/js/foundation.js',
+            dest: 'static/foundation/js/foundation.min.js'
         }
     },
     jshint: {
@@ -65,6 +69,7 @@ grunt.initConfig({
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-angular-templates');
 
-    grunt.registerTask('default', ['jshint', 'ngtemplates', 'concat', 'uglify', "cssmin"]);
+    grunt.registerTask('default', ['jshint', 'ngtemplates', 'concat', 'uglify:build', "cssmin"]);
+    grunt.registerTask('foundation', ['uglify:foundation']);
 
 };
