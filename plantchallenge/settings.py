@@ -194,3 +194,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+PROSO_JS_FILES = ['dist/libs.min.js']
