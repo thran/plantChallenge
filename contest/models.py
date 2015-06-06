@@ -21,14 +21,14 @@ class Request(models.Model):
     def __unicode__(self):
         return "request {}".format(self.original_id)
 
-    def to_json(self):
+    def to_json(self, nested=True):
         data = {
             "images": json.loads(self.images),
             "lat": self.lat,
             "long": self.long,
             "created": self.created,
         }
-        if self.term:
+        if self.term and nested:
             data["term"] = self.term.to_json()
         return data
 
@@ -55,8 +55,8 @@ class Guess(models.Model):
 
     def to_json(self):
         data = {
-            "request": self.request.to_json(),
-            "term": self.terms.to_json(),
+            "request": self.request.to_json(nested=self.correct is not None),
+            "term": self.term.to_json(),
             "timestamp": self.timestamp,
         }
         if self.correct is not None:
