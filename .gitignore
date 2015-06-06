@@ -3,3 +3,5 @@ data/final/categories.json
 data/final/terms.json
 static/bower
 static/dist
+node_modules
+static/ng-parts/templates.js
