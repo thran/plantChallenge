@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'practice',
     'set_creator',
     'flowerchecker',
+    'contest',
 )
 
 MIDDLEWARE_CLASSES = (
