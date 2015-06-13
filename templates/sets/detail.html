@@ -2,10 +2,6 @@
 {% load staticfiles %}
 {% block head %}
 
-    <script src="{% static "bower/angular/angular.min.js" %}"></script>
-    <script src="{% static "foundation/js/ng-foundation.min.js" %}"></script>
-
-
     <script>
         var app = angular.module('pc', ['mm.foundation']);
         app.controller("sets", function($scope, $http){

@@ -41,15 +41,15 @@ grunt.initConfig({
     },
     watch: {
         files: ['static/js/*.js', "static/*.css"],
-        tasks: ['jshint']
+        tasks: ['jshint', 'ngtemplates', 'concat', 'uglify:build', "cssmin", "copy"]
     },
     cssmin: {
         target: {
             files: {
                 'static/dist/plant-challenge.min.css': [
-                    'static/*.css',
                     "static/foundation/css/normalize.css",
-                    "static/foundation/css/myfoundation.css"
+                    "static/foundation/css/myfoundation.css",
+                    'static/*.css'
                 ]
             }
         }
@@ -58,6 +58,14 @@ grunt.initConfig({
         plantChallenge: {
             src: 'static/ng-parts/*.html',
             dest: 'static/ng-parts/templates.js'
+        }
+    },
+    copy: {
+        images: {
+            cwd: 'static/imgs',  // set working folder / root to copy
+            src: '**/*',           // copy all files and subfolders
+            dest: 'static/dist/imgs',    // destination folder
+            expand: true           // required when using cwd
         }
     }
 });
@@ -68,8 +76,9 @@ grunt.initConfig({
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-angular-templates');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['jshint', 'ngtemplates', 'concat', 'uglify:build', "cssmin"]);
+    grunt.registerTask('default', ['jshint', 'ngtemplates', 'concat', 'uglify:build', "cssmin", "copy"]);
     grunt.registerTask('foundation', ['uglify:foundation']);
 
 };
