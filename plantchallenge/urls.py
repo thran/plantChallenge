@@ -19,5 +19,6 @@ patterns('',
 
     url(r'^typehead$', "practice.views.typehead"),
     url(r'^typehead-all$', "practice.views.typehead", {"exclude_short": False}),
+    url(r'^typehead-short$', "practice.views.typehead", {"exclude_short": False, "exclude_long": True}),
     url(r'^.*$', "practice.views.home", name='home'),
 )

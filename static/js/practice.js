@@ -92,7 +92,7 @@ app.controller("practice", ["$scope", "$http", "$location", "practiceService", "
     };
 
     $scope.getPlantNames = function(val) {
-    return $http.get('typehead', {
+    return $http.get( $scope.flashcard.term.name.indexOf(" ") > -1 ? 'typehead' : 'typehead-short', {
         params: {
             search: val
         }

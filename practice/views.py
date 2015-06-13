@@ -6,7 +6,7 @@ from django.views.decorators.cache import cache_page
 from practice.models import ExtendedTerm
 
 @cache_page(60 * 60 * 24 * 30)
-def typehead(request, exclude_short=True, complex=False):
+def typehead(request, exclude_short=True, exclude_long=False, complex=False):
     LIMIT = 5
     MIN_LENGHT = 2
     search = request.GET.get("search", None)
@@ -21,6 +21,8 @@ def typehead(request, exclude_short=True, complex=False):
         q = Q(name__istartswith=search)
     if exclude_short:
         q &= Q(name__contains=" ")
+    if exclude_long:
+        q &= ~Q(name__contains=" ")
     data = {
         "plants": map(lambda t: t.to_json(nested=True), ExtendedTerm.objects.filter(q).order_by("name")[:LIMIT]),
         "count": max(0, ExtendedTerm.objects.filter(q).order_by("name").count() - LIMIT),
