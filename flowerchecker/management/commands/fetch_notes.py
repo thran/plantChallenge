@@ -49,6 +49,9 @@ class Command(BaseCommand):
                 if term.interesting == "" or term.interesting is None:
                     term.interesting = note
                     term.save()
+                if term.interesting == note:
+                    term.interesting = term.interesting[0].upper() + term.interesting[1:].lower()
+                    term.save()
 
         if options["filter"]:
             notes = json.load(open("data/notes.json"))
@@ -63,7 +66,7 @@ class Command(BaseCommand):
 
                 if note[-1] != ".":
                     note += "."
-                notes[term] = note.title()
+                notes[term] = note[0].uppper() + note[1:]
 
             json.dump(notes, open("data/notes-filtered.json", "w"), indent=4)
 
