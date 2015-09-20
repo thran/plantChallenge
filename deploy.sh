@@ -14,6 +14,7 @@ python $DIR/manage.py syncdb
 python $DIR/manage.py migrate
 
 #js
+npm install
 bower install
 grunt
 
