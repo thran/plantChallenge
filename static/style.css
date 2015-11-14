@@ -238,7 +238,7 @@ i.wikipedia{
     color: grey;
 }
 #answer > #input > div.loader {
-    font-size: 0.2rem;
+    font-size: 3px;
     position: absolute;
     right: 23px;
     top: 7px;
