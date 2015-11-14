@@ -9,6 +9,7 @@ grunt.initConfig({
                 'static/bower/angular-cookies/angular-cookies.min.js',
                 'static/bower/angular-route/angular-route.min.js',
                 'static/bower/angular-foundation/mm-foundation-tpls.min.js',
+                'static/bower/angular-sanitize/angular-sanitize.min.js',
                 'static/bower/jsTimezoneDetect/jstz.min.js',
                 'static/bower/proso-apps-js/proso-apps-services.js',
                 'static/foundation/js/vendor/jquery.js',

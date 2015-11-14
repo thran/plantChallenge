@@ -56,7 +56,7 @@
         <div class="web_icon" ng-click="openWeb(flashcard.term)" stop-event><i ng-class="webIcon(flashcard.term)"></i></div>
         It is <strong>{{ flashcard.term.name }}</strong>
     </p>
-    <p><i>{{ flashcard.term.interesting }}</i></p>
+    <p><i ng-bind-html="flashcard.term.interesting | linky:'_blank'"></i></p>
     <div class="button uppercase medium" ng-click="next_plant()" next-action="answer.closed && answer.correct && answer.answered" ng-hide="set.current + 1 == set.length" onkeydown="if (event.keyCode == 13) this.click()">Next plant</div>
     <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
 </div>
@@ -76,7 +76,7 @@
         <div class="web_icon" ng-click="openWeb(flashcard.term)" stop-event><i ng-class="webIcon(flashcard.term)"></i></div>
         It is <strong>{{ flashcard.term.name }}</strong>
     </p>
-    <p><i>{{ flashcard.term.interesting }}</i></p>
+    <p><i ng-bind-html="flashcard.term.interesting | linky:'_blank'"></i></p>
     <div class="button uppercase medium" next-action="answer.closed && !answer.correct" ng-click="next_plant()" ng-hide="set.current + 1 == set.length">Next plant</div>
     <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
 </div>
