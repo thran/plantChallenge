@@ -15,14 +15,14 @@
 </div>
 <br/>
 
-<div class="columns large-8 large-offset-2">
+<div class="columns large-8 large-offset-2" keypress-events>
 <div ng-hide="answer.answered || !flashcard" id="answer">
     <h3>What is this plant?</h3>
 
     <div id="input">
         <form ng-submit="submit()">
         <input
-                focus-me="flashcard"
+                focus-me="!answer.answered && flashcard"
                 type="text"
                 class="fancy"
                 ng-class="{'selected': answer.meta}"
@@ -53,14 +53,14 @@
     <h4><div class="fi-check"></div>Yes, correct!</h4>
     <p>It is <strong>{{ flashcard.term.name }}</strong></p>
     <p><i>{{ flashcard.term.interesting }}</i></p>
-    <div class="button uppercase medium" ng-click="next_plant()" ng-hide="set.current + 1 == set.length" onkeydown="if (event.keyCode == 13) this.click()">Next plant</div>
+    <div class="button uppercase medium" ng-click="next_plant()" next-action="answer.closed && answer.correct && answer.answered" ng-hide="set.current + 1 == set.length" onkeydown="if (event.keyCode == 13) this.click()">Next plant</div>
     <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
 </div>
 
 <div ng-cloak ng-show="answer.answered && !answer.closed && !answer.correct">
     <h4><div class="fi-x"></div>Unfortunately no.</h4>
     <p>This is not <strong>{{ answer.term.name }}</strong></p>
-    <div class="button uppercase" ng-click="try_again()">Try again</div>
+    <div class="button uppercase" next-action="answer.answered && !answer.closed && !answer.correct" ng-click="try_again()">Try again</div>
     <span class="shadow uppercase">&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
         <a href="" class="shadow-link" ng-click="skip()">show correct answer</a></span>
 </div>
@@ -69,7 +69,7 @@
     <h4><div class="fi-x"></div>No worries, here is the answer.</h4>
     <p>It is <strong>{{ flashcard.term.name }}</strong></p>
     <p><i>{{ flashcard.term.interesting }}</i></p>
-    <div class="button uppercase medium" ng-click="next_plant()" ng-hide="set.current + 1 == set.length">Next plant</div>
+    <div class="button uppercase medium" next-action="answer.closed && !answer.correct" ng-click="next_plant()" ng-hide="set.current + 1 == set.length">Next plant</div>
     <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
 </div>
 </div>
