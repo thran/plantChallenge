@@ -156,8 +156,19 @@ var social_auth_callback = function(){
     element.injector().get("userService").loadUserFromJS(element.scope());
 };
 
-app.directive('focus', function(){
-    return function(scope, element){
-            element[0].focus();
+
+app.directive('focusMe', ['$timeout', function($timeout) {
+    return {
+        scope: {
+            trigger: '=focusMe'
+        },
+        priority: -1,
+        link: function($scope, element) {
+            $scope.$watch('trigger', function(value) {
+                if (value) {
+                    $timeout(function () { element[0].focus(); });
+                }
+            });
+        }
     };
-});
+}]);
