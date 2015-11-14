@@ -14,7 +14,7 @@ class ExtendedTerm(Term):
 
     def to_json(self, nested=False):
         json = Term.to_json(self, nested)
-        json["url"] = self.url
+        json["external_url"] = self.url
         json["interesting"] = self.interesting
         return json
 

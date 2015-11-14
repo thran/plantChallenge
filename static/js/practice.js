@@ -105,12 +105,12 @@ app.controller("practice", ["$scope", "$http", "$location", "practiceService", "
         window.open('https://www.google.cz/search?&tbm=isch&q=' + plant.name);
     };
     $scope.openWeb = function(plant){
-        window.open(plant.url);
+        window.open(plant.external_url);
     };
 
     $scope.webIcon = function(plant){
         if (!plant){ return; }
-        if (plant.url.match(/wikipedia/)) {
+        if (plant.external_url.match(/wikipedia/)) {
             return "wikipedia";
         }
         return "fi-web";

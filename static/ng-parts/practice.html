@@ -51,7 +51,11 @@
 
 <div ng-cloak ng-show="answer.closed && answer.correct && answer.answered">
     <h4><div class="fi-check"></div>Yes, correct!</h4>
-    <p>It is <strong>{{ flashcard.term.name }}</strong></p>
+    <p>
+        <div class="google_icon" ng-click="searchGoogle(flashcard.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+        <div class="web_icon" ng-click="openWeb(flashcard.term)" stop-event><i ng-class="webIcon(flashcard.term)"></i></div>
+        It is <strong>{{ flashcard.term.name }}</strong>
+    </p>
     <p><i>{{ flashcard.term.interesting }}</i></p>
     <div class="button uppercase medium" ng-click="next_plant()" next-action="answer.closed && answer.correct && answer.answered" ng-hide="set.current + 1 == set.length" onkeydown="if (event.keyCode == 13) this.click()">Next plant</div>
     <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
@@ -67,7 +71,11 @@
 
 <div ng-cloak ng-show="answer.closed && !answer.correct">
     <h4><div class="fi-x"></div>No worries, here is the answer.</h4>
-    <p>It is <strong>{{ flashcard.term.name }}</strong></p>
+    <p>
+        <div class="google_icon" ng-click="searchGoogle(flashcard.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+        <div class="web_icon" ng-click="openWeb(flashcard.term)" stop-event><i ng-class="webIcon(flashcard.term)"></i></div>
+        It is <strong>{{ flashcard.term.name }}</strong>
+    </p>
     <p><i>{{ flashcard.term.interesting }}</i></p>
     <div class="button uppercase medium" next-action="answer.closed && !answer.correct" ng-click="next_plant()" ng-hide="set.current + 1 == set.length">Next plant</div>
     <div class="button uppercase medium" ng-click="next_plant()" ng-cloak ng-show="set.current + 1 == set.length">Finish</div>
