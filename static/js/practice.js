@@ -2,7 +2,7 @@
 app.controller("practice", ["$scope", "$http", "$location", "practiceService", "global", "$routeParams", "areas",
     function ($scope, $http, $location, practiceService, global, $routeParams, areas) {
     var area = parseInt($routeParams.id);
-    var areaName = $routeParams.areaName;
+    var areaName = area ? $routeParams.areaName : "Intro set";
     var progress = {};
     areas.setActive(area);
     global.progress = progress;
@@ -56,12 +56,7 @@ app.controller("practice", ["$scope", "$http", "$location", "practiceService", "
             });
     };
 
-    $scope.image_url = function(image, size){
-        if (typeof image === "undefined"){
-            return null;
-        }
-        return "http://images.flowerchecker.com/images/" + image + "-" + size;
-    };
+    $scope.image_url = image_url;
 
     $scope.try_again = function(){
         $scope.typeheadHiddenCount = null;

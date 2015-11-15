@@ -1,5 +1,5 @@
 angular.module("proso.apps", ["proso.apps.common-config","proso.apps.common-logging","proso.apps.flashcards-practice","proso.apps.flashcards-userStats","proso.apps.user-user"]);
-var app = angular.module('plantChallenge', ["ngCookies", "ngRoute", "mm.foundation", "proso.apps", "ngSanitize"]);
+var app = angular.module('plantChallenge', ["ngCookies", "ngRoute", "mm.foundation", "proso.apps", "ngSanitize", "slickCarousel"]);
 
 var MAX_GUESSES = 2;
 
@@ -125,12 +125,29 @@ app.controller("auth", ["$scope", "userService", function ($scope, userService) 
 }]);
 
 
-app.controller("postPractice", ["$scope", "global", "$location", function ($scope, global, $location) {
+app.controller("postPractice", ["$scope", "global", "$location", "$timeout", function ($scope, global, $location, $timeout) {
     if (!global.summary){
         $location.path("/training");
+        return;
     }
     $scope.global = global;
     $scope.summary = global.summary;
+    $scope.image_url = image_url;
+
+    $scope.selectFlashcard = function(flashcard){
+        $scope.slickReady = false;
+        $scope.selectedFlashcard = flashcard;
+        $timeout(function(){$scope.slickReady = true;});
+    };
+    $scope.selectFlashcard($scope.summary.flashcards[0]);
+
+    $scope.slickConfig = {
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        method: {}
+    };
+
 }]);
 
 app.controller("training", ["$scope", "$location", "global", "areas", function ($scope, $location, global, areas) {

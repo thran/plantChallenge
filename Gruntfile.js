@@ -5,6 +5,7 @@ grunt.initConfig({
     concat: {
         libs: {
             src: [
+                'static/foundation/js/vendor/jquery.js',
                 'static/bower/angular/angular.min.js',
                 'static/bower/angular-cookies/angular-cookies.min.js',
                 'static/bower/angular-route/angular-route.min.js',
@@ -12,7 +13,8 @@ grunt.initConfig({
                 'static/bower/angular-sanitize/angular-sanitize.min.js',
                 'static/bower/jsTimezoneDetect/jstz.min.js',
                 'static/bower/proso-apps-js/proso-apps-services.js',
-                'static/foundation/js/vendor/jquery.js',
+                'static/bower/slick-carousel/slick/slick.js',
+                'static/bower/angular-slick-carousel/dist/angular-slick.min.js',
                 'static/foundation/js/vendor/modernizr.min.js',
                 'static/foundation/js/vendor/fastclick.js',
                 'static/foundation/js/foundation.min.js'
@@ -50,6 +52,8 @@ grunt.initConfig({
                 'static/dist/plant-challenge.min.css': [
                     "static/foundation/css/normalize.css",
                     "static/foundation/css/myfoundation.css",
+                    "static/bower/slick-carousel/slick/slick.css",
+                    "static/bower/slick-carousel/slick/slick-theme.css",
                     'static/*.css'
                 ]
             }
@@ -66,6 +70,18 @@ grunt.initConfig({
             cwd: 'static/imgs',  // set working folder / root to copy
             src: '**/*',           // copy all files and subfolders
             dest: 'static/dist/imgs',    // destination folder
+            expand: true           // required when using cwd
+        },
+        fonts: {
+            cwd: 'static/bower/slick-carousel/slick/fonts',  // set working folder / root to copy
+            src: '**/*',           // copy all files and subfolders
+            dest: 'static/dist/fonts',    // destination folder
+            expand: true           // required when using cwd
+        },
+        loader: {
+            cwd: 'static/bower/slick-carousel/slick',  // set working folder / root to copy
+            src: 'ajax-loader.gif',           // copy all files and subfolders
+            dest: 'static/dist',    // destination folder
             expand: true           // required when using cwd
         }
     }

@@ -48,7 +48,7 @@ a:hover { color: #000000; }
 #tulips span {position: absolute; left: 610px; top: 20px; font-size: 1.3rem;}
 
 .area-box {
-    cursor: pointer;
+    cursor: move;
     width: 180px;
     min-height: 260px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -285,8 +285,6 @@ div.fi-check, #practice-progress > span.fi-check{ background-color: green; color
 div.fi-x, #practice-progress > span.fi-x{background-color: red; color: #ffffff;}
 #practice-progress > span.current{border-top-color: green; }
 
-.set-result-list{ margin-bottom: 10px; }
-.set-result-list div.fi-x, .set-result-list div.fi-check{ float: right; }
 #practice-progress > span{
     display: inline-block;
     height: 1.6em;
@@ -316,6 +314,27 @@ div.fi-x, #practice-progress > span.fi-x{background-color: red; color: #ffffff;}
     top: 0;
     height: 2rem;
     padding-top: 0.7rem;
+}
+
+.set-result-list{ margin-bottom: 10px; }
+.set-result-list div.fi-x, .set-result-list div.fi-check{ float: right; }
+.set-result-list { transition: all 0.5s; cursor: move }
+.set-result-list:hover { margin-left: 10px; }
+.set-result-list.selected { font-weight: bold; }
+
+slick img {
+    object-fit: contain;
+    height: 200px;
+    width: 200px;
+    margin: auto;
+}
+slick div{ outline: 0; }
+slick ul{ margin-left: 0 !important; }
+
+/* slick */
+
+.slick-next:before, .slick-prev:before{
+    color: black;
 }
 
 /* spinner */

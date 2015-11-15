@@ -3,14 +3,20 @@
         <div class="medium-5 column">
             <br/>
             <h3>Set finished</h3>
-            <p class="fancy"><span ng-hide="summary.correct == 0">Good job!</span> You identified {{ summary.correct }} from {{ summary.count }} plants from {{ summary.areaName }}.</p>
+            <p class="fancy"><span ng-hide="summary.correct == 0">Good job!</span> You identified <b>{{ summary.correct }}</b> from <b>{{ summary.count }}</b> plants from <b>{{ summary.areaName }}</b>.</p>
             <hr/>
-                <div ng-repeat="flashcard in summary.flashcards" class="fancy set-result-list">
+            <div ng-repeat="flashcard in summary.flashcards" class="fancy set-result-list" ng-class="{selected: flashcard == selectedFlashcard}"
+                 ng-click="selectFlashcard(flashcard);">
                 <div ng-show="!flashcard.answer.correct" class="fi-x"></div>
                 <div ng-show="flashcard.answer.correct" class="fi-check"></div>
                 {{ flashcard.term.name }}
             </div>
             <hr/>
+            <slick ng-if="slickReady" settings="slickConfig">
+                <div ng-repeat="image in selectedFlashcard.context.content">
+                    <img ng-src='{{image_url(image, "medium")}}' />
+                </div>
+            </slick>
         </div>
 
         <div class="medium-6 medium-offset-1 column" ng-show="global.user.status.logged">

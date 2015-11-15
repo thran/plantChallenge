@@ -22,3 +22,11 @@ app.directive('stopEvent', function () {
         }
     };
  });
+
+
+var image_url = function(image, size){
+        if (typeof image === "undefined"){
+            return null;
+        }
+        return "http://images.flowerchecker.com/images/" + image + "-" + size;
+    };
