@@ -5,7 +5,12 @@ default:
         predictive_model:
             class: proso.models.prediction.PriorCurrentPredictiveModel
         item_selector:
-            class: proso.models.item_selection.ScoreItemSelection
+            class: practice.item_selection.ScoreItemSelection
+            parameters:
+                weight_parent_time_ago: 10.0
+                weight_time_ago: 20.0
+                weight_number_of_answers: 20.0
+                estimate_parent_factors: false
         option_selector:
             class: proso.models.option_selection.NonOptionSelection
     proso_flashcards:
