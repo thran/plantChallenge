@@ -85,8 +85,22 @@ a:hover { color: #000000; }
     padding: 5px 15px;
     margin: 0;
 }
-.area-box span{
+.area-box > span{
     font-weight: bold;
+    display: block;
+    position: absolute;
+    bottom: 2.8em;
+    left: 5px;
+    margin-right: 5px;
+    max-height: 5em;
+    transition: all 0.5s;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 0 8px 0 8px;
+}
+
+.area-box:hover > span{
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 #google, #facebook{
