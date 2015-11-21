@@ -11,11 +11,14 @@ class ExtendedTerm(Term):
 
     url = models.TextField()
     interesting = models.TextField(null=True, blank=True)
+    example = models.ForeignKey(Flashcard, null=True, blank=True)
 
     def to_json(self, nested=False):
         json = Term.to_json(self, nested)
         json["external_url"] = self.url
         json["interesting"] = self.interesting
+        if self.example and not nested:
+            json["example"] = self.example.to_json(nested=True, categories=False)
         return json
 
     @staticmethod

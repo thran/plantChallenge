@@ -7,13 +7,18 @@
             #{{ flashcard.context.identifier }} -
             original answer: <b>{{ flashcard.get_context.fullname }}</b>
             <a target="_blank" href="{% url "admin:practice_extendedcontext_change" flashcard.context.pk %}"><i class="fi-pencil"></i></a>
+            {% if term.example.pk == flashcard.pk %}
+                vybrabná
+            {% else %}
+                <a href="{% url "set_as_example" flashcard.pk %}"><i class="fi-trophy"></i></a>
+            {% endif %}
             <br/>
             {% if flashcard.json_error %}
                 {{ flashcard.json_error }}
             {% else %}
                 <a href="http://images.flowerchecker.com/images/{{ flashcard.images.0 }}-original" target="_blank"><img src="http://images.flowerchecker.com/images/{{ flashcard.images.0 }}-small" alt=""/></a>
-                <a href="http://images.flowerchecker.com/images/{{ flashcard.images.1 }}-original" target="_blank"><img src="http://images.flowerchecker.com/images/{{ flashcard.images.1 }}-small" alt=""/></a>
-                <a href="http://images.flowerchecker.com/images/{{ flashcard.images.2 }}-original" target="_blank"><img src="http://images.flowerchecker.com/images/{{ flashcard.images.2 }}-small" alt=""/></a>
+                {% if flashcard.images.1 %} <a href="http://images.flowerchecker.com/images/{{ flashcard.images.1 }}-original" target="_blank"><img src="http://images.flowerchecker.com/images/{{ flashcard.images.1 }}-small" alt=""/></a> {% endif %}
+                {% if flashcard.images.2 %} <a href="http://images.flowerchecker.com/images/{{ flashcard.images.2 }}-original" target="_blank"><img src="http://images.flowerchecker.com/images/{{ flashcard.images.2 }}-small" alt=""/></a> {% endif %}
             {% endif %}
         {% else %}
             <i>

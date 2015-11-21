@@ -59,6 +59,7 @@ def remove_term(request, set_pk, term_pk):
     s.save()
     return redirect("set", set_pk)
 
+
 @staff_member_required
 def term_detail(request, pk):
     flashcards = Flashcard.objects.filter(term_id=pk).order_by("identifier")
@@ -72,12 +73,23 @@ def term_detail(request, pk):
         "term": get_object_or_404(ExtendedTerm, pk=pk)
     })
 
+
 @staff_member_required
 def switch_for_daniel(request, pk):
     set = get_object_or_404(Set, pk=pk)
     set.for_daniel = not set.for_daniel
     set.save()
     return redirect("set_list")
+
+
+@staff_member_required
+def set_as_example(request, pk):
+    flashcard = get_object_or_404(Flashcard, pk=pk)
+    term = flashcard.get_term()
+    term.example = flashcard
+    term.save()
+    return term_detail(request, term.pk)
+
 
 @staff_member_required
 def export_for_daniel(request):
