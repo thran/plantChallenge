@@ -103,6 +103,19 @@ a:hover { color: #000000; }
     background-color: rgba(255, 255, 255, 0.9);
 }
 
+.area-box .fi-eye {
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    text-decoration: none;
+    font-size: 2em;
+    z-index: 10;
+}
+.area-box .fi-eye:hover {
+    color: green;
+}
+
 #google, #facebook{
     text-transform: uppercase;
     font-weight: bold;
@@ -349,6 +362,13 @@ slick ul{ margin-left: 0 !important; }
 
 .slick-next:before, .slick-prev:before{
     color: black;
+}
+
+.clearing-thumbs{ display: inline-block; margin-bottom: 20px}
+.auto-thumbs a > img {
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
 }
 
 /* spinner */

@@ -1,6 +1,7 @@
 
 app.factory("areas", ["$http", "userStatsService", function($http, userStatsService){
     var self = this;
+    self.areaOverview = {};
 
     self.loadAreas = function(){
         if (self.areas){
@@ -61,6 +62,21 @@ app.factory("areas", ["$http", "userStatsService", function($http, userStatsServ
             self.active.stats.number_of_answers++;
             self.updateLevels();
         }
+    };
+
+    self.getOverview = function(id){
+        if (self.areaOverview[id]){
+            return;
+        }
+        $http.get("set/" + id)
+            .success(function(response){
+                angular.forEach(response, function(term){
+                    if (term.example){
+                        term.example.context.content = JSON.parse(term.example.context.content);
+                    }
+                });
+                self.areaOverview[id] = response;
+            });
     };
 
     return self;

@@ -25,8 +25,13 @@ app.directive('stopEvent', function () {
 
 
 var image_url = function(image, size){
-        if (typeof image === "undefined"){
-            return null;
-        }
-        return "http://images.flowerchecker.com/images/" + image + "-" + size;
-    };
+    if (typeof image === "undefined"){
+        return null;
+    }
+    return "http://images.flowerchecker.com/images/" + image + "-" + size;
+};
+
+var social_auth_callback = function(){
+    var element = angular.element($("body"));
+    element.injector().get("userService").loadUserFromJS(element.scope());
+};

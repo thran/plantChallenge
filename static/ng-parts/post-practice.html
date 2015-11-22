@@ -24,8 +24,13 @@
             <h3>Continue?</h3>
             <p class="fancy">Get the level 3 to join others in Contest mode.</p>
 
-            <a ng-href="/practice/{{ summary.area }}/{{ summary.areaName }}" class="button uppercase strong">Continue in this area</a>
-            <div class="shadow uppercase">or <a href="/training" class="shadow-link">end & go to training overview</a></div>
+            <div class="text-center">
+                <a ng-href="/practice/{{ summary.area }}/{{ summary.areaName }}" class="button uppercase strong">Continue in this area</a>
+                <div class="separator uppercase"><span><span>OR</span></span></div>
+                <div class="shadow uppercase"><a href="/training" class="shadow-link">end & go to training overview</a></div>
+                <div class="separator uppercase"><span><span>OR</span></span></div>
+                <span class="shadow uppercase"><a ng-href="area-overview/{{ summary.area }}/{{ summary.areaName }}">end & check plants in this set</a></span>
+            </div>
         </div>
     </div>
 

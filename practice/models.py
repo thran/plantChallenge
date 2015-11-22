@@ -18,7 +18,7 @@ class ExtendedTerm(Term):
         json["external_url"] = self.url
         json["interesting"] = self.interesting
         if self.example and not nested:
-            json["example"] = self.example.to_json(nested=True, categories=False)
+            json["example"] = self.example.to_json(nested=False, categories=False)
         return json
 
     @staticmethod

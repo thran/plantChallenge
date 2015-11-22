@@ -15,9 +15,10 @@ grunt.initConfig({
                 'static/bower/proso-apps-js/proso-apps-services.js',
                 'static/bower/slick-carousel/slick/slick.js',
                 'static/bower/angular-slick-carousel/dist/angular-slick.min.js',
-                'static/foundation/js/vendor/modernizr.min.js',
+                'static/foundation/js/vendor/modernizr.js',
                 'static/foundation/js/vendor/fastclick.js',
-                'static/foundation/js/foundation.min.js'
+                'static/foundation/js/foundation.min.js',
+                'static/foundation/js/foundation/foundation.clearing.js'
             ],
             dest: 'static/dist/libs.min.js'
         },

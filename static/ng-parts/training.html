@@ -13,6 +13,7 @@
     <div class="areas"></div>
 
     <div class="area-box" ng-repeat="area in areas.areas track by $index" ng-click="openArea(area)">
+        <a stop-event ng-href="area-overview/{{ area.id }}/{{ area.name }}" class="fi-eye"></a>
         <img ng-src="/media/areas/{{ area.identifier }}.jpg" alt=""/>
         <span>{{ area.name }}</span>
         <br/>

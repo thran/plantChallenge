@@ -79,6 +79,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 templateUrl: 'static/ng-parts/practice.html',
                 controller: "practice"
             }).
+            when('/area-overview/:id/:areaName', {
+                templateUrl: 'static/ng-parts/set-overview.html',
+                controller: "setOverview"
+            }).
             when('/training', {
                 templateUrl: 'static/ng-parts/training.html',
                 controller: "training"
@@ -124,7 +128,6 @@ app.controller("auth", ["$scope", "userService", function ($scope, userService) 
     };
 }]);
 
-
 app.controller("postPractice", ["$scope", "global", "$location", "$timeout", function ($scope, global, $location, $timeout) {
     if (!global.summary){
         $location.path("/training");
@@ -167,12 +170,21 @@ app.controller("training", ["$scope", "$location", "global", "areas", function (
 
 }]);
 
+app.controller("setOverview", ["$scope", "$routeParams", "areas", "$timeout", function ($scope, $routeParams, areas, $timeout) {
+    $scope.id = parseInt($routeParams.id);
+    $scope.areaName = $routeParams.areaName;
+    areas.getOverview($scope.id);
+    $scope.overviews = areas.areaOverview;
 
-var social_auth_callback = function(){
-    var element = angular.element($("body"));
-    element.injector().get("userService").loadUserFromJS(element.scope());
-};
-
+    $scope.image_url = image_url;
+    $scope.$watch("overviews", function(n, o) {
+        if (n) {
+            $timeout(function () {
+                $(document).foundation('clearing');
+            });
+        }
+    }, true);
+}]);
 
 app.directive('focusMe', ['$timeout', function($timeout) {
     return {
