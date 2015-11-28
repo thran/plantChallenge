@@ -1,3 +1,19 @@
+app.controller("training", ["$scope", "$location", "global", "areas", function ($scope, $location, global, areas) {
+    $scope.areas = areas;
+    if (global.introFinished){
+        $scope.showInfo = true;
+        global.introFinished = false;
+    }
+
+    $scope.openArea = function (area) {
+        $location.path("/practice/" + area.id + "/" + area.name);
+    };
+
+    areas.loadAreas();
+    $scope.max = 10;
+    $scope.dynamic = 7;
+
+}]);
 
 app.controller("practice", ["$scope", "$http", "$location", "practiceService", "global", "$routeParams", "areas",
     function ($scope, $http, $location, practiceService, global, $routeParams, areas) {
@@ -112,4 +128,45 @@ app.controller("practice", ["$scope", "$http", "$location", "practiceService", "
     };
 
     $scope.load_flashcards();
+}]);
+
+app.controller("postPractice", ["$scope", "global", "$location", "$timeout", function ($scope, global, $location, $timeout) {
+    if (!global.summary){
+        $location.path("/training");
+        return;
+    }
+    $scope.global = global;
+    $scope.summary = global.summary;
+    $scope.image_url = image_url;
+
+    $scope.selectFlashcard = function(flashcard){
+        $scope.slickReady = false;
+        $scope.selectedFlashcard = flashcard;
+        $timeout(function(){$scope.slickReady = true;});
+    };
+    $scope.selectFlashcard($scope.summary.flashcards[0]);
+
+    $scope.slickConfig = {
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        method: {}
+    };
+
+}]);
+
+app.controller("setOverview", ["$scope", "$routeParams", "areas", "$timeout", function ($scope, $routeParams, areas, $timeout) {
+    $scope.id = parseInt($routeParams.id);
+    $scope.areaName = $routeParams.areaName;
+    areas.getOverview($scope.id);
+    $scope.overviews = areas.areaOverview;
+
+    $scope.image_url = image_url;
+    $scope.$watch("overviews", function(n, o) {
+        if (n) {
+            $timeout(function () {
+                $(document).foundation('clearing');
+            });
+        }
+    }, true);
 }]);
