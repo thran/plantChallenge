@@ -48,7 +48,7 @@ a:hover { color: #000000; }
 #tulips span {position: absolute; left: 610px; top: 20px; font-size: 1.3rem;}
 
 .area-box {
-    cursor: move;
+    cursor: pointer;
     width: 180px;
     min-height: 260px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -349,7 +349,7 @@ div.fi-x, #practice-progress > span.fi-x{background-color: red; color: #ffffff;}
 .set-result-list:hover { margin-left: 10px; }
 .set-result-list.selected { font-weight: bold; }
 
-slick img {
+.set-result-list slick img {
     object-fit: contain;
     height: 200px;
     width: 200px;
@@ -370,6 +370,30 @@ slick ul{ margin-left: 0 !important; }
     height: 100px;
     width: 100px;
 }
+
+/* request card */
+.request-card {
+    width: 180px;
+    margin: 5px;
+    border: solid black 1px;
+    display: inline-block;
+    height: 230px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.request-card > span {
+    margin-left: 55px;
+}
+.request-card hr{
+    margin: 0 3px 5px 3px;
+}
+.request-card img {
+    object-fit: contain;
+    height: 170px;
+    width: 170px;
+}
+
 
 /* spinner */
 .loader.small{font-size: 0.2em; margin: auto;}

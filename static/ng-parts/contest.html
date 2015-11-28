@@ -1,4 +1,27 @@
-<div style="height: 5rem"></div>
-<div class="fancy text-center columns large-6 large-offset-3">
+<div ng-hide="selectedRequest">
+    <div ng-hide="requests" class="loader"></div>
+    <div ng-cloak ng-show="requests" class="columns">
+        <div ng-click="select(request)" ng-repeat="request in requests.slice(requestsPerPage * (currentPage - 1), requestsPerPage * (currentPage ))" class="request-card">
+            <span>
+                <timer countdown="request.time" finish-callback="request.closed=true" max-time-unit="'hour'" interval="1000">{{ hhours }}:{{mminutes}}<span class="shadow">:{{sseconds}}</span> </timer>
+            </span>
+            <hr>
+            <slick ng-hide="request.closed" settings="slickConfig">
+                <div ng-repeat="image in request.images">
+                    <img ng-src='{{image_url(image, "medium")}}' />
+                </div>
+            </slick>
+        </div>
+        <div class="pagination-centered">
+            <pagination total-items="requests.length" page="currentPage" items-per-page="requestsPerPage"></pagination>
+        </div>
 
+    </div>
+</div>
+
+
+<div ng-cloak ng-show="selectedRequest">
+    <a href="" ng-click="selectedRequest = null">back</a>
+
+    {{ selectedRequest }}
 </div>

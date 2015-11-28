@@ -1,5 +1,5 @@
 angular.module("proso.apps", ["proso.apps.common-config","proso.apps.common-logging","proso.apps.flashcards-practice","proso.apps.flashcards-userStats","proso.apps.user-user"]);
-var app = angular.module('plantChallenge', ["ngCookies", "ngRoute", "mm.foundation", "proso.apps", "ngSanitize", "slickCarousel"]);
+var app = angular.module('plantChallenge', ["ngCookies", "ngRoute", "mm.foundation", "proso.apps", "ngSanitize", "slickCarousel", "timer"]);
 
 var MAX_GUESSES = 2;
 

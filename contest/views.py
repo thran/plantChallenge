@@ -27,7 +27,7 @@ def requests(request):
     requests = Request.objects.filter(bad=False,
                                   created__gt=datetime.now()-timedelta(seconds=REQUEST_LIFETIME)).order_by("-created")
 
-    return JsonResponse({"requests": map(lambda r: r.to_json(), list(requests))})
+    return JsonResponse({"requests": map(lambda r: r.to_json(), list(requests)), "request_lifetime": REQUEST_LIFETIME})
 
 
 def guesses(request):
