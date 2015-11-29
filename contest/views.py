@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 import json
+
+from django.db.models import Prefetch
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
 from lazysignup.decorators import allow_lazy_user
@@ -12,24 +14,28 @@ def make_guess(request):
     if not request.method == "POST":
         return HttpResponseBadRequest("method must be POST")
     data = json.loads(str(request.body.decode('utf-8')))
-    request = get_object_or_404(Request, pk=data["request"])
-    if Guess.objects.filter(request=request, user=request.user).first():
-        return HttpResponseBadRequest("guess already made")
-    term = get_object_or_404(ExtendedTerm, pk=data["term"])
-    Guess.objects.create(
+    request_obj = get_object_or_404(Request, pk=data["request"])
+    term = get_object_or_404(ExtendedTerm, pk=data["term"]["id"])
+    guess, created = Guess.objects.get_or_create(
         user=request.user,
-        term=term,
-        request=request,
+        request=request_obj,
+        defaults={"term": term}
     )
+    if not created:
+        guess.term = term
+        guess.save()
 
     return HttpResponse("OK")
 
 
+@allow_lazy_user
 def requests(request):
-    requests = Request.objects.filter(bad=False,
-                                  created__gt=datetime.now()-timedelta(seconds=REQUEST_LIFETIME)).order_by("-created")
+    requests_objs = Request.objects.filter(bad=False, created__gt=datetime.now()-timedelta(seconds=REQUEST_LIFETIME))\
+        .select_related("term")\
+        .prefetch_related(Prefetch("guesses", queryset=Guess.objects.select_related("term").filter(user=request.user)))\
+        .order_by("-created")
 
-    return JsonResponse({"requests": map(lambda r: r.to_json(), list(requests)), "request_lifetime": REQUEST_LIFETIME})
+    return JsonResponse({"requests": map(lambda r: r.to_json(request.user), list(requests_objs)), "request_lifetime": REQUEST_LIFETIME})
 
 
 def guesses(request):

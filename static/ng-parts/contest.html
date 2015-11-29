@@ -1,7 +1,11 @@
 <div ng-hide="selectedRequest">
     <div ng-hide="requests" class="loader"></div>
     <div ng-cloak ng-show="requests" class="columns">
-        <div ng-click="goToDetail(request)" ng-repeat="request in requests.slice(requestsPerPage * (currentPage - 1), requestsPerPage * (currentPage ))" class="request-card">
+        <div
+                ng-click="goToDetail(request)"
+                ng-repeat="request in requests.slice(requestsPerPage * (currentPage - 1), requestsPerPage * (currentPage ))"
+                class="request-card" ng-class="{guessed: request.guess && !request.guess.new}"
+        >
             <span>
                 <timer countdown="request.time" finish-callback="request.closed=true" max-time-unit="'hour'" interval="1000">{{ hhours }}:{{mminutes}}<span class="shadow">:{{sseconds}}</span> </timer>
             </span>
@@ -21,7 +25,6 @@
 
 
 <div ng-cloak ng-show="selectedRequest">
-    <a href="" class="right" ng-click="goToOverview()">back</a>
 
     <div id="image-strip" ng-cloak ng-show="selectedRequest">
         <img id="img" ng-src='{{image_url(selectedRequest.selectedImage, "big")}}'/>
@@ -38,5 +41,15 @@
     </div>
     <br/>
 
-    {{ guess }}
+    <a href="" class="right" ng-click="goToOverview()">back</a>
+
+    <div class="columns large-8 large-offset-2" ng-show="selectedRequest.guess.new">
+        <plant-select submit="submit" focus='selectedRequest' model="selectedRequest.guess.term"></plant-select>
+        <div class="button uppercase" ng-disabled="!selectedRequest.guess.term" ng-click="submit()">Answer</div>
+    </div>
+
+    <div ng-hide="selectedRequest.guess.new" ng-cloak class="columns large-8 large-offset-2">
+        <span class="shadow">Your guess - <a href="" ng-click="selectedRequest.guess.new = true">change</a></span>
+        <h3 class=" fancy">{{ selectedRequest.guess.term.name }}</h3>
+    </div>
 </div>

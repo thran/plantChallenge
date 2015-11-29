@@ -41,7 +41,8 @@ app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeP
         id = request.id;
         if (!request.guess){
             request.guess = {
-                request: request.id
+                request: request.id,
+                new: true
             };
         }
         $location.path("/contest/"+request.id, false);
@@ -53,6 +54,13 @@ app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeP
         $location.path("/contest", false);
     };
 
+    $scope.submit = function(){
+        var request = $scope.selectedRequest;
+        $http.post("contest/make_guess", request.guess)
+            .success(function(response){
+                request.guess.new = false;
+            });
+    };
 
     get_requests();
 

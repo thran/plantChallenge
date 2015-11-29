@@ -22,7 +22,7 @@ class Request(models.Model):
     def __unicode__(self):
         return "request {}".format(self.original_id)
 
-    def to_json(self, nested=True):
+    def to_json(self, nested=True,):
         data = {
             "id": self.pk,
             "images": json.loads(self.images),
@@ -32,6 +32,12 @@ class Request(models.Model):
         }
         if self.term and nested:
             data["term"] = self.term.to_json()
+        guesses = self.guesses.all()
+        if len(guesses) > 0:
+            data["guess"] = {
+                "request": self.pk,
+                "term": guesses[0].term.to_json(nested=True)
+            }
         return data
 
 
@@ -49,7 +55,7 @@ class Guess(models.Model):
     user = models.ForeignKey(User)
     request = models.ForeignKey(Request, related_name="guesses")
     term = models.ForeignKey(ExtendedTerm)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=True)
 
     correct = models.CharField(max_length=2, choices=CORRECTNESS, null=True, blank=True)
     points = models.IntegerField(null=True, blank=True)
