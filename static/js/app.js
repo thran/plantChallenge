@@ -153,6 +153,35 @@ app.directive('focusMe', ['$timeout', function($timeout) {
     };
 }]);
 
+app.directive('plantSelect', ["$http", function($http){
+    return {
+        restrict: "E",
+        scope: {
+            model: '=',
+            focus: '=',
+            short: '=',
+            submit: '='
+        },
+        templateUrl: "static/ng-parts/plant-select.html",
+        link: function($scope) {
+            $scope.getPlantNames = function(val) {
+                return $http.get($scope.short ? 'typehead-short' : 'typehead', {
+                    params: {
+                        search: val
+                    }
+                }).then(function(response){
+                    $scope.typeheadHiddenCount = response.data.count;
+                    return response.data.plants;
+                });
+            };
+
+            $scope.searchGoogle = searchGoogle;
+            $scope.openWeb = openWeb;
+            $scope.webIcon = webIcon;
+        }
+    };
+}]);
+
 app.directive('keypressEvents', ["$document", "$rootScope", function ($document, $rootScope) {
     return {
         restrict: 'A',

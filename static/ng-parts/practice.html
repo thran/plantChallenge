@@ -19,31 +19,8 @@
 <div ng-hide="answer.answered || !flashcard" id="answer">
     <h3>What is this plant?</h3>
 
-    <div id="input">
-        <form ng-submit="submit()">
-        <input
-                focus-me="!answer.answered && flashcard"
-                type="text"
-                class="fancy"
-                ng-class="{'selected': answer.meta}"
-                ng-model="answer.term"
-                typeahead="plant as plant.name for plant in getPlantNames($viewValue)"
-                ng-change="typeheadHiddenCount = null"
-                typeahead-loading="loadingPlants"
-                typeahead-editable="false"
-                typeahead-min-length="2"
-                typeahead-wait-ms="300"
-                typeahead-template-url="static/ng-parts/dropdown.html"
-                />
-        </form>
-        <div id="links" ng-show="answer.term" >
-            <div class="google_icon" ng-click="searchGoogle(answer.term)" stop-event><i class="fi-magnifying-glass"></i></div>
-            <div class="web_icon" ng-click="openWeb(answer.term)" stop-event><i ng-class="webIcon(answer.term)"></i></div>
-        </div>
-        <span ng-show="answer.term" ng-click="answer.term = null; typeheadHiddenCount =null;" class="fi-x"></span>
-        <div ng-show="loadingPlants" class="loader"></div>
-        <div class="in-text" ng-show="typeheadHiddenCount > 0 && !loadingPlants && !answer.term">+{{ typeheadHiddenCount }} more plants, make your search more specific</div>
-    </div>
+    <plant-select submit="submit" focus='!answer.answered && flashcard' model="answer.term" short='flashcard.term.name.indexOf(" ") == -1'></plant-select>
+
     <div class="button uppercase" ng-disabled="!answer.term" ng-click="submit()">Answer</div>
     <span class="shadow uppercase">&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
         <a href="" class="shadow-link" ng-click="skip()">show correct answer</a></span>

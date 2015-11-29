@@ -1,0 +1,25 @@
+<div id="select-plant">
+    <form ng-submit="submit()">
+    <input
+            focus-me="focus"
+            type="text"
+            class="fancy"
+            ng-class="{'selected': model}"
+            ng-model="model"
+            typeahead="plant as plant.name for plant in getPlantNames($viewValue)"
+            ng-change="typeheadHiddenCount = null"
+            typeahead-loading="loadingPlants"
+            typeahead-editable="false"
+            typeahead-min-length="2"
+            typeahead-wait-ms="300"
+            typeahead-template-url="static/ng-parts/dropdown.html"
+            />
+    </form>
+    <div id="links" ng-show="model" >
+        <div class="google_icon" ng-click="searchGoogle(model)" stop-event><i class="fi-magnifying-glass"></i></div>
+        <div class="web_icon" ng-click="openWeb(model)" stop-event><i ng-class="webIcon(model)"></i></div>
+    </div>
+    <span ng-show="model" ng-click="model = null; typeheadHiddenCount =null;" class="fi-x"></span>
+    <div ng-show="loadingPlants" class="loader"></div>
+    <div class="in-text" ng-show="typeheadHiddenCount > 0 && !loadingPlants && !model">+{{ typeheadHiddenCount }} more plants, make your search more specific</div>
+</div>

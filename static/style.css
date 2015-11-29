@@ -220,23 +220,23 @@ label {text-transform: uppercase;}
     height: 100px;
     width: 100px;
 }
-#answer{ }
-#answer ul.f-dropdown{
+#select-plant{ }
+#select-plant ul.f-dropdown{
     max-width: none;
     margin-top: 0;
     right: 15px;
     left: 0;
     font-family: 'Sorts Mill Goudy', serif !important;
 }
-#answer .f-dropdown::before, #answer .f-dropdown::after { content: none; }
-#answer .f-dropdown li a {
+#select-plant .f-dropdown::before, #select-plant .f-dropdown::after { content: none; }
+#select-plant .f-dropdown li a {
     color: #000000;
     text-decoration: none;
     font-size: 1.1rem !important;
     height: 40px;
     line-height: 28px;
 }
-#answer .f-dropdown li a:hover, #answer .f-dropdown li.active{background-color: #fef8dd;}
+#select-plant .f-dropdown li a:hover, #select-plant .f-dropdown li.active{background-color: #fef8dd;}
 div.google_icon, div.web_icon {
     display: inline-block;
     height: 24px;
@@ -260,16 +260,16 @@ i.wikipedia{
     margin-top: 0.2rem;
     display: inline-block;
 }
-#answer input{
+#select-plant input{
     color: #000000;
     font-size: 1.1em;
     padding: 0 0 0 10px;
 }
-#answer input.selected{ background-color: #fef8dd; }
-#answer > #input {
+#select-plant input.selected{ background-color: #fef8dd; }
+#select-plant {
     position: relative;
 }
-#answer > #input > span{
+#select-plant > span{
     position: absolute;
     right: 15px;
     top: 7px;
@@ -278,25 +278,25 @@ i.wikipedia{
     padding-left: 10px;
     cursor: pointer;
 }
-#answer > #input > div.in-text{
+#select-plant > div.in-text{
     position: absolute;
     top: 7px;
     right: 7px;
     color: grey;
 }
-#answer > #input > div.loader {
+#select-plant > div.loader {
     font-size: 3px;
     position: absolute;
     right: 23px;
     top: 7px;
     margin: 0;
 }
-#answer > #input > #links {
+#select-plant > #links {
     position: absolute;
     right: 48px;
     top: 7px;
 }
-#answer > #input > span:hover{ color: #000000 }
+#select-plant > span:hover{ color: #000000 }
 div.fi-check, div.fi-x{
     height: 1.3em;
     width: 1.3em;

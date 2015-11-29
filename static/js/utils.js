@@ -35,3 +35,20 @@ var social_auth_callback = function(){
     var element = angular.element($("body"));
     element.injector().get("userService").loadUserFromJS(element.scope());
 };
+
+
+var searchGoogle = function(plant){
+    window.open('https://www.google.cz/search?&tbm=isch&q=' + plant.name);
+};
+
+var openWeb = function(plant){
+    window.open(plant.external_url);
+};
+
+var webIcon = function(plant){
+    if (!plant){ return; }
+    if (plant.external_url.match(/wikipedia/)) {
+        return "wikipedia";
+    }
+    return "fi-web";
+};

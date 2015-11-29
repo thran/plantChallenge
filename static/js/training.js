@@ -102,30 +102,9 @@ app.controller("practice", ["$scope", "$http", "$location", "practiceService", "
         }
     };
 
-    $scope.getPlantNames = function(val) {
-    return $http.get( $scope.flashcard.term.name.indexOf(" ") > -1 ? 'typehead' : 'typehead-short', {
-        params: {
-            search: val
-        }
-        }).then(function(response){
-            $scope.typeheadHiddenCount = response.data.count;
-            return response.data.plants;
-        });
-    };
-    $scope.searchGoogle = function(plant){
-        window.open('https://www.google.cz/search?&tbm=isch&q=' + plant.name);
-    };
-    $scope.openWeb = function(plant){
-        window.open(plant.external_url);
-    };
-
-    $scope.webIcon = function(plant){
-        if (!plant){ return; }
-        if (plant.external_url.match(/wikipedia/)) {
-            return "wikipedia";
-        }
-        return "fi-web";
-    };
+    $scope.searchGoogle = searchGoogle;
+    $scope.openWeb = openWeb;
+    $scope.webIcon = webIcon;
 
     $scope.load_flashcards();
 }]);
