@@ -87,10 +87,14 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
                 templateUrl: 'static/ng-parts/training.html',
                 controller: "training"
             }).
-            when('/contest', {
+             when('/contest-closed', {
                 templateUrl: 'static/ng-parts/contest-closed.html'
             }).
-            when('/contest2', {
+            when('/contest', {
+                templateUrl: 'static/ng-parts/contest.html',
+                controller: "contest"
+            }).
+            when('/contest/:id', {
                 templateUrl: 'static/ng-parts/contest.html',
                 controller: "contest"
             }).
@@ -172,5 +176,20 @@ app.directive('nextAction', [function() {
                 }
             });
         }
+    };
+}]);
+
+
+app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+    var original = $location.path;
+    $location.path = function (path, reload) {
+        if (reload === false) {
+            var lastRoute = $route.current;
+            var un = $rootScope.$on('$locationChangeSuccess', function () {
+                $route.current = lastRoute;
+                un();
+            });
+        }
+        return original.apply($location, [path]);
     };
 }]);

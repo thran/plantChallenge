@@ -6,6 +6,7 @@ from practice.models import ExtendedTerm
 REQUEST_LIFETIME = 24 * 60 * 60
 MAX_POINTS = 100
 
+
 class Request(models.Model):
     original_id = models.IntegerField(unique=True)
     images = models.TextField()
@@ -23,9 +24,10 @@ class Request(models.Model):
 
     def to_json(self, nested=True):
         data = {
+            "id": self.pk,
             "images": json.loads(self.images),
-            "lat": self.lat,
-            "long": self.long,
+            # "lat": self.lat,
+            # "long": self.long,
             "created": self.created,
         }
         if self.term and nested:
