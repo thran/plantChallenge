@@ -394,6 +394,10 @@ slick ul{ margin-left: 0 !important; }
     width: 170px;
 }
 
+.pagination a{
+    text-decoration: none !important;
+}
+
 
 /* spinner */
 .loader.small{font-size: 0.2em; margin: auto;}
