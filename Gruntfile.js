@@ -49,7 +49,7 @@ grunt.initConfig({
     },
     watch: {
         files: ['static/js/*.js', "static/*.css", "static/ng-parts/*.html"],
-        tasks: ['jshint', 'ngtemplates', 'concat', 'uglify:build', "cssmin", "copy"]
+        tasks: ['jshint', 'ngtemplates', 'concat:dist', 'uglify:build', "cssmin"]
     },
     cssmin: {
         target: {
