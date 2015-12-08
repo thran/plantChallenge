@@ -5,7 +5,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Prefetch
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
-from lazysignup.decorators import allow_lazy_user
 from contest.models import Request, Guess, REQUEST_LIFETIME
 from practice.models import ExtendedTerm
 
@@ -37,11 +36,10 @@ def requests(request):
         .prefetch_related(Prefetch("guesses", queryset=Guess.objects.select_related("term").filter(user=request.user)))\
         .order_by("-created")
 
-    return JsonResponse({"requests": map(lambda r: r.to_json(request.user), list(requests_objs)), "request_lifetime": REQUEST_LIFETIME})
+    guesses = Guess.objects.filter(user=request.user).order_by("-timestamp").select_related("request", "term", "request__term")
 
-
-@staff_member_required
-def guesses(request):
-    guesses = Guess.objects.filter(user=request.user)
-
-    return JsonResponse({"requests": map(lambda g: g.to_json(), list(guesses))})
+    return JsonResponse({
+        "requests": map(lambda r: r.to_json(request.user), list(requests_objs)),
+        "request_lifetime": REQUEST_LIFETIME,
+        "guesses": map(lambda g: g.to_json(), list(guesses)),
+    })
