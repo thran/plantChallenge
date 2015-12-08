@@ -1,7 +1,9 @@
+a.menu:focus { color: black; }
 .fancy {font-family: 'Sorts Mill Goudy', serif !important; }
 .strong {font-weight: bold; }
+.green {color: #236618; }
 .small {font-size: 0.6em; }
-.shadow,.shadow a {color: #909090;}
+.shadow,.shadow a {color: #909090; !important;}
 .underline{ text-decoration: underline; }
 .top-bar-section ul li > a {
     color: inherit;
@@ -394,7 +396,7 @@ slick ul{ margin-left: 0 !important; }
 .request-card.guessed:hover {
     opacity: 1;
 }
-.request-card > span {
+.request-card > span > timer {
     margin-left: 55px;
 }
 .request-card hr{

@@ -1,15 +1,11 @@
 
 app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeParams", function ($scope, $http, $location, $interval, $routeParams){
     var id = parseInt($routeParams.id);
-    var SLICK_SPEED = 1000;
+    var SLICK_SPEED = 3000;
     $scope.requestsPerPage = 15;
     $scope.currentPage = 1;
 
-    if (false){
-        $location.path("/contest-closed");
-    }
-
-    var get_requests = function (){
+    var getRequests = function (){
         $http.get("/contest/requests")
             .success(function(response){
                 $scope.requests = response.requests;
@@ -24,6 +20,14 @@ app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeP
                 $interval(function () {
                     $("slick").eq(Math.floor(Math.random() * $scope.requestsPerPage)).slick('slickNext');
                 }, SLICK_SPEED);
+
+                $scope.guesses = response.guesses;
+                angular.forEach($scope.guesses, function(guess) {
+                    guess.request.time = response.request_lifetime - moment().diff(guess.request.created, "seconds");
+                    guess.request.closed = guess.request.time < 0;
+                    guess.status = guess.correct === "c" ? "Correct!" : guess.correct === "pc" ? "Almost!" : guess.correct === "i" ? "Wrong" : "We are not sure";
+                    guess.request.guess = guess;
+                });
             });
     };
 
@@ -62,6 +66,6 @@ app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeP
             });
     };
 
-    get_requests();
+    getRequests();
 
 }]);

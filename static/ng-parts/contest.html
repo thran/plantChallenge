@@ -1,4 +1,12 @@
-<div ng-hide="selectedRequest">
+<br>
+<div class="text-center">
+    <a href="" class="menu" ng-click="showGuesses = false" ng-class="{shadow: showGuesses}">Waiting plants</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a href="" class="menu" ng-click="showGuesses = true" ng-class="{shadow: !showGuesses}">My quesses</a>
+</div>
+<hr>
+
+<div ng-hide="selectedRequest || showGuesses">
     <div ng-hide="requests" class="loader"></div>
     <div ng-cloak ng-show="requests" class="columns">
         <div
@@ -24,7 +32,7 @@
 </div>
 
 
-<div ng-cloak ng-show="selectedRequest">
+<div ng-cloak ng-show="selectedRequest ">
 
     <div id="image-strip" ng-cloak ng-show="selectedRequest">
         <img id="img" ng-src='{{image_url(selectedRequest.selectedImage, "big")}}'/>
@@ -49,7 +57,34 @@
     </div>
 
     <div ng-hide="selectedRequest.guess.new" ng-cloak class="columns large-8 large-offset-2">
-        <span class="shadow">Your guess - <a href="" ng-click="selectedRequest.guess.new = true">change</a></span>
+        <span class="shadow">Your guess <span ng-hide="selectedRequest.closed"><a href="" ng-click="selectedRequest.guess.new = true">change</a></span></span>
         <h3 class=" fancy">{{ selectedRequest.guess.term.name }}</h3>
+
+        <span class="shadow" ng-show="selectedRequest.closed">Real name </span>
+        <h3 class="fancy" ng-show="selectedRequest.closed">
+            {{ selectedRequest.term.name }}
+            <span ng-hide="selectedRequest.term.name">Unfortunately, we don't know.</span>
+        </h3>
+        <hr>
+        <h3 ng-show="selectedRequest.guess.points" class="fancy"> You earned <span class="green">{{ selectedRequest.guess.points }} points</span></h3>
+    </div>
+</div>
+
+
+<div ng-cloak ng-show="showGuesses && !selectedRequest">
+    <div ng-repeat="guess in guesses"  class="request-card" ng-click="goToDetail(guess.request)">
+        <span>
+            <timer ng-hide="guess.request.closed" countdown="guess.request.time" finish-callback="guess.request.closed=true" max-time-unit="'hour'" interval="1000">{{ hhours }}:{{mminutes}}<span class="shadow">:{{sseconds}}</span> </timer>
+            <div class="text-center" ng-hide="!guess.request.closed">
+                {{ guess.status }}
+                <span class="green" ng-show="guess.points">{{ guess.points }}p</span>
+            </div>
+        </span>
+        <hr>
+        <slick settings="slickConfig">
+            <div ng-repeat="image in guess.request.images">
+                <img ng-src='{{image_url(image, "medium")}}' />
+            </div>
+        </slick>
     </div>
 </div>
