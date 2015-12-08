@@ -22,6 +22,7 @@ def make_guess(request):
         defaults={"term": term}
     )
     if not created:
+        guess.timestamp = datetime.now()
         guess.term = term
         guess.save()
 

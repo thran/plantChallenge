@@ -4,6 +4,7 @@ from django.db import models
 from practice.models import ExtendedTerm
 
 REQUEST_LIFETIME = 24 * 60 * 60
+WAIT_TIME_TO_ANSWER = 3 * 24 * 60 * 60
 MAX_POINTS = 100
 
 
@@ -55,7 +56,7 @@ class Guess(models.Model):
     user = models.ForeignKey(User)
     request = models.ForeignKey(Request, related_name="guesses")
     term = models.ForeignKey(ExtendedTerm)
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     correct = models.CharField(max_length=2, choices=CORRECTNESS, null=True, blank=True)
     points = models.IntegerField(null=True, blank=True)
