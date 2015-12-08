@@ -44,7 +44,7 @@
     <a href="" class="right" ng-click="goToOverview()">back</a>
 
     <div class="columns large-8 large-offset-2" ng-show="selectedRequest.guess.new">
-        <plant-select submit="submit" focus='selectedRequest' model="selectedRequest.guess.term"></plant-select>
+        <plant-select submit="submit" all="true" focus='selectedRequest' model="selectedRequest.guess.term"></plant-select>
         <div class="button uppercase" ng-disabled="!selectedRequest.guess.term" ng-click="submit()">Answer</div>
     </div>
 

@@ -164,12 +164,13 @@ app.directive('plantSelect', ["$http", function($http){
             model: '=',
             focus: '=',
             short: '=',
+            all: '=',
             submit: '='
         },
         templateUrl: "static/ng-parts/plant-select.html",
         link: function($scope) {
             $scope.getPlantNames = function(val) {
-                return $http.get($scope.short ? 'typehead-short' : 'typehead', {
+                return $http.get($scope.short ? 'typehead-short' : $scope.all ? 'typehead-all' : 'typehead', {
                     params: {
                         search: val
                     }
