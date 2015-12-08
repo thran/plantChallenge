@@ -24,7 +24,7 @@ app.run(["$rootScope", "$location", "userService", "global", function ($rootScop
         var path = next.originalPath;
         var intro = ["/", "/intro", "/intro-final", "/login", "/practice"];
         var training = ["/training"];
-        var contest = ["/contest"];
+        var contest = ["/contest", "/contest-closed"];
 
         if (userService.status.logged && intro.indexOf(path) !== -1 ){
             $location.path("/training");
@@ -32,6 +32,10 @@ app.run(["$rootScope", "$location", "userService", "global", function ($rootScop
         }
         if (!userService.status.logged && intro.indexOf(path) === -1 && path !== "/post-practice"){
             $location.path("/login");
+            return;
+        }
+        if (!userService.user.staff && path !== "/contest-closed" && contest.indexOf(path) !== -1){
+            $location.path("/contest-closed");
             return;
         }
         if (training.indexOf(path) !== -1){

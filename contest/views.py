@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import json
 
+from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Prefetch
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
@@ -9,7 +10,7 @@ from contest.models import Request, Guess, REQUEST_LIFETIME
 from practice.models import ExtendedTerm
 
 
-@allow_lazy_user
+@staff_member_required
 def make_guess(request):
     if not request.method == "POST":
         return HttpResponseBadRequest("method must be POST")
@@ -29,7 +30,7 @@ def make_guess(request):
     return HttpResponse("OK")
 
 
-@allow_lazy_user
+@staff_member_required
 def requests(request):
     requests_objs = Request.objects.filter(bad=False, created__gt=datetime.now()-timedelta(seconds=REQUEST_LIFETIME))\
         .select_related("term")\
@@ -39,6 +40,7 @@ def requests(request):
     return JsonResponse({"requests": map(lambda r: r.to_json(request.user), list(requests_objs)), "request_lifetime": REQUEST_LIFETIME})
 
 
+@staff_member_required
 def guesses(request):
     guesses = Guess.objects.filter(user=request.user)
 
