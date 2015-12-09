@@ -71,6 +71,7 @@ class Guess(models.Model):
         if self.correct is not None:
             data["correct"] = self.correct
             data["points"] = self.points
+            data["delay"] = self.delay
         return data
 
     def evaluate(self):

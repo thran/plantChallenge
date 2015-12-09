@@ -24,6 +24,7 @@ app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeP
                 $scope.guesses = response.guesses;
                 angular.forEach($scope.guesses, function(guess) {
                     guess.request.time = response.request_lifetime - moment().diff(guess.request.created, "seconds");
+                    guess.delay = moment.utc(guess.delay * 1000).format("HH:mm:ss");
                     guess.request.closed = guess.request.time < 0;
                     guess.status = guess.correct === "c" ? "Correct!" : guess.correct === "pc" ? "Almost!" : guess.correct === "i" ? "Wrong" : "We are not sure";
                     guess.request.guess = guess;
