@@ -18,7 +18,7 @@
                 <timer countdown="request.time" finish-callback="request.closed=true" max-time-unit="'hour'" interval="1000">{{ hhours }}:{{mminutes}}<span class="shadow">:{{sseconds}}</span> </timer>
             </span>
             <hr>
-            <slick ng-hide="request.closed" settings="slickConfig">
+            <slick ng-if="!showGuesses" ng-hide="request.closed" settings="slickConfig">
                 <div ng-repeat="image in request.images">
                     <img ng-src='{{image_url(image, "medium")}}' />
                 </div>
@@ -72,7 +72,7 @@
 
 
 <div ng-cloak ng-show="showGuesses && !selectedRequest">
-    <div ng-repeat="guess in guesses"  class="request-card" ng-click="goToDetail(guess.request)">
+    <div ng-repeat="guess in guesses"  class="request-card"  ng-click="goToDetail(guess.request)">
         <span>
             <timer ng-hide="guess.request.closed" countdown="guess.request.time" finish-callback="guess.request.closed=true" max-time-unit="'hour'" interval="1000">{{ hhours }}:{{mminutes}}<span class="shadow">:{{sseconds}}</span> </timer>
             <div class="text-center" ng-hide="!guess.request.closed">
@@ -81,7 +81,7 @@
             </div>
         </span>
         <hr>
-        <slick settings="slickConfig">
+        <slick ng-if="showGuesses" settings="slickConfig">
             <div ng-repeat="image in guess.request.images">
                 <img ng-src='{{image_url(image, "medium")}}' />
             </div>
