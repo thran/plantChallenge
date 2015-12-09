@@ -13,7 +13,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for r in models.Request.objects.filter(closed=False):
             answer = Answer.objects.filter(request=r.original_id).first()
-            print r
             if answer is None:
                 if r.created.replace(tzinfo=None) + timedelta(seconds=models.WAIT_TIME_TO_ANSWER) < datetime.now():
                     r.closed = True
