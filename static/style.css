@@ -396,6 +396,7 @@ slick ul{ margin-left: 0 !important; }
     margin-left: 25px;
     color: #236618;
     position: absolute;
+    pointer-events: none;
 }
 .request-card.guessed img {
     opacity: 0.4;
@@ -414,6 +415,11 @@ slick ul{ margin-left: 0 !important; }
     height: 170px;
     width: 170px;
     cursor: pointer;
+}
+
+h3 button.small{
+    padding: 5px 15px;
+    margin-left: 60px ;
 }
 
 .pagination a{

@@ -67,6 +67,10 @@ app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeP
             });
     };
 
+    $scope.searchGoogle = searchGoogle;
+    $scope.openWeb = openWeb;
+    $scope.webIcon = webIcon;
+
     getRequests();
 
 }]);

@@ -1,12 +1,12 @@
-<br>
 <div class="text-center">
-    <a href="" class="menu" ng-click="showGuesses = false; selectedRequest = null;" ng-class="{shadow: showGuesses}">Waiting plants</a>
+    <a href="" class="menu" ng-click="showGuesses = false; selectedRequest = null;" ng-class="{shadow: showGuesses}">Panding plants</a>
     &nbsp;&nbsp; | &nbsp;&nbsp;
-    <a href="" class="menu" ng-click="showGuesses = true; selectedRequest = null;" ng-class="{shadow: !showGuesses}">My quesses</a>
+    <a href="" class="menu" ng-click="showGuesses = true; selectedRequest = null;" ng-class="{shadow: !showGuesses}">My guesses</a>
 </div>
 <hr>
 
 <div ng-hide="selectedRequest || showGuesses">
+    <br>
     <div ng-hide="requests" class="loader"></div>
     <div ng-cloak ng-show="requests" class="columns">
         <div
@@ -56,10 +56,20 @@
     </div>
 
     <div ng-hide="selectedRequest.guess.new" ng-cloak class="columns large-8 large-offset-2">
-        <span class="shadow">Your guess <span ng-hide="selectedRequest.closed"><a href="" ng-click="selectedRequest.guess.new = true">change</a></span></span>
-        <h3 class=" fancy">{{ selectedRequest.guess.term.name }}</h3>
+        <span class="shadow" ng-hide="selectedRequest.closed">Thank you for your contribution</span>
+        <span class="shadow" ng-show="selectedRequest.closed">Your answer</span>
+        <br>
+        <div class="google_icon" ng-click="searchGoogle(selectedRequest.guess.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+        <div class="web_icon" ng-click="openWeb(selectedRequest.guess.term)" stop-event><i ng-class="webIcon(selectedRequest.guess.term)"></i></div>
+        <h3 class="fancy">
+            {{ selectedRequest.guess.term.name }}
+            <button ng-hide="selectedRequest.closed" class="small" ng-click="selectedRequest.guess.new = true">change</button>
+        </h3>
 
-        <span class="shadow" ng-show="selectedRequest.closed">Real name </span>
+        <span class="shadow" ng-show="selectedRequest.closed">Experts' answer</span>
+        <br>
+        <div class="google_icon" ng-click="searchGoogle(selectedRequest.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+        <div class="web_icon" ng-click="openWeb(selectedRequest.term)" stop-event><i ng-class="webIcon(selectedRequest.term)"></i></div>
         <h3 class="fancy" ng-show="selectedRequest.closed">
             {{ selectedRequest.term.name }}
             <span ng-hide="selectedRequest.term.name">Unfortunately, we don't know.</span>
