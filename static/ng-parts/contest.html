@@ -95,7 +95,7 @@
         <hr>
         <slick ng-if="showGuesses && !selectedRequest" settings="slickConfig">
             <div ng-repeat="image in guess.request.images">
-                <img ng-src='{{image_url(image, "medium")}}' />
+                <img ng-src='{{image_url(image, "big")}}' />
             </div>
         </slick>
     </div>
