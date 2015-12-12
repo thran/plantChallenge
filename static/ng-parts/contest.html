@@ -76,7 +76,8 @@
         </h3>
         <hr>
         <span class="shadow" ng-show="selectedRequest.guess.points">You are <b class="black"><span ng-show="selectedRequest.guess.correct == 'pc'">partially </span>correct</b> with time {{ selectedRequest.guess.delay }} </span>
-        <span class="shadow" ng-show="selectedRequest.guess.correct == 'i'">Sorry, we disagree with your answer.</span>
+        <span class="shadow" ng-show="selectedRequest.guess.correct == 'i'">Sorry, we have diffirent opinion.</span>
+        <span ng-show="selectedRequest.guess.correct == 'i'"><br>Disagree? <a href="mailto:info@flowerchecker.com">Write us.</a></span>
         <h3 ng-show="selectedRequest.guess.points" class="fancy"> You earned <span class="green">{{ selectedRequest.guess.points }} points</span></h3>
     </div>
 </div>
