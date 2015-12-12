@@ -10,7 +10,6 @@
     <div ng-hide="requests" class="loader"></div>
     <div ng-cloak ng-show="requests" class="columns">
         <div
-                ng-click="goToDetail(request)"
                 ng-repeat="request in requests.slice(requestsPerPage * (currentPage - 1), requestsPerPage * (currentPage ))"
                 class="request-card" ng-class="{guessed: request.guess && !request.guess.new}"
         >
@@ -19,7 +18,7 @@
             </span>
             <hr>
             <slick ng-if="!selectedRequest && !showGuesses" ng-hide="request.closed" settings="slickConfig">
-                <div ng-repeat="image in request.images">
+                <div ng-click="goToDetail(request)" ng-repeat="image in request.images">
                     <img ng-src='{{image_url(image, "big")}}' />
                 </div>
             </slick>

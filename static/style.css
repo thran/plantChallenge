@@ -381,7 +381,6 @@ slick ul{ margin-left: 0 !important; }
     display: inline-block;
     height: 230px;
     overflow: hidden;
-    cursor: pointer;
     background-color: #fef8dd;
     padding: 4px;
     transition: all 0.5s;
@@ -406,6 +405,7 @@ slick ul{ margin-left: 0 !important; }
     object-fit: cover;
     height: 170px;
     width: 170px;
+    cursor: pointer;
 }
 
 .pagination a{
