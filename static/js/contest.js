@@ -6,7 +6,7 @@ app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeP
     $scope.currentPage = 1;
 
     var getRequests = function (){
-        $http.get("/contest/requests")
+        $http.get("/contest/data")
             .success(function(response){
                 $scope.requests = response.requests;
 

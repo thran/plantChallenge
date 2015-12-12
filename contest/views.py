@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import json
 
 from django.contrib.admin.views.decorators import staff_member_required
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Sum
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
 from contest.models import Request, Guess, REQUEST_LIFETIME
@@ -30,7 +30,7 @@ def make_guess(request):
 
 
 @staff_member_required
-def requests(request):
+def get_data(request):
     requests_objs = Request.objects.filter(bad=False, created__gt=datetime.now()-timedelta(seconds=REQUEST_LIFETIME))\
         .select_related("term")\
         .prefetch_related(Prefetch("guesses", queryset=Guess.objects.select_related("term").filter(user=request.user)))\
@@ -42,4 +42,5 @@ def requests(request):
         "requests": map(lambda r: r.to_json(request.user), list(requests_objs)),
         "request_lifetime": REQUEST_LIFETIME,
         "guesses": map(lambda g: g.to_json(), list(guesses)),
+        "total_points": Guess.objects.filter(points__isnull=False, user=request.user).aggregate(Sum("points"))["points__sum"]
     })
