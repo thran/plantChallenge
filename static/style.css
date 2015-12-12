@@ -389,10 +389,18 @@ slick ul{ margin-left: 0 !important; }
     box-shadow: 0 0 5px black;
     opacity: 1;
 }
-.request-card.guessed {
-    opacity: 0.3;
+.request-card.guessed:before {
+    content: "✓";
+    font-size: 150px;
+    z-index: 10;
+    margin-left: 25px;
+    color: #236618;
+    position: absolute;
 }
-.request-card.guessed:hover {
+.request-card.guessed img {
+    opacity: 0.4;
+}
+.request-card.guessed:hover img {
     opacity: 1;
 }
 .request-card > span > timer {
