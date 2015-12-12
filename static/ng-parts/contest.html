@@ -20,7 +20,7 @@
             <hr>
             <slick ng-if="!selectedRequest && !showGuesses" ng-hide="request.closed" settings="slickConfig">
                 <div ng-repeat="image in request.images">
-                    <img ng-src='{{image_url(image, "medium")}}' />
+                    <img ng-src='{{image_url(image, "big")}}' />
                 </div>
             </slick>
         </div>
@@ -44,7 +44,7 @@
                 ng-click="selectedRequest.selectedImage = image"
                 ng-class="{'selected': selectedRequest.selectedImage == image}"
                 >
-            <img ng-src='{{image_url(image, "small")}}' />
+            <img ng-src='{{image_url(image, "big")}}' />
         </div>
     </div>
     <br/>
