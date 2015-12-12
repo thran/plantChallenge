@@ -1,4 +1,6 @@
 import json
+from datetime import timedelta, datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 from practice.models import ExtendedTerm
@@ -31,7 +33,7 @@ class Request(models.Model):
             # "long": self.long,
             "created": self.created,
         }
-        if self.term and nested:
+        if self.term and nested and (self.created.replace(tzinfo=None) + timedelta(seconds=REQUEST_LIFETIME) < datetime.now()):
             data["term"] = self.term.to_json(nested=True)
         guesses = self.guesses.all()
         if not without_guess and len(guesses) > 0:
