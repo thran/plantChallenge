@@ -3,6 +3,7 @@ a.menu:focus { color: black; }
 .strong {font-weight: bold; }
 .green {color: #236618; }
 .small {font-size: 0.6em; }
+.black {color: black}
 .shadow,.shadow a {color: #909090; !important;}
 .underline{ text-decoration: underline; }
 .top-bar-section ul li > a {

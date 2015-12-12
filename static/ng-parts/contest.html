@@ -68,14 +68,15 @@
 
         <span class="shadow" ng-show="selectedRequest.closed">Experts' answer</span>
         <br>
-        <div class="google_icon" ng-click="searchGoogle(selectedRequest.term)" stop-event><i class="fi-magnifying-glass"></i></div>
-        <div class="web_icon" ng-click="openWeb(selectedRequest.term)" stop-event><i ng-class="webIcon(selectedRequest.term)"></i></div>
+        <div class="google_icon" ng-show="selectedRequest.term.name" ng-click="searchGoogle(selectedRequest.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+        <div class="web_icon" ng-show="selectedRequest.term.name" ng-click="openWeb(selectedRequest.term)" stop-event><i ng-class="webIcon(selectedRequest.term)"></i></div>
         <h3 class="fancy" ng-show="selectedRequest.closed">
             {{ selectedRequest.term.name }}
             <span ng-hide="selectedRequest.term.name">Unfortunately, we don't know.</span>
         </h3>
         <hr>
-        <span class="shadow" ng-show="selectedRequest.guess.points">Your time: {{ selectedRequest.guess.delay }} </span>
+        <span class="shadow" ng-show="selectedRequest.guess.points">You are <b class="black"><span ng-show="selectedRequest.guess.correct == 'pc'">partially </span>correct</b> with time {{ selectedRequest.guess.delay }} </span>
+        <span class="shadow" ng-show="selectedRequest.guess.correct == 'i'">Sorry, we disagree with your answer.</span>
         <h3 ng-show="selectedRequest.guess.points" class="fancy"> You earned <span class="green">{{ selectedRequest.guess.points }} points</span></h3>
     </div>
 </div>
