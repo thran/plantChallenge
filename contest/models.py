@@ -49,10 +49,12 @@ class Guess(models.Model):
     CORRECT = "c"
     INCORRECT = "i"
     PARTIALLY_CORRECT = "pc"
+    WE_DONT_KNOW = "wd"
     CORRECTNESS = (
         (CORRECT, "correct"),
         (INCORRECT, "incorrect"),
         (PARTIALLY_CORRECT, "partially correct"),
+        (WE_DONT_KNOW, "we don't know"),
     )
 
     user = models.ForeignKey(User, related_name="guesses")
@@ -79,6 +81,12 @@ class Guess(models.Model):
     def evaluate(self):
         if not self.term:
             return
+        if not self.request.term:
+            self.correct = self.WE_DONT_KNOW
+            self.points = 30
+            self.save()
+            return
+
         self.delay = (self.timestamp - self.request.created).total_seconds()
         if self.term.name == self.request.term.name or self.request.term.name == self.term.name.split()[0]:
             self.correct = self.CORRECT
