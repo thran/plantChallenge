@@ -87,7 +87,7 @@
 </div>
 
 
-<div ng-cloak ng-show="showGuesses">
+<div ng-cloak ng-show="showGuesses && !selectedRequest">
     <div ng-repeat="guess in guesses"  class="request-card"  ng-click="goToDetail(guess.request)">
         <span>
             <timer ng-hide="guess.request.closed" countdown="guess.request.time" finish-callback="guess.request.closed=true" max-time-unit="'hour'" interval="1000">{{ hhours }}:{{mminutes}}<span class="shadow">:{{sseconds}}</span> </timer>
@@ -105,7 +105,7 @@
     </div>
 </div>
 
-<div ng-cloak ng-show="showLeaderboard">
+<div ng-cloak ng-show="showLeaderboard  && !selectedRequest">
     <table class="fancy" style="margin: auto">
         <tbody>
             <tr ng-repeat="user in leaderboard">
