@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 import json
 
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.models import User
 from django.db.models import Prefetch, Sum
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
@@ -38,9 +39,18 @@ def get_data(request):
 
     guesses = Guess.objects.filter(user=request.user).order_by("-timestamp").select_related("request", "term", "request__term")
 
+    leaderboard = []
+    for u in User.objects.all().annotate(Sum("guesses__points")).filter(guesses__points__sum__isnull=False).order_by("-guesses__points__sum"):
+        leaderboard.append({
+            "name": u"{} {}".format(u.first_name, u.last_name),
+            "points": u.guesses__points__sum,
+            "self": u == request.user,
+        })
+
     return JsonResponse({
         "requests": map(lambda r: r.to_json(request.user), list(requests_objs)),
         "request_lifetime": REQUEST_LIFETIME,
         "guesses": map(lambda g: g.to_json(), list(guesses)),
-        "total_points": Guess.objects.filter(points__isnull=False, user=request.user).aggregate(Sum("points"))["points__sum"]
+        "leaderboard": leaderboard,
+        "total_points": Guess.objects.filter(points__isnull=False, user=request.user).aggregate(Sum("points"))["points__sum"],
     })

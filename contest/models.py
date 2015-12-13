@@ -55,7 +55,7 @@ class Guess(models.Model):
         (PARTIALLY_CORRECT, "partially correct"),
     )
 
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name="guesses")
     request = models.ForeignKey(Request, related_name="guesses")
     term = models.ForeignKey(ExtendedTerm)
     timestamp = models.DateTimeField(auto_now_add=True)

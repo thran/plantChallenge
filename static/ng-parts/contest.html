@@ -1,11 +1,15 @@
 <div class="text-center">
-    <a href="" class="menu" ng-click="showGuesses = false; selectedRequest = null;" ng-class="{shadow: showGuesses}">Panding plants</a>
+    <a href="" class="menu" ng-click="showGuesses = false; showLeaderboard = false; selectedRequest = null;" ng-class="{shadow: showGuesses || showLeaderboard}">Panding plants</a>
     &nbsp;&nbsp; | &nbsp;&nbsp;
-    <a href="" class="menu" ng-click="showGuesses = true; selectedRequest = null;" ng-class="{shadow: !showGuesses}">My guesses</a>
+    <a href="" class="menu" ng-click="showGuesses = true; showLeaderboard = false; selectedRequest = null;" ng-class="{shadow: !showGuesses}">My guesses</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a href="" class="menu" ng-click="showGuesses = false; showLeaderboard = true; selectedRequest = null;" ng-class="{shadow: !showLeaderboard}">Leaderboard</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <span class="fancy green">your points: {{ totalPoints }}</span>
 </div>
 <hr>
 
-<div ng-hide="selectedRequest || showGuesses">
+<div ng-hide="selectedRequest || showGuesses || showLeaderboard">
     <br>
     <div ng-hide="requests" class="loader"></div>
     <div ng-cloak ng-show="requests" class="columns">
@@ -83,7 +87,7 @@
 </div>
 
 
-<div ng-cloak ng-show="showGuesses && !selectedRequest">
+<div ng-cloak ng-show="showGuesses">
     <div ng-repeat="guess in guesses"  class="request-card"  ng-click="goToDetail(guess.request)">
         <span>
             <timer ng-hide="guess.request.closed" countdown="guess.request.time" finish-callback="guess.request.closed=true" max-time-unit="'hour'" interval="1000">{{ hhours }}:{{mminutes}}<span class="shadow">:{{sseconds}}</span> </timer>
@@ -99,4 +103,16 @@
             </div>
         </slick>
     </div>
+</div>
+
+<div ng-cloak ng-show="showLeaderboard">
+    <table class="fancy" style="margin: auto">
+        <tbody>
+            <tr ng-repeat="user in leaderboard">
+                <td ng-class="{ strong: user.self}">{{ user.name }}</td>
+                <td></td>
+                <td class="green">{{ user.points }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

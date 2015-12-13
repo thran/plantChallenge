@@ -9,6 +9,8 @@ app.controller("contest", ["$scope", "$http", "$location", "$interval", "$routeP
         $http.get("/contest/data")
             .success(function(response){
                 $scope.requests = response.requests;
+                $scope.leaderboard = response.leaderboard;
+                $scope.totalPoints = response.total_points;
 
                 angular.forEach($scope.requests, function(request){
                     request.time = response.request_lifetime - moment().diff(request.created, "seconds");
