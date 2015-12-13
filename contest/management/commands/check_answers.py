@@ -12,10 +12,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for r in Request.objects.filter(status="unresolved", created__gt=datetime.now()-timedelta(seconds=models.REQUEST_LIFETIME)).values("pk"):
-            request = models.Request.objects.get(original_id=r["pk"])
-            request.bad = True
-            request.closed = True
-            request.save()
+            try:
+                request = models.Request.objects.get(original_id=r["pk"])
+                request.bad = True
+                request.closed = True
+                request.save()
+            except models.Request.DoesNotExist:
+                pass
 
         for r in models.Request.objects.filter(closed=False):
             answer = Answer.objects.filter(request=r.original_id).first()
