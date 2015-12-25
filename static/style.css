@@ -427,6 +427,15 @@ h3 button.small{
     text-decoration: none !important;
 }
 
+.sub-menu{
+    text-align: right;
+    padding-right: 50px;
+    padding-left: 20px;
+    margin: 5px 5px 5px 20px;
+    border-bottom: 1px #d3d3d3 solid;
+    display: inline-block;
+}
+
 
 /* spinner */
 .loader.small{font-size: 0.2em; margin: auto;}

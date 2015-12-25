@@ -1,0 +1,26 @@
+<div ng-controller="contestPanel" ng-include="'static/ng-parts/contest-panel.html'"></div>
+
+<div ng-hide="guesses" class="loader"></div>
+<div ng-cloak ng-show="guesses">
+    <div ng-repeat="guess in guesses.slice(requestsPerPage * (currentPage - 1), requestsPerPage * (currentPage))"  class="request-card">
+        <span>
+            <timer ng-hide="guess.request.closed" countdown="guess.request.time" finish-callback="guess.request.closed=true" max-time-unit="'hour'" interval="1000">{{ hhours }}:{{mminutes}}<span class="shadow">:{{sseconds}}</span> </timer>
+            <div class="text-center" ng-hide="!guess.request.closed">
+                {{ guess.status }}
+                <span class="green" ng-show="guess.points">{{ guess.points }}p</span>
+            </div>
+        </span>
+        <hr>
+        <slick ng-if="guesses" settings="slickConfig">
+            <div ng-repeat="image in guess.request.images">
+                <a href="/contest/detail/{{ guess.request.id }}">
+                    <img ng-src='{{image_url(image, "big")}}' />
+                </a>
+            </div>
+        </slick>
+    </div>
+
+    <div class="pagination-centered">
+        <pagination total-items="requests.length" page="currentPage" items-per-page="requestsPerPage"></pagination>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div ng-controller="contestPanel" ng-include="'static/ng-parts/contest-panel.html'"></div>
+
+<div ng-hide="leaderboard" class="loader"></div>
+<table class="fancy" style="margin: auto">
+    <tbody>
+        <tr ng-repeat="user in leaderboard">
+            <td ng-class="{ strong: user.self}">{{ user.name }}</td>
+            <td></td>
+            <td class="green">{{ user.points }}</td>
+        </tr>
+    </tbody>
+</table>

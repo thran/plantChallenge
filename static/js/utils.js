@@ -23,6 +23,18 @@ app.directive('stopEvent', function () {
     };
  });
 
+app.directive('back', function(){
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', goBack);
+            function goBack() {
+                history.back();
+                scope.$apply();
+            }
+        }
+    };
+});
 
 var image_url = function(image, size){
     if (typeof image === "undefined"){

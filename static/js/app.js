@@ -54,57 +54,65 @@ app.run(["configService", "userService", function(configService, userService){
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-        $locationProvider.hashPrefix('!');
-        $routeProvider.
-            when('/', {
-                templateUrl: 'static/ng-parts/intro-1.html'
-            }).
-            when('/intro', {
-                templateUrl: 'static/ng-parts/intro-2.html'
-            }).
-            when('/intro-final', {
-                templateUrl: 'static/ng-parts/intro-final.html'
-            }).
-            when('/post-practice', {
-                templateUrl: 'static/ng-parts/post-practice.html'
-            }).
-            when('/about', {
-                templateUrl: 'static/ng-parts/about.html'
-            }).
-            when('/login', {
-                templateUrl: 'static/ng-parts/auth.html',
-                controller: "auth"
-            }).
-            when('/practice', {
-                templateUrl: 'static/ng-parts/practice.html',
-                controller: "practice"
-            }).
-            when('/practice/:id/:areaName', {
-                templateUrl: 'static/ng-parts/practice.html',
-                controller: "practice"
-            }).
-            when('/area-overview/:id/:areaName', {
-                templateUrl: 'static/ng-parts/set-overview.html',
-                controller: "setOverview"
-            }).
-            when('/training', {
-                templateUrl: 'static/ng-parts/training.html',
-                controller: "training"
-            }).
-             when('/contest-closed', {
-                templateUrl: 'static/ng-parts/contest-closed.html'
-            }).
-            when('/contest', {
-                templateUrl: 'static/ng-parts/contest.html',
-                controller: "contest"
-            }).
-            when('/contest/:id', {
-                templateUrl: 'static/ng-parts/contest.html',
-                controller: "contest"
-            }).
-            otherwise({
-                redirectTo: '/'
-            });
+    $locationProvider.hashPrefix('!');
+    $routeProvider.
+        when('/', {
+            templateUrl: 'static/ng-parts/intro-1.html'
+        }).
+        when('/intro', {
+            templateUrl: 'static/ng-parts/intro-2.html'
+        }).
+        when('/intro-final', {
+            templateUrl: 'static/ng-parts/intro-final.html'
+        }).
+        when('/post-practice', {
+            templateUrl: 'static/ng-parts/post-practice.html'
+        }).
+        when('/about', {
+            templateUrl: 'static/ng-parts/about.html'
+        }).
+        when('/login', {
+            templateUrl: 'static/ng-parts/auth.html',
+            controller: "auth"
+        }).
+        when('/practice', {
+            templateUrl: 'static/ng-parts/practice.html',
+            controller: "practice"
+        }).
+        when('/practice/:id/:areaName', {
+            templateUrl: 'static/ng-parts/practice.html',
+            controller: "practice"
+        }).
+        when('/area-overview/:id/:areaName', {
+            templateUrl: 'static/ng-parts/set-overview.html',
+            controller: "setOverview"
+        }).
+        when('/training', {
+            templateUrl: 'static/ng-parts/training.html',
+            controller: "training"
+        }).
+         when('/contest-closed', {
+            templateUrl: 'static/ng-parts/contest-closed.html'
+        }).
+        when('/contest', {
+            templateUrl: 'static/ng-parts/contest-pending.html',
+            controller: "contestPending"
+        }).
+        when('/contest/guesses', {
+            templateUrl: 'static/ng-parts/contest-guesses.html',
+            controller: "contestGuesses"
+        }).
+        when('/contest/leaderboard', {
+            templateUrl: 'static/ng-parts/contest-leaderboard.html',
+            controller: "contestLeaderboard"
+        }).
+        when('/contest/detail/:id', {
+            templateUrl: 'static/ng-parts/contest-detail.html',
+            controller: "contestDetail"
+        }).
+        otherwise({
+            redirectTo: '/'
+        });
 
         $locationProvider.html5Mode(true);
     }]);

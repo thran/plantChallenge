@@ -1,0 +1,54 @@
+<div ng-controller="contestPanel" ng-include="'static/ng-parts/contest-panel.html'"></div>
+
+
+<div ng-hide="request" class="loader"></div>
+<div ng-cloak ng-show="request">
+    <div id="image-strip" ng-cloak ng-show="request">
+        <img id="img" ng-src='{{image_url(request.selectedImage, "big")}}'/>
+    </div>
+    <div id="select-left" ng-cloak ng-show="request">
+        <div
+                ng-hide="request.images.length == 1"
+                ng-repeat="image in request.images"
+                ng-click="request.selectedImage = image"
+                ng-class="{'selected': request.selectedImage == image}"
+                >
+            <img ng-src='{{image_url(image, "big")}}' />
+        </div>
+    </div>
+    <br/>
+
+    <a href="" back class="right">back</a>
+
+    <div class="columns large-8 large-offset-2" ng-show="request.guess.new">
+        <plant-select submit="submit" all="true" focus='request' model="request.guess.term"></plant-select>
+        <div class="button uppercase" ng-disabled="!request.guess.term" ng-click="submit()">Answer</div>
+    </div>
+
+    <div ng-hide="request.guess.new" ng-cloak class="columns large-8 large-offset-2">
+        <span class="shadow" ng-hide="request.closed">Thank you for your contribution</span>
+        <span class="shadow" ng-show="request.closed">Your answer</span>
+        <br>
+        <div class="google_icon" ng-click="searchGoogle(request.guess.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+        <div class="web_icon" ng-click="openWeb(request.guess.term)" stop-event><i ng-class="webIcon(request.guess.term)"></i></div>
+        <h3 class="fancy">
+            {{ request.guess.term.name }}
+            <button ng-hide="request.closed" class="small" ng-click="request.guess.new = true">change</button>
+        </h3>
+
+        <span class="shadow" ng-show="request.closed">Experts' answer</span>
+        <br>
+        <div class="google_icon" ng-show="request.term.name" ng-click="searchGoogle(request.term)" stop-event><i class="fi-magnifying-glass"></i></div>
+        <div class="web_icon" ng-show="request.term.name" ng-click="openWeb(request.term)" stop-event><i ng-class="webIcon(request.term)"></i></div>
+        <h3 class="fancy" ng-show="request.closed">
+            {{ request.term.name }}
+            <span ng-hide="request.term.name">Unfortunately, we don't know.</span>
+        </h3>
+        <hr>
+        <span class="shadow" ng-hide="!request.closed || request.term.name">But don't worry, we give you some points.</span>
+        <span class="shadow" ng-show="request.guess.points && request.term.name">You are <b class="black"><span ng-show="request.guess.correct == 'pc'">partially </span>correct</b> with time {{ request.guess.delay }} </span>
+        <span class="shadow" ng-show="request.guess.correct == 'i'">Sorry, we have diffirent opinion.</span>
+        <span ng-show="request.guess.correct == 'i'"><br>Disagree? <a href="mailto:info@flowerchecker.com">Write us.</a></span>
+        <h3 ng-show="request.guess.points" class="fancy"> You earned <span class="green">{{ request.guess.points }} points</span></h3>
+    </div>
+</div>
