@@ -6,6 +6,10 @@
     <div id="image-strip" ng-cloak ng-show="request">
         <img id="img" ng-src='{{image_url(request.selectedImage, "big")}}'/>
     </div>
+    <div id="arrows">
+        <a ng-href="/contest/detail/{{ previous }}" ng-show="previous" class="clearing-main-prev shifted"><span></span></a>
+        <a ng-href="/contest/detail/{{ next }}" ng-show="next" class="clearing-main-next"><span></span></a>
+    </div>
     <div id="select-left" ng-cloak ng-show="request">
         <div
                 ng-hide="request.images.length == 1"

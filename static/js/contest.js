@@ -88,7 +88,7 @@ app.controller("contestDetail", ["$scope", "contestService", "$routeParams", fun
     $scope.webIcon = webIcon;
 
     contestService.getData().then(function (data) {
-        angular.forEach(data.requests, function (request) {
+        angular.forEach(data.requests, function (request, i) {
             if (request.id === id){
                 $scope.request = request;
                 request.selectedImage = request.images[0];
@@ -98,9 +98,18 @@ app.controller("contestDetail", ["$scope", "contestService", "$routeParams", fun
                         new: true
                     };
                 }
+                if (i > 0) {
+                    $scope.previous = data.requests[i - 1].id;
+                }
+                if (i < data.requests.length - 1) {
+                    $scope.next = data.requests[i + 1].id;
+                }
             }
         });
-        angular.forEach(data.guesses, function (guess) {
+        if ($scope.request){
+            return;
+        }
+        angular.forEach(data.guesses, function (guess, i) {
             if (guess.request.id === id){
                 $scope.request = guess.request;
                 guess.request.selectedImage = guess.request.images[0];

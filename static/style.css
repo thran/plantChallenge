@@ -189,6 +189,14 @@ label {text-transform: uppercase;}
     height: 100%;
 
 }
+#arrows{
+    position: absolute;
+    height: 460px;
+    width: 100%;
+    max-width: 1000px;
+}
+#arrows > .clearing-main-prev, #arrows > .clearing-main-next { z-index: 100; }
+#arrows > .clearing-main-prev.shifted { margin-left: -40px}
 #select-left{
     display: inline-block;
     width: 135px;
