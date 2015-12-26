@@ -115,6 +115,9 @@ app.controller("contestDetail", ["$scope", "contestService", "$routeParams", fun
                 guess.request.selectedImage = guess.request.images[0];
             }
         });
+        if (!$scope.request){
+            $scope.requestNotFound = true;
+        }
     });
 
     $scope.submit = function(){

@@ -1,7 +1,11 @@
 <div ng-controller="contestPanel" ng-include="'static/ng-parts/contest-panel.html'"></div>
 
 
-<div ng-hide="request" class="loader"></div>
+<div ng-hide="request || requestNotFound" class="loader"></div>
+<div ng-show="requestNotFound" class="text-center">
+    <br><br>
+    <p>Plant not found.</p>
+</div>
 <div ng-cloak ng-show="request">
     <div id="image-strip" ng-cloak ng-show="request">
         <img id="img" ng-src='{{image_url(request.selectedImage, "big")}}'/>
