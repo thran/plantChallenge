@@ -14,7 +14,7 @@
         <slick ng-if="guesses" settings="slickConfig">
             <div ng-repeat="image in guess.request.images">
                 <a href="/contest/detail/{{ guess.request.id }}">
-                    <img ng-src='{{image_url(image, "big")}}' />
+                    <img ng-src='{{ imageUrl(image, "big")}}' />
                 </a>
             </div>
         </slick>

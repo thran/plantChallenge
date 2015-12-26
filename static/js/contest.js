@@ -11,6 +11,8 @@ app.service("contestService", ["$http", "$q", function ($http, $q) {
 
                 angular.forEach(self.requests, function(request){
                     request.time = response.request_lifetime - moment().diff(request.created, "seconds");
+                    request.map = getMap(request, 700, 460, 5);
+                    request.mapSmall = getMap(request, 100, 100, 3);
                 });
 
                 self.guesses = response.guesses;
@@ -20,6 +22,8 @@ app.service("contestService", ["$http", "$q", function ($http, $q) {
                     guess.request.closed = guess.request.time < 0;
                     guess.status = guess.correct === "c" ? "Correct!" : guess.correct === "pc" ? "Almost!" : guess.correct === "i" ? "Disagreement" : "We are not sure";
                     guess.request.guess = guess;
+                    guess.request.map = getMap(guess.request, 700, 460, 5);
+                    guess.request.mapSmall = getMap(guess.request, 100, 100, 3);
                 });
                 deferred.resolve(self);
             });
@@ -64,7 +68,7 @@ app.controller("contestGuesses", ["$scope", "contestService", "$interval", funct
     var SLICK_SPEED = 3000;
     $scope.requestsPerPage = 15;
     $scope.currentPage = 1;
-    $scope.image_url = image_url;
+    $scope.imageUrl = imageUrl;
 
     contestService.getData().then(function (data) {
         $scope.guesses = data.guesses;
@@ -82,7 +86,7 @@ app.controller("contestGuesses", ["$scope", "contestService", "$interval", funct
 
 app.controller("contestDetail", ["$scope", "contestService", "$routeParams", function ($scope, contestService,  $routeParams){
     var id = parseInt($routeParams.id);
-    $scope.image_url = image_url;
+    $scope.imageUrl = imageUrl;
     $scope.searchGoogle = searchGoogle;
     $scope.openWeb = openWeb;
     $scope.webIcon = webIcon;
@@ -91,7 +95,10 @@ app.controller("contestDetail", ["$scope", "contestService", "$routeParams", fun
         angular.forEach(data.requests, function (request, i) {
             if (request.id === id){
                 $scope.request = request;
-                request.selectedImage = request.images[0];
+                if (!request.selectedImageUrl) {
+                    request.selectedImage = request.images[0];
+                    request.selectedImageUrl = imageUrl(request.images[0], "big");
+                }
                 if (!request.guess){
                     request.guess = {
                         request: request.id,
@@ -113,6 +120,8 @@ app.controller("contestDetail", ["$scope", "contestService", "$routeParams", fun
             if (guess.request.id === id){
                 $scope.request = guess.request;
                 guess.request.selectedImage = guess.request.images[0];
+                guess.request.selectedImage = guess.request.images[0];
+                guess.request.selectedImageUrl = imageUrl(guess.request.images[0], "big");
             }
         });
         if (!$scope.request){
@@ -137,7 +146,7 @@ app.controller("contestPending", ["$scope", "contestService", "$interval", funct
     $scope.requestsPerPage = 15;
     $scope.currentPage = 1;
 
-    $scope.image_url = image_url;
+    $scope.imageUrl = imageUrl;
     $scope.searchGoogle = searchGoogle;
     $scope.openWeb = openWeb;
     $scope.webIcon = webIcon;

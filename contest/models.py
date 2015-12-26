@@ -29,8 +29,8 @@ class Request(models.Model):
         data = {
             "id": self.pk,
             "images": json.loads(self.images),
-            # "lat": self.lat,
-            # "long": self.long,
+            "lat": int(self.lat),
+            "long": int(self.long),
             "created": self.created,
         }
         if self.term and nested and (self.created.replace(tzinfo=None) + timedelta(seconds=REQUEST_LIFETIME) < datetime.now()):

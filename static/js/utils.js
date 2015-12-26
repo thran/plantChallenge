@@ -36,7 +36,7 @@ app.directive('back', function(){
     };
 });
 
-var image_url = function(image, size){
+var imageUrl = function(image, size){
     if (typeof image === "undefined"){
         return null;
     }
@@ -48,6 +48,12 @@ var social_auth_callback = function(){
     element.injector().get("userService").loadUserFromJS(element.scope());
 };
 
+var getMap = function (request, s1, s2, zoom) {
+    if (typeof request === "undefined" || request.long === null || request.lat === null || (request.long === 0 && request.lat === 0)) {
+        return null;
+    }
+    return "http://maps.googleapis.com/maps/api/staticmap?size=" + s1 + "x" + s2 + "&zoom=" + zoom + "&markers=" + request.lat + " " + request.long;
+};
 
 var searchGoogle = function(plant){
     window.open('https://www.google.cz/search?&tbm=isch&q=' + plant.name);

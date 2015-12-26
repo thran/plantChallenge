@@ -59,7 +59,10 @@ app.controller("practice", ["$scope", "$http", "$location", "practiceService", "
                 $scope.answer = {guesses: 0, start_time: (new Date()).getTime()};
                 $scope.flashcard = flashcard;
                 $scope.flashcard.context.content = JSON.parse($scope.flashcard.context.content.split("'").join('"'));
-                $scope.flashcard.selected_image = $scope.flashcard.context.content[0];
+                $scope.flashcard.selectedImage = $scope.flashcard.context.content[0];
+                $scope.flashcard.selectedImageUrl = imageUrl($scope.flashcard.context.content[0], "big");
+                $scope.flashcard.map = getMap($scope.flashcard.context, 700, 460, 5);
+                $scope.flashcard.mapSmall = getMap($scope.flashcard.context, 100, 100, 3);
             }, function(msg){
                 if (!area) {
                     global.introFinished = true;
@@ -72,7 +75,7 @@ app.controller("practice", ["$scope", "$http", "$location", "practiceService", "
             });
     };
 
-    $scope.image_url = image_url;
+    $scope.imageUrl = imageUrl;
 
     $scope.try_again = function(){
         $scope.typeheadHiddenCount = null;
@@ -116,7 +119,7 @@ app.controller("postPractice", ["$scope", "global", "$location", "$timeout", fun
     }
     $scope.global = global;
     $scope.summary = global.summary;
-    $scope.image_url = image_url;
+    $scope.imageUrl = imageUrl;
 
     $scope.selectFlashcard = function(flashcard){
         $scope.slickReady = false;
@@ -140,7 +143,7 @@ app.controller("setOverview", ["$scope", "$routeParams", "areas", "$timeout", fu
     areas.getOverview($scope.id);
     $scope.overviews = areas.areaOverview;
 
-    $scope.image_url = image_url;
+    $scope.imageUrl = imageUrl;
     $scope.$watch("overviews", function(n, o) {
         if (n) {
             $timeout(function () {

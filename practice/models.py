@@ -37,8 +37,11 @@ class ExtendedContext(Context):
     long = models.FloatField(null=True, blank=True)
     fullname = models.CharField(max_length=255, null=True, blank=True)
 
-    def to_json(self, nested=False):
-        json = Context.to_json(self, nested)
+    def to_json(self, nested=False, with_content=True):
+        json = Context.to_json(self, nested, with_content)
+        if self.lat and self.long:
+            json["lat"] = int(self.lat)
+        json["long"] = int(self.long)
         return json
 
     @staticmethod

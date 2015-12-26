@@ -14,7 +14,7 @@
             <hr/>
             <slick ng-if="slickReady" settings="slickConfig">
                 <div ng-repeat="image in selectedFlashcard.context.content">
-                    <img ng-src='{{image_url(image, "medium")}}' />
+                    <img ng-src='{{imageUrl(image, "medium")}}' />
                 </div>
             </slick>
         </div>

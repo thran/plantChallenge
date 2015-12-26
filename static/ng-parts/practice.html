@@ -1,16 +1,22 @@
 <div class="loader" ng-hide="flashcard"></div>
 
 <div id="image-strip" ng-cloak ng-show="flashcard">
-    <img id="img" ng-src='{{image_url(flashcard.selected_image, "big")}}'/>
+    <img id="img" ng-src='{{ flashcard.selectedImageUrl }}'/>
 </div>
 <div id="select-left" ng-cloak ng-show="flashcard">
     <div
-            ng-hide="flashcard.context.content.length == 1"
+            ng-hide="flashcard.context.content.length == 1 && !flashcard.map"
             ng-repeat="image in flashcard.context.content"
-            ng-click="flashcard.selected_image = image"
-            ng-class="{'selected': flashcard.selected_image == image}"
+            ng-click="flashcard.selectedImage = image; flashcard.selectedImageUrl = imageUrl(image, 'big')"
+            ng-class="{'selected': flashcard.selectedImage == image}"
             >
-        <img ng-src='{{image_url(image, "small")}}' />
+        <img ng-src='{{imageUrl(image, "small")}}' />
+    </div>
+    <div
+            ng-hide="!flashcard.map"
+            ng-click="flashcard.selectedImage = 'map'; flashcard.selectedImageUrl = flashcard.map"
+            ng-class="{'selected': flashcard.selectedImage == 'map'}">
+        <img ng-src="{{ flashcard.mapSmall }}" alt="">
     </div>
 </div>
 <br/>

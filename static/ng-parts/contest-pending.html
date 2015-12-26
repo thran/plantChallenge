@@ -13,7 +13,7 @@
         <slick ng-hide="request.closed" settings="slickConfig">
             <div ng-repeat="image in request.images">
                 <a href="/contest/detail/{{ request.id }}">
-                    <img ng-src='{{image_url(image, "big")}}' />
+                    <img ng-src='{{imageUrl(image, "big")}}' />
                 </a>
             </div>
         </slick>

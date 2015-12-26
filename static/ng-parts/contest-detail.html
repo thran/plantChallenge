@@ -8,7 +8,7 @@
 </div>
 <div ng-cloak ng-show="request">
     <div id="image-strip" ng-cloak ng-show="request">
-        <img id="img" ng-src='{{image_url(request.selectedImage, "big")}}'/>
+        <img id="img" ng-src='{{ request.selectedImageUrl }}'/>
     </div>
     <div id="arrows">
         <a ng-href="/contest/detail/{{ previous }}" ng-show="previous" class="clearing-main-prev shifted"><span></span></a>
@@ -16,12 +16,18 @@
     </div>
     <div id="select-left" ng-cloak ng-show="request">
         <div
-                ng-hide="request.images.length == 1"
+                ng-hide="request.images.length == 1 && !request.map"
                 ng-repeat="image in request.images"
-                ng-click="request.selectedImage = image"
+                ng-click="request.selectedImage = image; request.selectedImageUrl = imageUrl(image, 'big')"
                 ng-class="{'selected': request.selectedImage == image}"
                 >
-            <img ng-src='{{image_url(image, "big")}}' />
+            <img ng-src='{{imageUrl(image, "big")}}' />
+        </div>
+        <div
+                ng-hide="!request.map"
+                ng-click="request.selectedImage = 'map'; request.selectedImageUrl = request.map"
+                ng-class="{'selected': request.selectedImage == 'map'}">
+            <img ng-src="{{ request.mapSmall }}" alt="">
         </div>
     </div>
     <br/>
