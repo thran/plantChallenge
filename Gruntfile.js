@@ -22,7 +22,8 @@ grunt.initConfig({
                 'static/foundation/js/vendor/modernizr.js',
                 'static/foundation/js/vendor/fastclick.js',
                 'static/foundation/js/foundation.min.js',
-                'static/foundation/js/foundation/foundation.clearing.js'
+                'static/foundation/js/foundation/foundation.clearing.js',
+                'static/foundation/js/foundation/foundation.reveal.js'
             ],
             dest: 'static/dist/libs.min.js'
         },

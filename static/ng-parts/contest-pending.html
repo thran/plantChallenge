@@ -1,4 +1,24 @@
-<div ng-controller="contestPanel" ng-include="'static/ng-parts/contest-panel.html'"></div>
+<div id="selectCountries" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2 id="modalTitle">Filter countries</h2>
+    <div class="row">
+        <div class="small-6 column">
+            <label ng-repeat="country in countries.slice(0, countries.length / 2)">
+                <input ng-change="saveCountryFilter()" ng-model="country.show" type="checkbox">
+                {{ country.name }}
+            </label>
+        </div>
+        <div class="small-6 column">
+            <label ng-repeat="country in countries.slice(countries.length / 2, countries.length)">
+                <input ng-change="saveCountryFilter()" ng-model="country.show" type="checkbox">
+                {{ country.name }}
+            </label>
+        </div>
+    </div>
+</div>
+
+    <div ng-controller="contestPanel" ng-include="'static/ng-parts/contest-panel.html'"></div>
+
+<a href="#" class="right" data-reveal-id="selectCountries">Filter countries</a>
 
 <div ng-hide="requests" class="loader"></div>
 <div ng-cloak ng-show="requests" class="columns">

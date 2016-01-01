@@ -23,10 +23,8 @@ class Location(models.Model):
 
 @receiver(pre_save, sender=Location)
 def fill_location(sender, instance, **kwargs):
-    print instance.long, instance.lat
     instance.source = urlopen(
         "https://maps.googleapis.com/maps/api/geocode/json?latlng={},{}".format(instance.lat, instance.long)).read()
-    print "loaded"
     try:
         for component in json.loads(instance.source)["results"][0]["address_components"]:
             if "country" in component["types"]:

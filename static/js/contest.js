@@ -8,11 +8,21 @@ app.service("contestService", ["$http", "$q", function ($http, $q) {
                 self.requests = response.requests;
                 self.leaderboard = response.leaderboard;
                 self.totalPoints = response.total_points;
-
+                var countries = [];
                 angular.forEach(self.requests, function(request){
                     request.time = response.request_lifetime - moment().diff(request.created, "seconds");
                     request.map = getMap(request, 700, 460, 5);
                     request.mapSmall = getMap(request, 100, 100, 3);
+                    if (request.country && countries.indexOf(request.country) === -1){
+                        countries.push(request.country);
+                    }
+                });
+                self.countries = [];
+                angular.forEach(countries, function (country) {
+                    self.countries.push({
+                        name: country,
+                        show: localStorage[country] === "false"
+                    });
                 });
 
                 self.guesses = response.guesses;
@@ -141,7 +151,7 @@ app.controller("contestLeaderboard", ["$scope", "contestService", "$routeParams"
 }]);
 
 
-app.controller("contestPending", ["$scope", "contestService", "$interval", function ($scope, contestService, $interval){
+app.controller("contestPending", ["$scope", "contestService", "$interval", "$filter", function ($scope, contestService, $interval, $filter) {
     var SLICK_SPEED = 3000;
     $scope.requestsPerPage = 15;
     $scope.currentPage = 1;
@@ -158,10 +168,35 @@ app.controller("contestPending", ["$scope", "contestService", "$interval", funct
     };
 
     contestService.getData().then(function (data) {
-        $scope.requests = data.requests;
+        $scope.allRequests = data.requests;
+        $scope.countries = $filter("orderBy")(data.countries, "name");
         $interval(function () {
             $("slick").eq(Math.floor(Math.random() * $scope.requestsPerPage)).slick('slickNext');
         }, SLICK_SPEED);
+        $(document).foundation('reveal');
+
+        $scope.$watch("countries", function (countries) {
+            if (!countries){
+                return;
+            }
+            var countryList = [];
+            angular.forEach(countries, function (country) {
+                if (country.show){
+                    countryList.push(country.name);
+                }
+            });
+            $scope.requests = [];
+            angular.forEach($scope.allRequests, function (request) {
+                if (countryList.indexOf(request.country) > -1 ){
+                    $scope.requests.push(request);
+                }
+            });
+        }, true);
     });
 
+    $scope.saveCountryFilter = function () {
+        angular.forEach($scope.countries, function (country) {
+            localStorage[country.name] = !country.show;
+        });
+    };
 }]);
