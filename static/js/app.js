@@ -110,6 +110,9 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
             templateUrl: 'static/ng-parts/contest-detail.html',
             controller: "contestDetail"
         }).
+        when('/contest/about', {
+            templateUrl: 'static/ng-parts/contest-about.html'
+        }).
         otherwise({
             redirectTo: '/'
         });
