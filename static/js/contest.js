@@ -21,7 +21,7 @@ app.service("contestService", ["$http", "$q", function ($http, $q) {
                 angular.forEach(countries, function (country) {
                     self.countries.push({
                         name: country,
-                        show: localStorage[country] === "false"
+                        show: localStorage[country] !== "true"
                     });
                 });
 
@@ -102,7 +102,8 @@ app.controller("contestDetail", ["$scope", "contestService", "$routeParams", fun
     $scope.webIcon = webIcon;
 
     contestService.getData().then(function (data) {
-        angular.forEach(data.requests, function (request, i) {
+        var requests = data.filteredRequests ? data.filteredRequests : data.requests;
+        angular.forEach(requests, function (request, i) {
             if (request.id === id){
                 $scope.request = request;
                 if (!request.selectedImageUrl) {
@@ -116,10 +117,10 @@ app.controller("contestDetail", ["$scope", "contestService", "$routeParams", fun
                     };
                 }
                 if (i > 0) {
-                    $scope.previous = data.requests[i - 1].id;
+                    $scope.previous = requests[i - 1].id;
                 }
-                if (i < data.requests.length - 1) {
-                    $scope.next = data.requests[i + 1].id;
+                if (i < requests.length - 1) {
+                    $scope.next = requests[i + 1].id;
                 }
             }
         });
@@ -191,6 +192,7 @@ app.controller("contestPending", ["$scope", "contestService", "$interval", "$fil
                     $scope.requests.push(request);
                 }
             });
+            data.filteredRequests = $scope.requests;
         }, true);
     });
 
