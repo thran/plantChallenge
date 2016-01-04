@@ -18,7 +18,7 @@ app.controller("training", ["$scope", "$location", "global", "areas", function (
 app.controller("practice", ["$scope", "$http", "$location", "practiceService", "global", "$routeParams", "areas",
     function ($scope, $http, $location, practiceService, global, $routeParams, areas) {
     var area = parseInt($routeParams.id);
-    var areaName = area ? $routeParams.areaName : "Intro set";
+    var areaName = area ? $routeParams.areaName : "First Plants set";
     var progress = {};
     areas.setActive(area);
     global.progress = progress;
