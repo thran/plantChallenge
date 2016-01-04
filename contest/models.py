@@ -3,6 +3,7 @@ from datetime import timedelta, datetime
 from urllib2 import urlopen
 
 from django.contrib.auth.models import User
+from django.core.exceptions import MultipleObjectsReturned
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -51,7 +52,10 @@ class Request(models.Model):
 
     def to_json(self, nested=True, without_guess=False):
         if self.location is None and self.lat is not None and self.long is not None:
-            self.location, _ = Location.objects.get_or_create(lat=int(self.lat), long=int(self.long))
+            try:
+                self.location, _ = Location.objects.get_or_create(lat=int(self.lat), long=int(self.long))
+            except MultipleObjectsReturned:
+                self.location = Location.objects.filter(lat=int(self.lat), long=int(self.long)).first()
             self.save()
 
         data = {
