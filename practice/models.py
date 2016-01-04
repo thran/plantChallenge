@@ -41,7 +41,7 @@ class ExtendedContext(Context):
         json = Context.to_json(self, nested, with_content)
         if self.lat and self.long:
             json["lat"] = int(self.lat)
-        json["long"] = int(self.long)
+            json["long"] = int(self.long)
         return json
 
     @staticmethod
