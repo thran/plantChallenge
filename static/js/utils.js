@@ -49,7 +49,7 @@ var social_auth_callback = function(){
 };
 
 var getMap = function (request, s1, s2, zoom) {
-    if (typeof request === "undefined" || request.long === null || request.lat === null || (request.long === 0 && request.lat === 0)) {
+    if (typeof request === "undefined" || typeof request.lat === "undefined" || typeof request.long === "undefined" || request.long === null || request.lat === null || (request.long === 0 && request.lat === 0)) {
         return null;
     }
     return "http://maps.googleapis.com/maps/api/staticmap?size=" + s1 + "x" + s2 + "&zoom=" + zoom + "&markers=" + request.lat + " " + request.long;
