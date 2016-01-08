@@ -50,8 +50,11 @@ app.service("contestService", ["$http", "$q", function ($http, $q) {
     };
 
     self.makeGuess = function (request) {
-         return $http.post("contest/make_guess", request.guess)
-            .success(function(response){
+        console.log(request);
+        return $http.post("contest/make_guess", {
+            term: request.guess.term,
+            request: request.id
+        }).success(function(response){
                 request.guess.new = false;
                 request.guess.request = request;
                 self.guesses.unshift(request.guess);
