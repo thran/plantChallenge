@@ -40,7 +40,6 @@
     </div>
 
     <div ng-hide="request.guess.new" ng-cloak class="columns large-8 large-offset-2">
-        <span class="shadow" ng-hide="request.closed">Thank you for your contribution</span>
         <span class="shadow" ng-show="request.closed">Your answer</span>
         <br>
         <div class="google_icon" ng-click="searchGoogle(request.guess.term)" stop-event><i class="fi-magnifying-glass"></i></div>
@@ -59,10 +58,15 @@
             <span ng-hide="request.term.name">Unfortunately, we don't know.</span>
         </h3>
         <hr>
+        <div ng-hide="request.closed">Thank you for your contribution <p class="shadow">Our experts are working on this too. We will let you know about their opinion after 24 hours run out.</p></div>
         <span class="shadow" ng-hide="!request.closed || request.term.name">But don't worry, we give you some points.</span>
-        <span class="shadow" ng-show="request.guess.points && request.term.name">You are <b class="black"><span ng-show="request.guess.correct == 'pc'">partially </span>correct</b> with time {{ request.guess.delay }} </span>
+        <span class="shadow" ng-show="request.guess.points && request.term.name"><b class="black">
+            <span ng-show="request.guess.correct == 'pc'">Partially correct!</span>
+            <span ng-show="request.guess.correct == 'c'">Correct!</span>
+            </b> Your time was {{ request.guess.delay }}
+        </span>
         <span class="shadow" ng-show="request.guess.correct == 'i'">Sorry, we have diffirent opinion.</span>
-        <span ng-show="request.guess.correct == 'i'"><br>Disagree? <a href="mailto:info@flowerchecker.com">Write us.</a></span>
+        <span ng-show="request.guess.correct == 'i'"><br>Disagree? <a href="mailto:info@flowerchecker.com">Let us know.</a></span>
         <h3 ng-show="request.guess.points" class="fancy"> You earned <span class="green">{{ request.guess.points }} points</span></h3>
     </div>
 </div>
