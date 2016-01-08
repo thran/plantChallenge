@@ -195,8 +195,17 @@ label {text-transform: uppercase;}
     width: 100%;
     max-width: 1000px;
 }
-#arrows > .clearing-main-prev, #arrows > .clearing-main-next { z-index: 100; }
-#arrows > .clearing-main-prev.shifted { margin-left: -40px}
+#arrows > .clearing-main-prev, #arrows > .clearing-main-next {
+    font-size: 0.8em;
+    z-index: 100;
+    color: #2a2a2a;
+    overflow: visible;
+    margin-top: 170px;
+}
+#arrows .greenway{ border-color: transparent transparent transparent #7CBF46; }
+#arrows > .clearing-main-prev:hover, #arrows > .clearing-main-next:hover { color: white; }
+#arrows > .clearing-main-prev.shifted { margin-left: -40px;}
+#arrows > .clearing-main-prev.shifted span.text { margin-left: -40px; border: none; margin-top: 15px; text-align: right}
 #select-left{
     display: inline-block;
     width: 135px;
