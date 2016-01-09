@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.views.decorators.cache import cache_page
 from proso_flashcards.models import Category
 
+from contest.views import allow_user_to_contest
 from practice.models import ExtendedTerm
 
 
@@ -38,7 +39,9 @@ def home(request):
     if not hasattr(request.user, "userprofile"):
         user = ""
     else:
-        user = json.dumps(request.user.userprofile.to_json())
+        j = request.user.userprofile.to_json()
+        j["user"]["contest_open"] = allow_user_to_contest(request.user)
+        user = json.dumps(j)
     return render(request, "index.html", {"user": user})
 
 

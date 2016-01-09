@@ -70,3 +70,7 @@ var webIcon = function(plant){
     }
     return "fi-web";
 };
+
+function stringStartsWith (string, prefix) {
+    return string.slice(0, prefix.length) === prefix;
+}

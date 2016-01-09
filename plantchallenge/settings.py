@@ -66,6 +66,7 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'proso_common.middleware.ToolbarMiddleware',
     'proso_questions_client.middleware.AuthAlreadyAssociatedMiddleware',
+    'contest.middleware.UserMiddleware'
 )
 
 ROOT_URLCONF = 'plantchallenge.urls'

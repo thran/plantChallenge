@@ -1,5 +1,5 @@
 
-app.factory("areas", ["$http", "userStatsService", function($http, userStatsService){
+app.factory("areas", ["$http", "userStatsService", "userService", function($http, userStatsService, userService){
     var self = this;
     self.areaOverview = {};
 
@@ -34,6 +34,9 @@ app.factory("areas", ["$http", "userStatsService", function($http, userStatsServ
             for (var i=0; i < levelLimits.length; i++) {
                 if (levelLimits[i] <= area.stats.number_of_correct_answers){
                     area.level = i;
+                    if (area.level >= 3){
+                        userService.user.contest_open = true;
+                    }
                     area.nextLevelIn = levelLimits[i + 1] - area.stats.number_of_correct_answers;
                     area.inThisLevel = area.stats.number_of_correct_answers - levelLimits[i];
                     area.levelLength = levelLimits[i + 1] -levelLimits[i];

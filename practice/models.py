@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import F, Count
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from proso_flashcards.models import Term, Context, Flashcard
+from proso_flashcards.models import Term, Context, Flashcard, Category
+from proso_models.models import Answer
 
 
 class ExtendedTerm(Term):
@@ -56,6 +58,14 @@ class ExtendedContext(Context):
 class Request(Flashcard):
     class Meta:
         proxy = True
+
+
+def get_answer_counts_in_sets(user):
+    return {set["item__flashcards__term__parents"]: set["count"]
+            for set in Answer.objects.filter(user=user, item_asked=F("item_answered"))
+                .values("item__flashcards__term__parents")
+                .annotate(count=Count("item__flashcards__term__parents"))
+            }
 
 
 settings.PROSO_FLASHCARDS["term_extension"] = ExtendedTerm

@@ -2,15 +2,26 @@ from datetime import datetime, timedelta
 import json
 
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from django.db.models import Prefetch, Sum
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404
 from contest.models import Request, Guess, REQUEST_LIFETIME
-from practice.models import ExtendedTerm
+from practice.models import ExtendedTerm, get_answer_counts_in_sets
+
+ANSWERS_TO_OPEN_CONTEST = 20
 
 
-@staff_member_required
+def allow_user_to_contest(user):
+    if user.is_anonymous():
+        return False
+    if user.is_staff:
+        return True
+    return max([0] + get_answer_counts_in_sets(user).values()) >= ANSWERS_TO_OPEN_CONTEST
+
+
+@user_passes_test(allow_user_to_contest)
 def make_guess(request):
     if not request.method == "POST":
         return HttpResponseBadRequest("method must be POST")
@@ -30,7 +41,7 @@ def make_guess(request):
     return HttpResponse("OK")
 
 
-@staff_member_required
+@user_passes_test(allow_user_to_contest)
 def get_data(request):
     requests_objs = Request.objects.filter(bad=False, created__gt=datetime.now()-timedelta(seconds=REQUEST_LIFETIME))\
         .select_related("term")\

@@ -34,13 +34,13 @@ app.run(["$rootScope", "$location", "userService", "global", function ($rootScop
             $location.path("/login");
             return;
         }
-        if (!userService.user.staff && path !== "/contest-closed" && contest.indexOf(path) !== -1){
+        if ((!userService.user.contest_open) && path !== "/contest-closed" && stringStartsWith(path, "/contest")){
             $location.path("/contest-closed");
             return;
         }
         if (training.indexOf(path) !== -1){
             global.section = "training";
-        }else if (contest.indexOf(path) !== -1){
+        }else if (stringStartsWith(path, "/contest")){
             global.section = "contest";
         }else if (intro.indexOf(path) !== -1){
              delete global.section;
