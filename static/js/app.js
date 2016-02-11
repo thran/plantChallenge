@@ -22,7 +22,7 @@ app.run(["$rootScope", "$location", "userService", "global", function ($rootScop
 
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
         var path = next.originalPath;
-        var intro = ["/", "/intro", "/intro-final", "/login", "/practice"];
+        var intro = ["/", "/intro", "/intro-final", "/login", "/practice", "/about"];
         var training = ["/training"];
         var contest = ["/contest", "/contest-closed"];
 
